@@ -99,7 +99,8 @@ The package records a run ID, session generation and checkpoint revision. Task/m
 metadata, available per-arm usage, action counters, ratings, policy/request history
 and check summaries support later analysis. Counts/histories can be partial or
 unknown; the export labels those limits. Its task source commit is not necessarily
-the harness release commit, so include the full `git rev-parse HEAD` value from your local checkout in your note separately.
+the harness release commit, so run `git rev-parse HEAD` inside your local checkout
+and include the full value in your note separately.
 
 **Full answers and code are not in this export.** The first export should precede any optional Observer assessment, so it has no
 generated assessment or selected answer quotes; ticking the excerpts option does

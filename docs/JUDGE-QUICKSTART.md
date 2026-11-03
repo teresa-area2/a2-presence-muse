@@ -100,9 +100,15 @@ Before closing each pair, open **Testing and diagnostics**:
    ```
 
 4. Return the JSON privately to the person who asked you to test (Teresa for this
-   rehearsal), with browser/macOS/Muse versions, task/model, `git rev-parse HEAD`,
-   what worked or blocked and what felt easier, harder or the same. Note Screen
-   Sharing if used. Export saves locally; it does not upload. Keep credentials,
+   rehearsal), with browser/macOS/Muse versions, task/model, checkout revision,
+   what worked or blocked and what felt easier, harder or the same. To get the
+   revision, run the command below, using your clone's path if you chose another:
+
+   ```sh
+   git -C "$HOME/Developer/open-presence-muse-judge" rev-parse HEAD
+   ```
+
+   Note Screen Sharing if used. Export saves locally; it does not upload. Keep credentials,
    real typing and raw exports out of Git/public issues.
 
 Try the [other prepared tasks](MAC-TESTER-TASKS.md), then optionally **Your own task**,

@@ -7,7 +7,7 @@ any reviewed public evidence.
 
 - Tester: A / B
 - Task and attempt number:
-- Actual full checkout revision (`git rev-parse HEAD`):
+- Actual full checkout revision (run `git rev-parse HEAD` inside your checkout):
 - Browser and version (or not recorded):
 - Interaction mode: directly at the Mac / Screen Sharing / other remote setup:
 - Started from: macOS Terminal / Codex (note any per-command approval) / other:
