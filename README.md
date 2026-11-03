@@ -24,6 +24,6 @@ The resource view reports available usage, which can include reasoning and tool 
 
 The repository includes [redacted historical evidence](evidence/README.md) and an [aggregate summary](evidence/RESULTS.md). The ratings come from a one-person, unblinded pilot across different tasks, models and versions; historical results do not qualify every feature of this release. Inspect any locally exported evidence before sharing it; exports are saved locally and are not uploaded automatically.
 
-The event work includes the Muse-specific experience and the current Presence, coding and evidence integration. An earlier Area2 demo informed its visual design. Agent Lab/Pulse and the Capsule validator are reused code; Cipher, Muse and Open Presence inference are external. See [provenance](docs/PROVENANCE.md) and [dependencies and notices](docs/DEPENDENCIES.md).
+The event work includes the Muse-specific experience and the current Presence, coding and evidence integration. An earlier Area2 demo informed its visual design. Agent Lab/Pulse and the Capsule validator are reused code; Cipher, Muse and Open Presence inference are external. See the [event build record](docs/EVENT-BUILD.md), [provenance](docs/PROVENANCE.md), and [dependencies and notices](docs/DEPENDENCIES.md).
 
 For troubleshooting and advanced setup, see the [judge reference](docs/JUDGE-REFERENCE.md), [qualification status](docs/STATUS.md) and [setup guide](docs/SETUP.md).

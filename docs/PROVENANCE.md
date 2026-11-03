@@ -4,10 +4,10 @@ The event-period work in this repository is the Muse-specific interactive
 experience and UI adaptation, plus the current Presence/coding/evidence integration
 around reused components. An earlier Area2 Open Presence side-by-side comparison
 demo informed the visual design; it is a visual reference, not a claim that the
-underlying foundations were created from scratch during the event. The private
-event build records and source-transfer manifests support this boundary but are
-not included in the public candidate or its Git history. They are not independent
-proof of the creation date or authorship of every line.
+underlying foundations were created from scratch during the event. The
+[event build record](EVENT-BUILD.md) summarizes development and testing milestones.
+The retrospective does not independently establish the creation date or
+authorship of every line.
 
 The selected Agent Lab/Pulse files are actually imported byte-for-byte from the
 pinned snapshot, rather than merely inspired by it. Its [NOTICE](../vendor/agent-lab/NOTICE)
