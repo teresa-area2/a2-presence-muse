@@ -8,6 +8,11 @@ any reviewed public evidence.
 - Tester: A / B
 - Task and attempt number:
 - Approved release commit from Teresa / actual full `git rev-parse HEAD` value:
+- Browser and version (or not recorded):
+- Interaction mode: directly at the Mac / Screen Sharing / other remote setup:
+- Started from: macOS Terminal / Codex (note any per-command approval) / other:
+- Printed workspace URL and port (do not include bootstrap tokens):
+- Setup: fresh clone/install / resumed existing approved checkout and build:
 - Selected model (and whether it changed):
 - Typing consent enabled / genuine OP reading observed / ordinary fallback?
 - Export filename (or why unavailable):
@@ -34,7 +39,11 @@ or unable to judge. Please do not reconstruct counts you cannot remember.
 [Your note]
 
 For your first task only: macOS / Node / Muse versions, approximate setup time,
-and the first confusing step or safe error. Remove secrets before sharing.
+and the first confusing step or safe error. For capture failures, include the
+browser/version and direct/remote mode even if another browser worked; do not
+assume the browser or remote setup caused it. Preserve the exact nonsecret error
+and say whether a verified different port or Terminal startup helped. Do not send
+settings/auth contents; keep backups. Remove secrets before sharing.
 
 [Your note]
 

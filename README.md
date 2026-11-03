@@ -36,6 +36,11 @@ remain external. See [provenance](docs/PROVENANCE.md) and
 **Reviewers: [start with the Mac tester handoff](docs/MAC-TESTER-HANDOFF.md).**
 It covers setup, your own Muse login, the first test and returning results.
 
+Use **Chrome or Firefox** for this rehearsal. Teresa reports working textbox
+capture in both browsers on the Mini. Safari capture failed in her Screen Sharing
+setup; exact versions and cause remain unverified. Start the workspace from
+macOS Terminal and retain your working installation if setup is already complete.
+
 Before enabling textbox Presence, read [Privacy & Data Use](docs/PRIVACY-DATA-USE.md).
 It distinguishes OP metadata, Meta/Muse coding and optional Observer requests,
 consent and saved evidence, with upstream terms still awaiting confirmation.
@@ -64,7 +69,11 @@ npm run judge:install
 npm run judge:start -- --consent-typing
 ```
 
-Open **http://127.0.0.1:8930/**, choose a task/model and open both sessions. Opening
+Open the **exact URL printed by the launcher**, choose a task/model and open both sessions. The default is 8930;
+if occupied, the launcher uses an OS-assigned free port and leaves the older
+workspace running. An explicit `--port` remains authoritative; `--port 0` requests
+a free port directly. The output identifies this launch's checkout and URL.
+Opening
 sessions sends no model task; Send uses the judge's own allowance. Account login
 or a readable credential file does not itself prove valid model access.
 

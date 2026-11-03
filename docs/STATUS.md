@@ -3,10 +3,20 @@
 This candidate records checked behavior and remaining limits. It does not claim a
 complete independent judge journey or production qualification.
 
-- **Clean candidate checks:** on 3 November, the independent release tree passed
-  all 1,790 offline tests with zero failures/skips on Node 22.12.0, including the
+- **Judge onboarding recovery:** the launcher tries8930 and, only when the default
+  is occupied, binds once on an OS-assigned loopback port. Explicit ports are
+  authoritative. The printed URL/checkout identifies the new workspace and older
+  services/sessions remain unchanged.77 focused offline checks cover collision,
+  consent/private-config cleanup, dynamic-origin capture/submission and shutdown;
+  independent source review found no substantive issue. Teresa reports the Mini
+  works and capture works in Chrome/Firefox; Safari failed under Screen Sharing,
+  with exact browser versions/cause unverified. Each teammate's fresh own-account
+  coding/approval/export journey remains a rehearsal gate.
+- **Clean candidate checks:** on 3 November, the updated release tree passed
+  all 1,795 offline tests with zero failures/skips on Node 22.12.0, including the
   installed PowerShell parser checks. A fresh empty-cache anonymous judge install
-  passed. Earlier 1,755-test installation qualifications cover predecessor source;
+  passed on the preceding1,790-test release; dependencies/install code are unchanged
+  by this onboarding update. Earlier 1,755-test installation qualifications cover predecessor source;
   source checks are not an independent human judge or live OP admission test.
 - **Shared evidence home:** future launches use a private per-user home outside
   source checkouts for checkpoints and exports. Directory ownership/permissions,

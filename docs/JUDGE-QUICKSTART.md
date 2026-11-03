@@ -3,6 +3,12 @@
 Start from a fresh clone on your own Mac. Record the commit and your Muse version
 with your feedback. Current verification limits are listed in [STATUS](STATUS.md).
 
+**Use Chrome or Firefox for this rehearsal.** Teresa reports that the Mini works
+and textbox capture works in both browsers. Safari failed in the Screen Sharing
+setup; exact browser versions and the cause are unverified. This does not establish
+a general Safari limitation or a difference between direct and remote operation.
+Record your browser/version and whether you are at the Mac or using Screen Sharing.
+
 The intended judge route is a **local macOS workspace**, using the judge's own
 authorized Muse account. Linux and Windows via WSL2 are additional implementation
 targets; their current verification status is listed below. The browser is the interface; a local server runs two real
@@ -12,8 +18,9 @@ judge service or shared Meta account in this submission.
 Before account setup, install Git and Node **22.12 or later within Node 22** (`.nvmrc` pins 22.12.0), and
 Meta's Muse Code CLI. Native protocol startup, steering and interruption were
 checked with **1.4.13 / R6996.1** and **1.4.14 / R7309.1**. The full real-model
-coding/Presence qualification remains on 1.4.13; 1.4.14 still needs the hands-on
-coding/OP rehearsal. Other schema fingerprints refuse before sessions open. This
+coding/Presence qualification remains on 1.4.13. The operator-reported working
+Mini rehearsal does not independently qualify every version/account/browser path.
+Other schema fingerprints refuse before sessions open. This
 project does not redistribute Meta's binary. The harness uses Unix process groups,
 private Unix files and local sockets. Native Windows launchers refuse before loading
 credentials or starting a workspace; use the WSL2 route below. **Check code** uses
@@ -135,17 +142,28 @@ never downloads a fallback. Do not substitute unrelated production credentials. 
 does not read this file.
 
 ```sh
-# Clone into a private local directory. Git does not preserve owner-only file modes.
-umask 077
-# Public clone: no GitHub login is required.
-# The OP access file is needed only for consented live startup.
-git clone https://github.com/teresa-area2/a2-presence-muse.git open-presence-muse
-cd open-presence-muse
-# If you use nvm:
-nvm install
-nvm use
-npm run judge:install
+(
+  set -e
+  umask 077
+  mkdir -p "$HOME/Developer"
+  # Public clone: no GitHub login is required.
+  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse"
+  cd "$HOME/Developer/open-presence-muse"
+  node --version
+  npm run judge:install
+)
 ```
+
+Use your existing supported Node 22 installation. **nvm is optional**; if you
+use it and need to select the pinned version, run `nvm install` and `nvm use`
+inside the checkout before installation. Do not install nvm or reinstall Node
+merely to repeat a completed setup. The `~/Developer` location avoids common macOS
+protected Desktop/Documents-folder prompts; use a new unused directory for a fresh
+clone rather than overwriting a previous comparison.
+
+If the approved checkout, Node 22 and browser build are already ready, continue
+from startup in that checkout. No fresh clone or reinstall is required just to
+restart. Keep the approved commit recorded; use your existing path if different.
 
 The intended command performs the locked anonymous npm install without dependency
 install scripts, builds the browser bundle and checks setup. It reads no access
@@ -189,6 +207,21 @@ another active judge session may own one. A force-kill or OS crash can also leav
 temporary files and needs the same checked recovery. Keep directory contents and
 the supplied credential bundle out of feedback/screenshots.
 
+### Host permissions and settings errors
+
+A command launched through Codex inherits its host execution sandbox. An `EPERM`
+while creating config/session directories can therefore differ from running the
+same command in macOS Terminal. Keep the exact nonsecret error and command; use
+Terminal as the primary route, or a supported per-command approved execution in
+Codex when that sandbox boundary is the cause. This does not authorize disabling
+Muse’s own sandbox or approvals.
+
+Do not recursively chmod your home or settings, reset credentials, replace auth
+files or delete old sessions to bypass a startup error. Preserve existing settings
+and backups. There is no universal automatic migration between Muse settings
+schemas: report the installed build and safe error, then obtain a version-specific
+repair rather than guessing a new settings format.
+
 ### Local trust boundary
 
 Run this workspace on a trusted personal machine and OS session. It binds to
@@ -203,6 +236,10 @@ would need a separately authenticated design; adding another caller-supplied
 header would not provide it. No such gateway is included here.
 
 ## 3. Start with explicit typing consent
+
+Use **macOS Terminal** to start the local workspace and leave that terminal open.
+If setup is complete, `cd ~/Developer/open-presence-muse` (or your actual checkout)
+and use your already configured Node 22; no reinstall is needed.
 
 Read [Privacy & Data Use](PRIVACY-DATA-USE.md) first. The message box supplies
 key timings/categories, a session identifier and time/timezone context to
@@ -227,11 +264,19 @@ After reading the notice and agreeing to this typing-metadata processing:
 npm run judge:start -- --consent-typing
 ```
 
-Open the printed loopback URL, normally **http://127.0.0.1:8930/**. If a
-`localhost` alias returns 403, use the printed `127.0.0.1` address; the Host guard
-is intentional. This command never kills another workspace. If that port is occupied, use the existing workspace
-or deliberately choose another port with `--port 8931`; do not run duplicate demos.
-Starting the server or opening sessions sends no model task.
+Open the **exact URL printed by this startup** in Chrome or Firefox. Without
+`--port`, the launcher tries 8930; only if that port is already occupied does it ask
+the OS for an available port and print the new URL. To request an available port
+directly, use `npm run judge:start -- --consent-typing --port 0`. An explicit
+`--port 8931` remains authoritative and fails if unavailable; it does not silently
+choose another port.
+
+A fallback port leaves any older workspace running. It neither moves nor restores
+its sessions. Do not kill an unknown listener, reuse an unverified old page or
+assume a reused browser tab belongs to this launch. If you intend to continue a
+known open comparison, verify its identity and URL instead of starting another.
+If a `localhost` alias returns 403, use the printed `127.0.0.1` address; the Host
+guard is intentional. Starting the server or opening sessions sends no model task.
 
 The owner reports that the dated Open Presence grant configuration expires at
 **17:00 UTC on 15 November 2026**; current service acceptance was not freshly
@@ -314,7 +359,7 @@ Within the Linux distribution:
    your own account; open its displayed sign-in URL in your browser if necessary.
    Do not copy another person's Muse auth or Windows credential store.
 3. Run `npm run judge:install`, then `npm run judge:start -- --consent-typing`.
-   Open the printed `http://127.0.0.1:8930/` in your Windows browser. WSL's localhost
+   Open the exact URL printed by this startup in your Windows browser. WSL's localhost
    forwarding must work; do not expose the server on `0.0.0.0` to work around it.
 4. Stop with Ctrl-C in the same WSL terminal. Use the optional Linux sandbox check
    above; WSL2 itself does not prove the verifier can create its namespaces.

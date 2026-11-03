@@ -2,7 +2,11 @@
 
 Use the [clean rehearsal source](https://github.com/teresa-area2/a2-presence-muse)
 and start from a fresh clone. It is public for the real judge rehearsal. The private development-history repository is not the tester checkout.
-Teresa tests the Mini first; Peña and Mauro follow using the same public revision.
+Teresa reports that the Mini works; Peña and Mauro should use the same approved
+public revision. **Use Chrome or Firefox:** capture worked in those browsers.
+Safari failed in the Screen Sharing setup; browser versions and the cause are
+unverified. Record your browser/version and direct or remote mode rather than
+assuming a general browser or Screen Sharing limitation.
 
 Your goal is to complete a small coding conversation with two Muse agents and
 return one result package per task pair plus your experience. Use the nonconfidential samples;
@@ -17,7 +21,8 @@ rehearsal gates, not already verified outcomes.
 anonymous installation and the normal judge installer have passed locally. Teresa
 will supply the exact approved full GitHub commit; use the same commit for both
 testers. Do not substitute the private archive, an older rehearsal tag or moving
-`main`. Independent setup, login, typing, approval and export remain untested.
+`main`. The Mini result is operator-reported; each teammate’s own setup, login,
+typing, approval and export still need testing.
 
 Start with **one Trip bill pair** each and return its result before doing the
 remaining tasks. Allow time for setup and a real conversation; completion speed
@@ -50,11 +55,11 @@ Then follow [installation](JUDGE-QUICKSTART.md#2-install-the-submitted-checkout)
   IFS= read -r judge_commit
   test "${#judge_commit}" -eq 40
   case "$judge_commit" in *[!0-9a-f]*) exit 2 ;; esac
-  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Desktop/open-presence-muse-judge"
-  cd "$HOME/Desktop/open-presence-muse-judge"
+  mkdir -p "$HOME/Developer"
+  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
+  cd "$HOME/Developer/open-presence-muse-judge"
   git checkout --detach "$judge_commit"
   test "$(git rev-parse HEAD)" = "$judge_commit"
-  if command -v nvm >/dev/null 2>&1; then nvm install; nvm use; fi
   node --version
   MUSE_NO_AUTO_UPDATE=1 muse --version
   git rev-parse HEAD
@@ -64,12 +69,16 @@ Then follow [installation](JUDGE-QUICKSTART.md#2-install-the-submitted-checkout)
 
 The block stops at the first failure. If the destination already exists, use a
 new unused folder and adjust the later `cd`; do not overwrite or delete an old
-comparison. Without nvm, install the documented Node22 version before this block.
+comparison. Use your existing supported Node 22; nvm is optional, not a prerequisite.
+If you use nvm and need a different Node version, select the documented version
+before installation. The `~/Developer` location avoids common protected-folder
+prompts. If the approved clone, Node 22 and browser build are already ready, skip
+clone/install and continue below from your existing checkout; do not overwrite it.
 Record those version/commit outputs. The designated local judge file is OP-only and is retrieved automatically on
 first consented start; do not send its contents. `judge:install` installs locked Cipher versions anonymously
 without reading that file or requiring npm authentication.
 The lite packages and a fresh token-free installation were verified locally on
-3 November; your independent setup/login/coding journey remains to be tested. The
+3 November; your own account’s setup/login/coding journey still needs testing. The
 prior public-judge npm token was revoked on 3 November. The OP client cutoff is
 the start of **15 November UTC**; expiry does not delete saved records.
 Stop on installation failure; use the quickstart's specific recovery guidance.
@@ -96,22 +105,32 @@ Coding messages, task context and tool results go separately to Meta/Muse.
 context to Muse; read its disclosure before using it. No Observer action is needed
 to finish this rehearsal.
 
+Use **macOS Terminal** as the primary startup route and keep it open. If a Codex
+launch reports `EPERM` on config/session folders, preserve the nonsecret error and
+try Terminal or supported per-command approved execution in Codex. Keep Muse’s
+sandbox and approvals enabled. Do not broadly chmod settings/home, reset credentials
+or delete backups; settings-schema errors need a version-specific repair. See
+[host-permission guidance](JUDGE-QUICKSTART.md#host-permissions-and-settings-errors).
+
 If you agree to textbox metadata capture:
 
 ```sh
 (
   set -e
-  cd "$HOME/Desktop/open-presence-muse-judge"
-  if command -v nvm >/dev/null 2>&1; then nvm use; fi
+  cd "$HOME/Developer/open-presence-muse-judge"
   npm run judge:start -- --consent-typing
 )
 ```
 
 Otherwise omit `--consent-typing` and report that you tested ordinary fallback.
 The first consented start retrieves and saves the local access file with mode0600.
-Open the printed **http://127.0.0.1:8930/** URL on the same Mac. Keep one workspace;
-if the port is occupied, stop and identify the existing one. Do not expose a tunnel
-or kill unrelated processes. Opening sessions sends no coding prompt.
+Open the **exact URL printed by this startup** in Chrome or Firefox on the same
+Mac. With no `--port`, the launcher tries 8930 and chooses an OS-available port only
+if 8930 is already occupied. You can request a free port directly with
+`npm run judge:start -- --consent-typing --port 0`. An explicit nonzero `--port`
+does not fall back. The older workspace remains running; sessions are not moved
+or restored. Never kill an unknown listener or reuse an unverified old page.
+Do not expose a tunnel. Opening sessions sends no coding prompt.
 
 ## 3. Complete the first matched conversation
 
@@ -183,6 +202,8 @@ Use the [per-task feedback template](TESTER-FEEDBACK-TEMPLATE.md), or this short
 
 ```text
 Tester / macOS / Node / Muse version / Git commit:
+Browser and version / direct Mac or Screen Sharing (or other remote mode):
+Started from macOS Terminal or Codex / printed workspace URL:
 Task and selected model:
 Typing consent enabled? First real OP reading observed?
 Setup, approvals, steering, checks and export: what worked / failed?
