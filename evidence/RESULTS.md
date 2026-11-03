@@ -1,6 +1,6 @@
 # Preliminary Presence × Muse evidence
 
-This reviewed evidence is included in the public repository. The analysis was frozen on 3 November 2026. It combines a one-person, unblinded pilot across several tasks, models and software versions; repeated comparisons do not create independent participants.
+This reviewed evidence is included in the public repository. The analysis was frozen on 3 November 2026. The ratings come from one person in an unblinded pilot; the resource cohort also includes unrated records with uncertain origin and work comparability. The records span several tasks, models and software versions; repeated comparisons do not create independent participants.
 
 | Outcome | Without Presence | With Presence | Paired comparisons |
 | --- | ---: | ---: | ---: |

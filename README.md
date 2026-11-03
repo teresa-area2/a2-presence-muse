@@ -8,7 +8,7 @@ Muse Code was used substantially in implementing and testing the project during 
 
 ## Try the demo
 
-**[Follow the Judge journey](docs/JUDGE-QUICKSTART.md)** to set up, run a coding task and return your results. You need a Mac, Git, a supported Muse Code installation and your own entitled Muse account. Use Chrome or Firefox. The Mac setup prepares a verified Node runtime inside the checkout; it does not change your system Node or shell settings.
+**[Follow the Judge journey](docs/JUDGE-QUICKSTART.md)** to set up, run a coding task and inspect the results. You need a Mac, Git, a supported Muse Code installation and your own entitled Muse account. Use Chrome or Firefox. The Mac setup prepares a verified Node runtime inside the checkout; it does not change your system Node or shell settings.
 
 Read [Privacy & Data Use](docs/PRIVACY-DATA-USE.md) before enabling Presence. With your consent, the demo sends textbox interaction metadata to Open Presence, including while you type. Your coding messages and task context go separately to Muse. The optional **See Presence impact** action sends selected exchanges and code excerpts to Muse, which may contain private information.
 

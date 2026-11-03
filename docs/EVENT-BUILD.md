@@ -69,7 +69,7 @@ On 31 October, distribution of the selected Area2-owned Lab/Pulse and validator 
 
 ## Evidence boundaries
 
-Offline checks, real model runs and human-reported experience are distinct evidence. Historical comparisons include partial or failed attempts and do not establish a causal benefit or cost saving. The published aggregate is a one-person, unblinded pilot across tasks, models and versions; its uncached input increased in the recorded resource comparison.
+Offline checks, real model runs and human-reported experience are distinct evidence. Historical comparisons include partial or failed attempts and do not establish a causal benefit or cost saving. The published ratings are from one person in an unblinded pilot; the resource cohort also includes unrated records with uncertain origins. The records span tasks, models and versions, and uncached input increased in the recorded resource comparison.
 
 ## Related documentation
 
