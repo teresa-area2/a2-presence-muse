@@ -48,9 +48,11 @@ another. A separate manually created key is not always required. This harness
 requires Muse's readable stored auth file; environment-only keys and Keychain-only
 login are not qualified for these isolated panes.
 
-The designated `judge-access/temporary-credentials.json` supplies temporary Open
-Presence access, not Muse access. The current file is OP-only; normal installation
-does not read it and needs no npm token. This clean release contains the existing designated OP evaluation access only.
+The first consented startup retrieves the existing owner-published temporary Open
+Presence demo access from a fixed historical HTTPS source, checks its pinned hash
+and saves an ignored local `judge-access/temporary-credentials.json` with mode0600.
+No access-file handoff, private GitHub login, npm token or shared Muse account is
+needed. Installation and no-consent startup do not download or read OP access.
 The installer fetches the public Cipher lite packages anonymously through locked
 npm aliases. A fresh empty-cache installation and the normal judge installer
 passed locally on 3 November; see [qualification status](docs/STATUS.md). After
@@ -58,8 +60,7 @@ following the quickstart's account and prerequisite steps:
 
 ```sh
 npm run judge:install
-# Before a consented live Presence session:
-chmod 600 judge-access/temporary-credentials.json
+# After reading the typing-metadata consent disclosure:
 npm run judge:start -- --consent-typing
 ```
 

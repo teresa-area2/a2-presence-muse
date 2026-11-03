@@ -127,16 +127,17 @@ that qualification.
 
 The designated temporary file at `judge-access/temporary-credentials.json`
 is OP-only and supplies no Muse access. Normal installation does not read it or
-require npm authentication. A
-normal development clone omits that file. If it is absent, request the completed
-judge package or use `--access /absolute/path/to/your/OP-file.json` on the consented
-start command. Do not substitute unrelated production credentials. The installer
+require npm authentication. A fresh clone intentionally omits the local access file. First consented startup
+downloads the owner-published demo file from a fixed historical HTTPS URL, verifies
+its pinned hash and OP-only schema/expiry, and saves it locally with mode0600. An
+explicit `--access /absolute/path/to/your/OP-file.json` remains authoritative and
+never downloads a fallback. Do not substitute unrelated production credentials. The installer
 does not read this file.
 
 ```sh
 # Clone into a private local directory. Git does not preserve owner-only file modes.
 umask 077
-# During private rehearsal, complete the GitHub login in MAC-TESTER-HANDOFF.md first.
+# Public clone: no GitHub login is required.
 # The OP access file is needed only for consented live startup.
 git clone https://github.com/teresa-area2/a2-presence-muse.git open-presence-muse
 cd open-presence-muse
@@ -223,7 +224,6 @@ without the flag. Requesting an Observer explanation/assessment is a separate ac
 After reading the notice and agreeing to this typing-metadata processing:
 
 ```sh
-chmod 600 judge-access/temporary-credentials.json
 npm run judge:start -- --consent-typing
 ```
 
@@ -308,8 +308,8 @@ already installed, follow [Microsoft's installation guide](https://learn.microso
 Within the Linux distribution:
 
 1. Put the checkout/package in your Linux home, such as `~/open-presence-muse`,
-   rather than `/mnt/c`. Keep the temporary access file private with
-   `chmod 600 judge-access/temporary-credentials.json`.
+   rather than `/mnt/c`. The first consented startup retrieves temporary OP
+   access and saves its ignored local file with mode0600.
 2. Install and run **Linux** Git, Node22 and Muse there. Start `MUSE_NO_AUTO_UPDATE=1 muse --contributor-mode off` and use first-run sign-in or `/login` with
    your own account; open its displayed sign-in URL in your browser if necessary.
    Do not copy another person's Muse auth or Windows credential store.

@@ -4,7 +4,7 @@ This candidate records checked behavior and remaining limits. It does not claim 
 complete independent judge journey or production qualification.
 
 - **Clean candidate checks:** on 3 November, the independent release tree passed
-  all 1,769 offline tests with zero failures/skips on Node 22.12.0, including the
+  all 1,790 offline tests with zero failures/skips on Node 22.12.0, including the
   installed PowerShell parser checks. A fresh empty-cache anonymous judge install
   passed. Earlier 1,755-test installation qualifications cover predecessor source;
   source checks are not an independent human judge or live OP admission test.
@@ -21,10 +21,12 @@ complete independent judge journey or production qualification.
   Existing import paths are npm aliases; original private packages remain separate.
   The former npm token is revoked; normal judge installation never reads it or the
   OP access file. This is a local installation qualification, not live OP admission.
-- **Release access:** this clean release includes only the existing designated OP
-  evaluation access; no npm token or Muse key is included. Preserving that access
+- **Release access:** first consented startup can retrieve the already-public, fixed
+  hash-pinned OP-only demo access into an ignored private local file; no credential
+  value, npm token or Muse key is tracked in the clean release. Preserving that access
   does not establish a fresh OP admission check. Normal installation does not read
-  the evaluation file. Original development history is retained privately.
+  the evaluation file. Original development history is retained privately. Fresh-clone default bootstrap
+  has offline regression coverage; real OP admission remains a human rehearsal gate.
 - **Native Muse:** existing-account 1.4.13 empty sessions, hook installation and
   catchable judge hangup cleanup were exercised without a model turn or OP capture.
   Historical 1.4.14 protocol/control checks do not qualify its full current coding/

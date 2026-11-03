@@ -10,7 +10,13 @@ try{
  const [major,minor]=process.versions.node.split('.').map(Number);if(major!==22||minor<12)throw Error('judge_node_22_12_required');
  const {readJudgeAccess,prepareJudgeAccess,judgeArguments}=await import('../src/judge-access.mjs');
  const options=judgeArguments(process.argv.slice(2)),port=options.port??8930;
- if(options.consent){const bundle=await readJudgeAccess(options.access??path.join(root,'judge-access/temporary-credentials.json'),{purpose:'start'});check();privateAccess=await prepareJudgeAccess(bundle,{repoRoot:root});check();}
+ if(options.consent){
+  const access=options.access??path.join(root,'judge-access/temporary-credentials.json');
+  // Only explicit consent enables the fixed public demo-access bootstrap.
+  // A supplied access path is authoritative and must never fall back.
+  if(options.access===null){const {ensurePublicJudgeAccess}=await import('../src/judge-public-access.mjs');await ensurePublicJudgeAccess({destination:access,signal:controller.signal});check();}
+  const bundle=await readJudgeAccess(access,{purpose:'start'});check();privateAccess=await prepareJudgeAccess(bundle,{repoRoot:root});check();
+ }
  const {buildStructuredLauncher,canonicalWorkspaceEnvironment}=await import('../structured-live.mjs'),{prepareCodingTaskProfiles}=await import('../src/coding-task-profiles.mjs');
  check();const environment=canonicalWorkspaceEnvironment({...process.env,...privateAccess?.environment,A2_MUSE_PRESENCE_SOURCE:'textbox',A2_MUSE_OP_LIVE:options.consent?'1':'0',A2_MUSE_CAPTURE_AUTHORIZED:options.consent?'1':'0'});
  const taskProfiles=await prepareCodingTaskProfiles({sourceRoot:root,localRoot:path.join(root,'.local'),environment});check();app=await buildStructuredLauncher({environment,taskProfiles,keepWorkspaceOpen:true,presentationGuidance:true,presentationVersion:3});check();

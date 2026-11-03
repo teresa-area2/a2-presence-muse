@@ -42,7 +42,7 @@
     "schema": "open_presence.controls.v0.4",
     "instructions": "coding-instructions.3",
     "user_mode": "internal",
-    "distribution": "external service; designated temporary OP-only evaluation access is in the checkout, not sent to the browser; normal installation does not read it; Muse access remains separate"
+    "distribution": "external service; consented judge startup can fetch pinned owner-published OP-only demo access into a private ignored local file; installation does not read it or need npm authentication; Muse access remains separate"
   },
   "pulse": {
     "source": "vendor/agent-lab/interactive-public/{pulse.mjs,presence-print.mjs,pulse.css}",

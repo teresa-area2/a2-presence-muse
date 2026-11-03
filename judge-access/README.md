@@ -2,12 +2,23 @@
 
 ## Designated OP access and separate installation
 
-The designated `judge-access/temporary-credentials.json` supplies temporary OP
-evaluation access and is OP-only, without a Muse key or npm token. This clean release includes only the existing designated OP evaluation access.
-Normal installation does not read this file. Keep
-its local copy mode 0600; the user's own Muse login and billing remain separate.
-The separate private development-history checkout omits it. Use [the first-time journey](../docs/JUDGE-QUICKSTART.md)
-for consent, fallback and setup.
+The local `judge-access/temporary-credentials.json` is ignored by Git and is not
+shipped in this clean repository. After `--consent-typing`, implicit default
+startup can retrieve the owner’s already-public OP-only demo bundle from a fixed
+historical GitHub URL, validate its full-file SHA256, OP-only schema and expiry,
+and save it atomically with mode0600. It supplies no Muse key or npm token.
+Existing safe local access is preserved. A named `--access` path never falls back.
+No-consent startup and normal installation do not download or read this file.
+Download is bounded to10seconds/16KiB, with no credentials, cookies or redirects;
+failures remain explicit and do not start the live app. No OP/model request is
+made just to retrieve the access file. Use [the first-time journey](../docs/JUDGE-QUICKSTART.md)
+for separate typing consent, your own Muse account, fallback and setup.
+
+The temporary bootstrap source is the owner-published OP-only file at pinned
+historical commit44be3b1 in the previous public hackathon repository. Keep that
+source readable while judges rely on it; migrate the access distribution before
+removing the old repository. No new credential values are published by this clean
+repo. The existing service grant and local cutoff remain unchanged.
 
 The intended normal `npm run judge:install` uses anonymous locked npm access and
 does not read this file, the old npm token or user/global npm credentials. The
@@ -16,7 +27,7 @@ on 3 November; your independent Muse login/coding journey remains separate. An e
 option, not the normal judge route. No private Cipher package archive, generated
 bundle or `node_modules` is committed.
 
-Live startup reads the OP file only with `--consent-typing`; no-consent startup
+Live startup retrieves/reads OP access only with `--consent-typing`; no-consent startup
 does not read it. Confirmed shutdown/error paths remove copied configuration.
 Catchable Ctrl-C, termination and terminal hangup follow the owned cleanup flow.
 If installer process-group termination is unconfirmed, the installer withholds

@@ -1,9 +1,8 @@
 # Mac judge rehearsal
 
 Use the [clean rehearsal source](https://github.com/teresa-area2/a2-presence-muse)
-and start from a fresh clone. It remains private until Teresa approves public
-release. The private development-history repository is not the tester checkout.
-Teresa tests the Mini first; Peña and Mauro follow after access is granted.
+and start from a fresh clone. It is public for the real judge rehearsal. The private development-history repository is not the tester checkout.
+Teresa tests the Mini first; Peña and Mauro follow using the same public revision.
 
 Your goal is to complete a small coding conversation with two Muse agents and
 return one result package per task pair plus your experience. Use the nonconfidential samples;
@@ -41,16 +40,6 @@ Keychain credentials or put a key into the repo or feedback. If onboarding/versi
 file-backed auth does not match the quickstart, stop and report the exact nonsecret
 error instead of changing the protocol allowlist.
 
-While the repository is private, sign in to GitHub as an account with access.
-For the Mini, use Teresa’s own GitHub account. Testers must first accept their
-invitation. With the official GitHub CLI installed (`gh`; Homebrew users can run
-`brew install gh`), authenticate through its browser flow:
-
-```sh
-gh auth login --hostname github.com --git-protocol https --web
-gh auth setup-git
-```
-
 Then follow [installation](JUDGE-QUICKSTART.md#2-install-the-submitted-checkout):
 
 ```sh
@@ -76,8 +65,8 @@ Then follow [installation](JUDGE-QUICKSTART.md#2-install-the-submitted-checkout)
 The block stops at the first failure. If the destination already exists, use a
 new unused folder and adjust the later `cd`; do not overwrite or delete an old
 comparison. Without nvm, install the documented Node22 version before this block.
-Record those version/commit outputs. The designated judge file is OP-only; do not
-send its contents. `judge:install` installs locked Cipher versions anonymously
+Record those version/commit outputs. The designated local judge file is OP-only and is retrieved automatically on
+first consented start; do not send its contents. `judge:install` installs locked Cipher versions anonymously
 without reading that file or requiring npm authentication.
 The lite packages and a fresh token-free installation were verified locally on
 3 November; your independent setup/login/coding journey remains to be tested. The
@@ -114,13 +103,12 @@ If you agree to textbox metadata capture:
   set -e
   cd "$HOME/Desktop/open-presence-muse-judge"
   if command -v nvm >/dev/null 2>&1; then nvm use; fi
-  chmod 600 judge-access/temporary-credentials.json
   npm run judge:start -- --consent-typing
 )
 ```
 
-Otherwise omit `--consent-typing` (and the access-file `chmod` if no OP file is
-present), and report that you tested ordinary fallback.
+Otherwise omit `--consent-typing` and report that you tested ordinary fallback.
+The first consented start retrieves and saves the local access file with mode0600.
 Open the printed **http://127.0.0.1:8930/** URL on the same Mac. Keep one workspace;
 if the port is occupied, stop and identify the existing one. Do not expose a tunnel
 or kill unrelated processes. Opening sessions sends no coding prompt.
