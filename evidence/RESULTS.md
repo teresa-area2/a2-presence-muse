@@ -9,9 +9,9 @@ models and builds. These are descriptive results, not a causal estimate.
 ## Overall Presence impact assessment
 
 **Across the frozen pilot, Presence is associated with favorable reported
-collaboration experience, alongside mixed resource use and a substantial
-cache-reuse trade-off. Net productivity, correctness or cost benefit is not
-established.** This conclusion uses all eligible evidence, not the five
+collaboration experience alongside a different resource profile. Cache reuse
+alone does not determine collaboration value. Net productivity, correctness or
+cost benefit is not established.** This conclusion uses all eligible evidence, not the five
 illustrative episodes.
 
 - **Experience:** 29/33 rated cases report lower effort; 25/33 fewer interruptions;
@@ -54,8 +54,10 @@ Noticed interruptions were lower in 25 cases, equal in four and higher in four.
 
 Across the 51 paired resource records, input increased **1.36%**, output decreased
 **14.27%**, and input plus output increased **0.85%**. Uncached input increased
-**509.74%** (about 6.1 times baseline). Reduced cache reuse is not a saving;
-input already includes cached input. Actual billing and full overhead are unknown.
+**509.74%** (about 6.1 times baseline). Input already includes cached input.
+Cache reuse is reported descriptively: lower reuse alone does not establish
+better or worse collaboration. Resource use is evaluated against experience,
+usefulness and correctness. Actual billing and full overhead are unknown.
 Completed timing is faster with Presence in 19 of 39 pairs and slower in 20;
 the lower mean does not establish faster accepted work.
 

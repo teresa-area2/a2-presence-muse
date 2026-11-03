@@ -18,7 +18,7 @@
     "coverage.json": "f7d1d55da8d4b892165e247774a0ab38b5690a5e93962e2252172f35026d248a",
     "coverage-summary.json": "61312e97ce45f49d3e55dae99438681b78ee1a01ec8fa118aa3a900f61765bbc",
     "response-excerpts.json": "d2da402f0bfb000d6560ddf97ab7bebd4dd2ec07165c982917337e018a867e11",
-    "README.md": "27f0312d0a7d753084cbfb9a9533cd93ef83147275266c1ae59ec758bb548fc6"
+    "README.md": "3bba8e52898e81bfe850a013c7ff054cc6548095445e547b3b57d338afe16d88"
   },
   "review_scope": "Offline source/quote/linkage/arithmetic review; no new participant, model, OP, evaluator or code-check run.",
   "privacy": "Only previously reviewed redacted Muse public finals and selected exact fragments; no participant prompts, code-file bodies, raw typing, Capsules, credentials, native streams or hidden reasoning.",

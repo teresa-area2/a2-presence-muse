@@ -33,6 +33,15 @@ uncached = input − cache; input + output does not add cache again. A scale-poi
 rating change is not a calibrated workload reduction. Turn times include waits
 and do not establish accepted-work speed or equal realized work.
 
+## Resource interpretation
+
+Cached and uncached input are reported as resource-accounting dimensions.
+Lower cache reuse is not classified as a benefit or a penalty by itself. The
+assessment relates resource use to reported experience, useful work and
+correctness. Dynamic guidance is a possible explanation for a changed reuse
+profile; this dataset does not isolate its cause or show that the difference
+was necessary for adaptation. Design rationale remains separate from observation.
+
 ## Quality and interpretation
 
 The known rated participant is one unblinded repeated pilot, not 33 independent

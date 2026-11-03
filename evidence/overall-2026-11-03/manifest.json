@@ -14,7 +14,7 @@
   },
   "source_commitment_scope": "Private analysis derivatives, not original participant/provider receipts. Public files have separate byte hashes.",
   "files": {
-    "README.md": "e8a59742e4a2c72a210d6a900d7e9ed30d223ba5c55199f71baba2b710b7cb27",
+    "README.md": "d8e849643aaced3b9a7c7fb918d750c48c50658cb838c37dbc2f100205328f4e",
     "reproduce.mjs": "32f2b27cb1118a9b7965c388a484f3c4c39015cdf3d666514e1a728ed1e6d376",
     "quantitative-evidence.json": "db6676381514628c670593b27a784d6a3db3d1c60d2554f2b9544657ad2dec1b"
   },
@@ -23,5 +23,7 @@
   "cohort_semantic_adherence_estimate": null,
   "new_trials": 0,
   "new_Muse_OP_or_evaluator_calls": 0,
-  "original_numeric_audit_and_primary_aggregates_unchanged": true
+  "original_numeric_audit_and_primary_aggregates_unchanged": true,
+  "interpretation_revision_date": "2026-11-04",
+  "interpretation_revision": "Neutral cache-reuse framing; adaptive collaboration is the design aim. Dynamic-context explanation remains a hypothesis; data, cohorts and causal limits unchanged."
 }

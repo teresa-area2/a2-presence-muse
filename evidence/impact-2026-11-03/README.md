@@ -67,9 +67,9 @@ provider execution, causality and semantic correctness.
 For case-076, reported effort is **4 → 2** and noticed interruptions **4 → 3**.
 At the same time, complete elapsed seconds increase **112.80 → 118.86**, and
 uncached input increases **35,888 → 220,770**. Saved common frozen passes are stale.
-This is a mixed account: lower reported burden alongside greater processing and
-longer elapsed work. It does not establish the additional processing's value or
-current technical quality.
+This places lower reported burden alongside a different input profile and
+longer elapsed work. Resource differences alone do not determine collaboration
+value; this case does not establish that value or current technical quality.
 
 For case-014, reported effort is **4 → 1** and interruptions **4 → 2**. The case is
 flagged matched, but identical instructions are not independently verified; latest
