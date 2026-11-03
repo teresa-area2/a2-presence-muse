@@ -1,6 +1,10 @@
 # Bounded Windows qualification
 
-The checked-in Windows workflow is a credential-free diagnostic, not a hosted judge service. Its bootstrap deliberately refuses a tree containing the designated judge-access bundle. Do not dispatch this credential-bearing submission tree to hosted CI.
+The checked-in Windows workflow is a credential-free diagnostic, not a hosted judge
+service. A fresh public checkout does not contain the temporary judge-access file;
+consented local startup can retrieve it into an ignored file. The Windows bootstrap
+refuses a tree containing that file. Never send a local access file or other
+credentials to hosted CI.
 
 For a separately reviewed credential-free copy, the explicit qualification job uses `A2_WINDOWS_QUALIFICATION=1` and `A2_QUALIFICATION_MODE=native` or `wsl`. It has a ten-minute limit and no automatic retry. The bootstrap verifies pinned tools and limits artifacts to allowlisted metadata; authentication files, native output and transcripts are excluded.
 

@@ -53,6 +53,6 @@ Primary references: [Meta Muse Code](https://dev.meta.ai/docs/muse-code), [Bubbl
 
 ## Actual hosted Windows CI
 
-Native CLI Echo and precredential guards have been exercised; WSL2 was unavailable. The submission tree contains the designated temporary access and must not be dispatched to the credential-free Windows bootstrap. See [CI scope](WINDOWS-CI.md); none of those diagnostics qualifies a full judge-owned login and coding experience.
+Native CLI Echo and precredential guards have been exercised; WSL2 was unavailable. The clean submission does not track the demo access file, but a checkout after consented startup may contain a local ignored copy. The credential-free Windows bootstrap must not receive a checkout containing that file. See [CI scope](WINDOWS-CI.md); these diagnostics do not qualify a full judge-owned login and coding experience.
 
 Teresa has no Windows computer available for a physical rehearsal. Hosted Windows Echo checks do not qualify the harness, and unavailable hosted WSL2 installation is not a pass. Do not describe native Windows or a complete WSL login/model/OP journey as tested.

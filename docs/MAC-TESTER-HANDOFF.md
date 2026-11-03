@@ -10,7 +10,7 @@ login, automatic consented OP access, installation, printed workspace URL, first
 coding conversation, final checks, ratings, export and private return instructions.
 Record your actual checkout revision; no separately supplied commit is required.
 
-Use Chrome or Firefox and macOS Terminal. Start with one Trip bill pair and return
+Use Chrome or Firefox and macOS Terminal. Start with any prepared task and return
 its result to Teresa; continue with the remaining prepared tasks if time/allowance
 permit. Your own task is optional. The [feedback template](TESTER-FEEDBACK-TEMPLATE.md)
 and [task battery](MAC-TESTER-TASKS.md) are optional supporting references.

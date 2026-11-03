@@ -1,130 +1,29 @@
 # Open Presence × Muse
 
-A side-by-side coding workspace for exploring how temporary Open Presence guidance can shape collaboration with Muse Code. Two isolated Muse sessions work on the same task; eligible Presence guidance is supplied only to the **With Presence** session. You can talk to either or both, review native approvals, steer a running turn and compare the resulting work and reported resources.
-
-**[Follow the Judge journey](docs/JUDGE-QUICKSTART.md)** to clone the repository,
-get it running, test it and return results.
-
-Presence is the focus of the experiment. The workspace can adjust optional commentary and suggest an appropriate response presentation when guidance is available. Essential answers, errors and approvals remain visible. When guidance is unavailable or withdrawn, the Presence session uses ordinary fallback. The Pulse displays the collaboration policy; it does not show numerical personal-state measurements.
-
-## Comparison configuration
-
-Both agents use isolated configurations with optional imports of personal rules
-and skills from other agent configurations disabled. Task-local instructions and
-skills, coding tools, questions and normal approvals remain available. Your normal
-Muse settings files are not edited.
-
-If your everyday Muse setup relies on those imports, this workspace can behave
-differently. **Without Presence is the configured comparison baseline**, not a
-copy of your complete everyday Muse environment. Applying the same isolation to
-both agents supports the comparison; it does not establish equivalent experience
-or results in a differently configured environment.
-
-For everyday Presence-enhanced Muse, the recommended direction is to preserve the
-user's chosen configuration and add Presence alongside it. That separate mode is
-not implemented or qualified in this submission.
-
-## Event-built work and reused foundations
-
-The event-period work is the Muse-specific interactive experience, UI adaptation
-and current Presence/coding/evidence integration. An earlier Area2 comparison demo
-was a visual reference. The selected Agent Lab/Pulse and Capsule validator files
-are actual imported code, with exact pins and notices; the Lab snapshot contains
-both earlier foundations and later refinements. Cipher, OP inference and Muse
-remain external. See [provenance](docs/PROVENANCE.md) and
-[dependency scope](docs/DEPENDENCIES.md); the disclosures do not decide eligibility.
+A side-by-side coding workspace for exploring how Open Presence guidance can shape collaboration with Muse Code. Two separate Muse sessions work on the same task; eligible Presence guidance goes only to the **With Presence** session. You can converse with both, review approvals, check their work and compare reported resources.
 
 ## Try the demo
 
-**Start here: [Judge journey — clone, run, test and return results](docs/JUDGE-QUICKSTART.md).**
-Start with a fresh clone; the Mac helper prepares pinned local Node and checks
-requirements before app installation. Your existing Node, nvm and shell settings
-stay unchanged.
-Follow that page through setup, your own Muse login,
-the coding test and its final export/return instructions. It is the same journey
-for judges and teammates; no separate handoff or externally supplied commit is
-required.
+**[Follow the Judge journey](docs/JUDGE-QUICKSTART.md)** to set up, run a coding task and return your results. You need a Mac, Git, a supported Muse Code installation and your own entitled Muse account. Use Chrome or Firefox. The Mac setup prepares a verified Node runtime inside the checkout; it does not change your system Node or shell settings.
 
-Use **Chrome or Firefox** for this rehearsal. Teresa reports working textbox
-capture in both browsers on the Mini. Safari capture failed in her Screen Sharing
-setup; exact versions and cause remain unverified. Start the workspace from
-macOS Terminal and retain your working installation if setup is already complete.
+Read [Privacy & Data Use](docs/PRIVACY-DATA-USE.md) before enabling Presence. With your consent, the demo sends textbox interaction metadata to Open Presence, including while you type. Your coding messages and task context go separately to Muse. The optional **See Presence impact** action sends selected exchanges and code excerpts to Muse, which may contain private information.
 
-Before enabling textbox Presence, read [Privacy & Data Use](docs/PRIVACY-DATA-USE.md).
-It distinguishes OP metadata, Meta/Muse coding and optional Observer requests,
-consent and saved evidence, with upstream terms still awaiting confirmation.
+The first consented startup retrieves temporary OP demo access automatically. The judge uses their own Muse account; no npm token is needed. The access is reported to expire on 15 November 2026, with a more conservative client cutoff. The demo uses shared calibration, so one tester's activity can influence later guidance. Details and current limits are in [judge access](judge-access/README.md) and the [privacy notice](docs/PRIVACY-DATA-USE.md).
 
-Follow the [complete first-time judge quickstart](docs/JUDGE-QUICKSTART.md) from
-a fresh checkout. You need Git and a reviewed Muse Code CLI
-and your own authorized model usage. An active Muse Code plan connected by browser
-onboarding is one route; your own stored Model API key with billing/credits is
-another. A separate manually created key is not always required. This harness
-requires Muse's readable stored auth file; environment-only keys and Keychain-only
-login are not qualified for these isolated panes.
-
-The first consented startup retrieves the existing owner-published temporary Open
-Presence demo access from a fixed historical HTTPS source, checks its pinned hash
-and saves an ignored local `judge-access/temporary-credentials.json` with mode0600.
-No access-file handoff, private GitHub login, npm token or shared Muse account is
-needed. Installation and no-consent startup do not download or read OP access.
-The installer fetches the public Cipher lite packages anonymously through locked
-npm aliases. A fresh empty-cache installation and the normal judge installer
-passed locally on 3 November; see [qualification status](docs/STATUS.md). After
-following the quickstart's account and prerequisite steps:
-
-```sh
-sh scripts/judge-mac.sh install
-# After reading the typing-metadata consent disclosure:
-sh scripts/judge-mac.sh start --consent-typing
-```
-
-Open the **exact URL printed by the launcher**, choose a task/model and open both sessions. The default is 8930;
-if occupied, the launcher uses an OS-assigned free port and leaves the older
-workspace running. An explicit `--port` remains authoritative; `--port 0` requests
-a free port directly. The output identifies this launch's checkout and URL.
-Opening
-sessions sends no model task; Send uses the judge's own allowance. Account login
-or a readable credential file does not itself prove valid model access.
-
-No npm token is included or required. OP is owner-reported to expire 15 November 2026 with the launcher's
-conservative UTC cutoff. The owner reports a
-retained calibration subject shared across Teresa and testers; local session IDs do
-not isolate it. Scope, dated grant expiry and deletion limits are in
-[judge access](judge-access/README.md) and [Privacy & Data Use](docs/PRIVACY-DATA-USE.md). The separate
-Mac collector is not required: explicit consent enables timing metadata from the
-app textbox. Without consent, the workspace uses ordinary fallback.
-
-Setup is checked on Apple Silicon macOS with Node22.12.0 and24.1.0; real Muse/OP
-journey limits remain in the platform matrix. Linux and Windows/WSL have
-specific, incomplete qualifications; see [platform support](docs/PLATFORM-SUPPORT.md).
-Native Windows harness launch is unsupported, even though Muse Code itself has
-a Windows CLI. A fresh independent judge's login/coding/OP journey remains open.
-
-Use a trusted personal machine: local processes able to reach the loopback port
-can obtain the browser bootstrap token. Host/Origin checks do not authenticate
-local OS users. See the [local trust boundary](docs/JUDGE-QUICKSTART.md#local-trust-boundary).
+Use a trusted personal machine. The local interface does not authenticate other processes or users on that machine. [Platform support](docs/PLATFORM-SUPPORT.md) describes tested routes and limits: the preferred path is macOS; the complete Linux and Windows/WSL judge journeys remain unqualified, and native Windows harness launch is unsupported.
 
 ## Work and compare
 
-Choose one of the five [sample coding tasks](coding-tasks/README.md), or **Your own task** for a clean workspace. Each agent has a separate worktree. Start with a plan, respond to each agent, review any approval in its own pane and ask for changes. You can steer a running agent with a follow-up; Escape interrupts selected active work without closing the sessions. **Close sessions** ends both. Preserve an open comparison before restarting the backend: saved evidence does not restore native conversations.
+Choose a [prepared coding task](coding-tasks/README.md), open both sessions and start with a plan. Each agent works in a separate workspace. Review approvals in each pane, ask follow-up questions, then use **Check code** for prepared tasks. An unavailable check is not a pass. Your own task has no predefined frozen checks.
 
-For the supplied tasks, **Check code** runs the public and frozen checks in an available sandbox. **Send CI feedback** is a separate, explicit model action. Your own task has no frozen acceptance checks. A failed or unavailable sandbox is not a pass and is not replaced by unsandboxed execution. See [setup](docs/SETUP.md#native-approval-review) for approval and safety details.
+Both agents use isolated configurations with personal imports from other agent configurations disabled; task-local instructions, tools and normal approvals remain available. **Without Presence** is the configured baseline, not a copy of your complete everyday Muse setup. When guidance is unavailable, the Presence session uses ordinary fallback. Essential answers, errors and approvals remain visible.
 
-The resource view reports cumulative usage where available. Output can include reasoning and tool-call arguments, not just visible replies. A count or difference alone does not establish a human benefit, causal saving or billing total. The optional observer uses a separate model call only when requested; selected exchanges and work files can contain private data or embedded credentials. Review the [observer disclosure](docs/OBSERVER-REPORT.md) before using it.
+The resource view reports available usage, which can include reasoning and tool arguments. Differences in counts do not establish cost savings, causation or human benefit. Review the [Observer disclosure](docs/OBSERVER-REPORT.md) before using its optional assessment.
 
-## Offline checks and evidence
+## Evidence and project origins
 
-After the authorized dependency setup:
+The repository includes [redacted historical evidence](evidence/README.md) and an [aggregate summary](evidence/RESULTS.md). The ratings come from a one-person, unblinded pilot across different tasks, models and versions; historical results do not qualify every feature of this release. Inspect any locally exported evidence before sharing it; exports are saved locally and are not uploaded automatically.
 
-```sh
-npm run check:setup
-npm run test:offline
-npm run test:tasks
-npm run demo:offline
-```
+The event work includes the Muse-specific experience and the current Presence, coding and evidence integration. An earlier Area2 demo informed its visual design. Agent Lab/Pulse and the Capsule validator are reused code; Cipher, Muse and Open Presence inference are external. See [provenance](docs/PROVENANCE.md) and [dependencies and notices](docs/DEPENDENCIES.md).
 
-The offline replay uses declared fixtures, not human typing or a live model. The local evidence package combines the checkpoint and available assessment, with explicit omissions and separate observer usage. It may contain private task information and stays in the shared private `~/.local/share/a2-presence-muse/evidence/` directory, independently of the checkout. See [evidence package setup](docs/SETUP.md#combined-evidence-package) and [current qualification limits](docs/STATUS.md).
-
-The UI export stays private. A separate `npm run evidence:public -- --input /absolute/path/to/package.json` creates a closed, redacted review copy directly under `evidence/runs/`; see the [evidence guide](evidence/README.md). It does not commit, publish or run a model. This candidate includes reviewed redacted historical snapshots and a limited aggregate pilot summary under `evidence/`; raw originals remain private. These historical records do not qualify every final-build feature.
-
-The selected [Agent Lab/Pulse](vendor/agent-lab/NOTICE) and [Capsule validator](vendor/capsule-validator/NOTICE.md) are reused foundations, not newly built models. Cipher remains an external npm dependency; Muse Code and OP inference are external services. See [dependency scope](docs/DEPENDENCIES.md) and [provenance](docs/PROVENANCE.md).
+For troubleshooting and advanced setup, see the [judge reference](docs/JUDGE-REFERENCE.md), [qualification status](docs/STATUS.md) and [setup guide](docs/SETUP.md).

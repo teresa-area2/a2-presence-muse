@@ -1,6 +1,6 @@
 # Setup
 
-Start with the [judge quickstart](JUDGE-QUICKSTART.md) for prerequisites, your own Muse authentication and explicit typing-metadata consent. The designated temporary evaluation access file is the sole submission credential exception; see [its scope and expiry](../judge-access/README.md). The current file is OP-only and supplies no Muse access. Normal installation does not read it or require npm authentication.
+Start with the [judge quickstart](JUDGE-QUICKSTART.md) for prerequisites, your own Muse authentication and explicit typing-metadata consent. The clean repository does not track an access file. Consented startup can retrieve an OP-only temporary evaluation file, which supplies no Muse access; see [its scope and expiry](../judge-access/README.md). Normal installation does not retrieve it or require npm authentication.
 
 ## Dependencies and offline checks
 

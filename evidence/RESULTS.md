@@ -1,6 +1,6 @@
 # Preliminary Presence × Muse evidence
 
-This reviewed evidence copy is held in the private rehearsal candidate until the owner approves publication. The analysis was frozen on 3 November 2026. It combines a one-person, unblinded pilot across several tasks, models and software versions; repeated comparisons do not create independent participants.
+This reviewed evidence is included in the public repository. The analysis was frozen on 3 November 2026. It combines a one-person, unblinded pilot across several tasks, models and software versions; repeated comparisons do not create independent participants.
 
 | Outcome | Without Presence | With Presence | Paired comparisons |
 | --- | ---: | ---: | ---: |

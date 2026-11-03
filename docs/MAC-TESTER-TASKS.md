@@ -1,7 +1,7 @@
 # Mac task battery and returning results
 
 For the two internal Mac testers. First complete the
-[judge journey](JUDGE-QUICKSTART.md), including setup, the first Trip bill pair and
+[judge journey](JUDGE-QUICKSTART.md), including setup, a first prepared task and
 its final return instructions. Record your actual full checkout revision for every
 result; no separately supplied commit is required.
 Aim to try **all five prepared tasks**, one fresh comparison at a time. Your own
@@ -23,20 +23,19 @@ Any agreed model change is a separate, labelled comparison.
 | Batch import | Keep valid customer rows and report invalid rows | Show a mixed-validity example and explain which rows are kept. |
 | Notification routing | Add quiet hours while preserving existing routing behavior | Explain which routing rules stay unchanged and how quiet hours interact with them. |
 
-Tester A: Trip bill → Save conflicts → Booking rules → Batch import → Notification
-routing. Tester B: Trip bill → Notification routing → Batch import → Booking rules
-→ Save conflicts. The different order reduces a shared ordering bias; two internal
-testers still do not establish a general causal effect.
+You can start with any prepared task. If both testers try all five, using different
+orders can reduce shared ordering bias; two internal testers still do not establish
+a general causal effect.
 
 ## Repeat this loop for each prepared task
 
 1. Confirm the previous task's export is saved before ending that comparison.
    Use **Close sessions**, choose the next task/model, then **Open sessions**.
    Keep the local server running. Do not reuse a previous task's agent history.
-2. Select **Both**. Type naturally and send:
+2. Select **Both**. Type the prompt yourself without copying and pasting, then send:
 
-   > Read TASK.md and CONTRACT.md. Explain the problem and propose a short plan.
-   > Wait for my response before changing files.
+   > Read TASK.md and suggest an implementation plan. Wait for my response before
+   > making changes.
 
 3. Read both plans, then send the same implementation instruction to Both:
 

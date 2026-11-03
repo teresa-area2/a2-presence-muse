@@ -2,6 +2,11 @@
 
 Start with the short [Judge journey](JUDGE-QUICKSTART.md). This page retains
 advanced account, privacy, recovery and platform detail for troubleshooting.
+
+Jump to [Muse login](#1-connect-your-own-muse-account), [installer recovery](#installer-recovery),
+[local trust](#local-trust-boundary), [the coding conversation](#4-complete-one-coding-conversation),
+or [Linux and WSL2](#linux-and-windows-through-wsl2).
+
 On macOS, run `sh scripts/judge-mac.sh requirements` from the fresh clone before
 app installation. It first prepares a fixed, checksum-verified Node 22.12.0 under
 ignored `.local/judge-node-22.12.0-arm64` (or `-x64`), then runs local tool/browser
@@ -335,21 +340,17 @@ accepts this for the demo. Quotas, current server state and deletion remain unve
 
 ## 4. Complete one coding conversation
 
-Select **Split a trip bill** and the same entitled model for both agents. Spark 1.3
-and Wonder 1.0 are selectable; start with Spark 1.3 for both if your account permits
-it. Report model-access trouble before substituting; record any model change.
-Open the sessions. The task is an expense calculation: Alice paid €90 for a shared
-apartment; Ben paid €30 for dinner shared by Ben and Cara. The intended result is
-Ben paying Alice €15 and Cara paying Alice €45.
+Choose **any prepared task** and the same entitled model for both agents. Spark 1.3
+and Wonder 1.0 are selectable. Open the sessions and select **Both**.
+Type the first prompt yourself, without copying and pasting, to exercise textbox
+Presence capture:
 
-Send to **Both**, adding a short note by normal typing rather than simulated input:
+> Read TASK.md and suggest an implementation plan. Wait for my response before
+> making changes.
 
-> Read TASK.md and CONTRACT.md. Explain the problem and propose a short plan in
-> ordinary language. Wait for my response before changing files.
-
-Then authorize implementation and ask a natural follow-up, such as explaining
-Cara's €45 or splitting five cents three ways. Approve task-local commands inside
-each pane. Approval permits that displayed action; it does not certify its result.
+Then ask Both to implement and test, and follow up naturally about the chosen task.
+Review task-local approvals inside each pane. Approval permits the displayed action;
+it does not certify its result.
 Keep sends on Both for comparable input histories. Different questions/decisions
 can make the histories different; the evidence should record that honestly.
 
