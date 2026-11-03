@@ -1,8 +1,9 @@
 # Judge journey
 
-**Requirements:** macOS, Git, Node **22.12+ (22.x) or 24.1+ (24.x)**, Muse Code
+**Requirements:** macOS, Git, Muse Code
 **1.4.13 or 1.4.14** with your own entitled account, and **Chrome or Firefox**.
-Need a prerequisite? See [setup help](JUDGE-REFERENCE.md).
+Node is prepared automatically inside this checkout; no existing Node or nvm is
+needed. Need another prerequisite? See [setup help](JUDGE-REFERENCE.md).
 
 ## Quick setup
 
@@ -15,14 +16,15 @@ Need a prerequisite? See [setup help](JUDGE-REFERENCE.md).
   mkdir -p "$HOME/Developer"
   git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
   cd "$HOME/Developer/open-presence-muse-judge"
-  sh scripts/judge-requirements.sh
+  sh scripts/judge-mac.sh requirements
 )
 ```
 
-Continue only when the local requirements check passes. It checks tools and
-browser availability without installing anything or making a model/OP request;
-account entitlement is checked by the first real task. If it fails, follow its
-listed fix and rerun `(cd "$HOME/Developer/open-presence-muse-judge" && sh scripts/judge-requirements.sh)`.
+The command prepares a checksum-verified local Node 22.12.0 once, then checks
+tools and browser availability before installing app dependencies. It leaves
+your global Node, nvm and shell settings unchanged and makes no model/OP request.
+Continue only when requirements pass; account access is checked by the first
+real task. If it fails, follow its listed fix and rerun `(cd "$HOME/Developer/open-presence-muse-judge" && sh scripts/judge-mac.sh requirements)`.
 Use a new unused folder for a fresh rehearsal; keep the previous clone untouched.
 
 **2. Install and sign in** from the new checkout:
@@ -31,7 +33,7 @@ Use a new unused folder for a fresh rehearsal; keep the previous clone untouched
 (
   set -e
   cd "$HOME/Developer/open-presence-muse-judge"
-  npm run judge:install
+  sh scripts/judge-mac.sh install
   MUSE_NO_AUTO_UPDATE=1 muse --contributor-mode off
 )
 ```
@@ -52,7 +54,7 @@ Send. Coding messages go separately to Muse. If you agree:
 (
   set -e
   cd "$HOME/Developer/open-presence-muse-judge"
-  npm run judge:start -- --consent-typing
+  sh scripts/judge-mac.sh start --consent-typing
 )
 ```
 
@@ -109,9 +111,9 @@ export, return the failed step and exact nonsecret error.
 
 ## Help
 
-For missing prerequisites, use the [setup reference](JUDGE-REFERENCE.md), then
-repeat the requirements check before installing the project. Use Node 22.12+
-within 22.x or 24.1+ within 24.x. Other help and verification limits:
+For missing prerequisites or a failed runtime download, use the
+[setup reference](JUDGE-REFERENCE.md), then repeat the requirements step.
+Do not change your global Node. Other help and verification limits:
 
 - [Setup reference](JUDGE-REFERENCE.md) · [Qualification status](STATUS.md)
 - <a id="installer-recovery"></a>[Installer recovery](JUDGE-REFERENCE.md#installer-recovery)

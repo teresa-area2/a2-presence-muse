@@ -12,27 +12,37 @@ complete independent judge journey or production qualification.
   works and capture works in Chrome/Firefox; Safari failed under Screen Sharing,
   with exact browser versions/cause unverified. Each teammate's fresh own-account
   coding/approval/export journey remains a rehearsal gate.
-- **Node22/24 and quick setup:** the candidate passed all1,818 offline tests with
+- **Node22/24 qualification base:** the preceding setup checkpoint passed all1,818 offline tests with
   zero failures/skips on **Node22.12.0 and Peña's exact Node24.1.0**, including the
   installed PowerShell parser. Empty-cache anonymous install/build and no-consent
   server startup/health/owned shutdown passed under both on macOS arm64. No Muse
   pair was opened and no OP/model call was made; this is not a fresh account or
   human coding/adaptation qualification. Node24 changed child-test reporter defaults;
   CI now requests TAP explicitly rather than relaxing report/quality checks.
-  The optional Mac helper's21 offline checks and an actual checksum-verified
-  official Node22 fallback download/install passed. Host Node, nvm, shell profiles
-  and Muse settings are unchanged. Dependencies/versions are unchanged; package
+  Those full suites are prior runtime qualification, not a repeated full-suite
+  claim for the standalone Mac helper changes below. Host Node, nvm, shell
+  profiles and Muse settings are unchanged. Dependencies/versions are unchanged; package
   engine metadata now admits stable22.12+ or24.1+ within their respective majors.
   The short Judge journey has requirements and three setup blocks; advanced
   account/platform/recovery detail is retained in JUDGE-REFERENCE.
-- **Before-setup requirements:** the fresh-clone path runs a read-only local check
-  before dependency installation.21 focused checks pass on both Node22/24; actual
-  local CLI runs passed on22.12.0 and24.1.0. It reports OS, Git, Node, npm, reviewed
-  Muse build and installed Chrome/Firefox, with bounded version probes and
-  credential-free environments. It does not install, log in, launch a browser,
-  call OP/models or verify account entitlement/browser capture. Missing Node and
-  invalid arguments fail clearly without npm/dependencies. Existing clones and
-  credentials are preserved; a fresh clone is not a first-time account enrollment.
+- **Automatic Mac runtime and requirements:** the default shell journey always
+  uses checksum-verified checkout-local Node22.12.0 on Apple Silicon or Intel,
+  independent of any existing Node/npm version. First use downloads the pinned
+  official archive into private ignored `.local`; repeat commands reuse it.
+  `requirements` then checks local tools/browser metadata, and `install` must pass
+  that same check before app dependencies. Startup uses the same local runtime.
+  The underlying check is read-only; runtime preparation downloads/writes locally.
+  Seventy-seven focused checks pass on both Node22.12.0 and24.1.0, including
+  23 helper tests for pinned selection, failed-check gating, flags, checksum/cache
+  and owned cleanup. Temporary-socket tests require normal host permissions;
+  restricted-sandbox EPERM failures were not treated as product passes. Node version ranges remain relevant only to
+  advanced direct npm/developer commands. A real Apple Silicon rehearsal with no
+  Node/npm on host PATH passed official bootstrap, requirements before app install,
+  cache reuse, anonymous install/build, no-consent startup/health/HTML and owned
+  shutdown. This made no OP/model request or native coding pair and did not change
+  live sessions or the Mini. Intel archive selection is fixture-tested, not a real
+  Intel-Mac qualification. Account entitlement and browser capture remain unverified
+  by these local checks; existing clones/login/settings are preserved.
 - **Shared evidence home:** future launches use a private per-user home outside
   source checkouts for checkpoints and exports. Directory ownership/permissions,
   symlink/inode/currentness and atomic-save behavior are checked. Existing live

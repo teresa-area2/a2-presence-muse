@@ -2,11 +2,21 @@
 
 Start with the short [Judge journey](JUDGE-QUICKSTART.md). This page retains
 advanced account, privacy, recovery and platform detail for troubleshooting.
-Run `sh scripts/judge-requirements.sh` from the fresh clone before installation.
-It checks local tools/browser availability; account/billing/model access is not
-proved by a local requirements check.
-The optional Mac helper can select a compatible project runtime; direct npm
-commands below require Node 22.12+ (22.x) or 24.1+ (24.x) already selected in that shell.
+On macOS, run `sh scripts/judge-mac.sh requirements` from the fresh clone before
+app installation. It first prepares a fixed, checksum-verified Node 22.12.0 under
+ignored `.local/judge-node-22.12.0-arm64` (or `-x64`), then runs local tool/browser
+checks. The first preparation downloads only from the pinned official Node URL;
+later commands reuse the verified private cache. No global Node, nvm, shell
+profiles or Muse settings are edited. This is runtime isolation, not a separate
+OS sandbox; native Muse approvals and sandboxing stay in place.
+
+Use `sh scripts/judge-mac.sh install` and `sh scripts/judge-mac.sh start` for the
+same local runtime throughout. Install checks requirements before app dependencies;
+requirements alone never installs dependencies or starts a server. The underlying
+`sh scripts/judge-requirements.sh` check is read-only, but requires a compatible
+Node already on PATH. Direct npm commands are an advanced alternative requiring
+Node 22.12+ (22.x) or 24.1+ (24.x) selected in that shell. No local version check
+proves account/billing/model access or browser capture.
 
 **Use Chrome or Firefox for this rehearsal.** Teresa reports that the Mini works
 and textbox capture works in both browsers. Safari failed in the Screen Sharing
@@ -20,8 +30,8 @@ targets; their current verification status is listed below. The browser is the i
 Muse Code sessions. A static website alone cannot run them. There is no hosted
 judge service or shared Meta account in this submission.
 
-Before account setup, install Git and Node **22.12+ (22.x) or 24.1+ (24.x)** (`.nvmrc` pins 22.12.0), and
-Meta's Muse Code CLI. Native protocol startup, steering and interruption were
+Before account setup, install Git and Meta's Muse Code CLI. The macOS helper
+provides its own Node 22.12.0; you do not need to install Node or nvm. Native protocol startup, steering and interruption were
 checked with **1.4.13 / R6996.1** and **1.4.14 / R7309.1**. The full real-model
 coding/Presence qualification remains on 1.4.13. The operator-reported working
 Mini rehearsal does not independently qualify every version/account/browser path.
@@ -43,8 +53,8 @@ folder under `~/Developer`:
   set -e
   umask 077
   mkdir -p "$HOME/Developer"
-  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse"
-  git -C "$HOME/Developer/open-presence-muse" rev-parse HEAD
+  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
+  git -C "$HOME/Developer/open-presence-muse-judge" rev-parse HEAD
 )
 ```
 
@@ -171,20 +181,20 @@ does not read this file.
 ```sh
 (
   set -e
-  cd "$HOME/Developer/open-presence-muse"
-  node --version
-  npm run judge:install
+  cd "$HOME/Developer/open-presence-muse-judge"
+  sh scripts/judge-mac.sh install
 )
 ```
 
-Use your existing supported Node 22 or24 installation. **nvm is optional**; if you
-use it and need to select the pinned version, run `nvm install` and `nvm use`
-inside the checkout before installation. Do not install nvm or reinstall Node
-merely to repeat a completed setup. The `~/Developer` location avoids common macOS
-protected Desktop/Documents-folder prompts; use a new unused directory for a fresh
-clone rather than overwriting a previous comparison.
+The macOS helper always uses the same checkout-local Node 22.12.0, even if your
+global Node is supported. It verifies the official archive before extraction and
+refuses an unsafe/incomplete cache without replacing existing data. A failed
+download installs no app dependencies; retry the same command when connectivity
+is restored. Do not install nvm or change global Node to recover. The `~/Developer`
+location avoids common macOS protected Desktop/Documents-folder prompts; use a
+new unused directory for a fresh clone rather than overwriting a previous pair.
 
-If the approved checkout, supported Node and browser build are already ready, continue
+If the approved checkout, local runtime and browser build are already ready, continue
 from startup in that checkout. No fresh clone or reinstall is required just to
 restart. Keep the actual checkout revision recorded; use your existing path if different.
 
@@ -261,8 +271,9 @@ header would not provide it. No such gateway is included here.
 ## 3. Start with explicit typing consent
 
 Use **macOS Terminal** to start the local workspace and leave that terminal open.
-If setup is complete, `cd ~/Developer/open-presence-muse` (or your actual checkout)
-and use your already configured supported Node; no reinstall is needed.
+If setup is complete, enter `~/Developer/open-presence-muse-judge` (or your actual
+checkout) and use `sh scripts/judge-mac.sh start` below with the consent flag if
+you agree. It reuses the verified local Node; no reinstall is needed.
 
 Read [Privacy & Data Use](PRIVACY-DATA-USE.md) first. The message box supplies
 key timings/categories, a session identifier and time/timezone context to
@@ -286,16 +297,15 @@ After reading the notice and agreeing to this typing-metadata processing:
 ```sh
 (
   set -e
-  cd "$HOME/Developer/open-presence-muse"
-  node --version
-  npm run judge:start -- --consent-typing
+  cd "$HOME/Developer/open-presence-muse-judge"
+  sh scripts/judge-mac.sh start --consent-typing
 )
 ```
 
 Open the **exact URL printed by this startup** in Chrome or Firefox. Without
 `--port`, the launcher tries 8930; only if that port is already occupied does it ask
 the OS for an available port and print the new URL. To request an available port
-directly, use `npm run judge:start -- --consent-typing --port 0`. An explicit
+directly, use `sh scripts/judge-mac.sh start --consent-typing --port 0` on macOS. An explicit
 `--port 8931` remains authoritative and fails if unavailable; it does not silently
 choose another port.
 
@@ -447,8 +457,10 @@ before starting another workspace; do not kill unrelated processes.
 
 ## Linux and Windows through WSL2
 
-For Linux, install Git and supported Node22/24, then follow the same Muse,
-Cipher and consent commands above. The optional independent verifier requires
+For Linux, install Git, Muse and Node22.12+ within22 or24.1+ within24. After
+your own Muse sign-in, use `npm run judge:install`, then
+`npm run judge:start -- --consent-typing` after reading the consent notice. The
+Mac helper does not run on Linux. The optional independent verifier requires
 Bubblewrap from the distribution's maintained package repository. On Debian or
 Ubuntu, `sudo apt-get install git bubblewrap` installs those prerequisites; the
 judge decides whether to install system packages. Run `npm run check:linux-sandbox`
@@ -479,7 +491,7 @@ Windows authentication UX or an independent judge's live OP typing.
 
 ## If access is unavailable
 
-After Cipher is installed, `npm run judge:start` without `--consent-typing` opens
+After Cipher is installed, `sh scripts/judge-mac.sh start` on macOS without `--consent-typing` opens
 ordinary fallback with live OP off and does not read an OP credential. Real Muse
 coding still needs your own entitled account. This tests fallback, not adaptation.
 

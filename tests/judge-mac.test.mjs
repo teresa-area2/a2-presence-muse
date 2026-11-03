@@ -8,14 +8,14 @@ import {spawn} from 'node:child_process';
 const expected={arm64:'293dcc6c2408da21562d135b0412525e381bb6fe150d688edb58fe850d0f3e13',x64:'52bc25dd026db7247c3c00439afdb83e95087248267f02d6c1a7250d1f896173'};
 const quote=s=>"'"+s.replaceAll("'","'\\''")+"'";
 async function executable(file,body){await fs.writeFile(file,'#!/bin/sh\nset -eu\n'+body+'\n',{mode:0o700});}
-async function fixture(t,{host='v25.0.0',arch='arm64',system='Darwin'}={}){
+async function fixture(t,{host='v25.0.0',arch='arm64',system='Darwin',requirementsExit=0}={}){
  const base=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'judge-mac-test-'))),root=path.join(base,'checkout with spaces'),bin=path.join(base,'tools');await fs.mkdir(root);await fs.mkdir(bin);await fs.mkdir(path.join(root,'scripts'));
- await fs.copyFile(new URL('../scripts/judge-mac.sh',import.meta.url),path.join(root,'scripts/judge-mac.sh'));
- const logs={exec:path.join(base,'node.args'),npm:path.join(base,'npm.args'),cwd:path.join(base,'cwd'),env:path.join(base,'path'),curl:path.join(base,'curl.args'),tar:path.join(base,'tar.args')};
+ await fs.copyFile(new URL('../scripts/judge-mac.sh',import.meta.url),path.join(root,'scripts/judge-mac.sh'));await fs.mkdir(path.join(root,'src'));await fs.writeFile(path.join(root,'src/judge-requirements.mjs'),'// Synthetic read-only preflight selected by the fixture Node.\n');
+ const logs={exec:path.join(base,'node.args'),npm:path.join(base,'npm.args'),npmPath:path.join(base,'npm.path'),cwd:path.join(base,'cwd'),env:path.join(base,'path'),curl:path.join(base,'curl.args'),tar:path.join(base,'tar.args'),requirements:path.join(base,'requirements.args'),events:path.join(base,'events'),host:path.join(base,'host-node.calls')};
  await executable(path.join(bin,'uname'),`case "$1" in -s) printf '%s\\n' ${quote(system)} ;; -m) printf '%s\\n' ${quote(arch)} ;; *) exit 2 ;; esac`);
- const nodeScript=version=>`if [ "\${1-}" = --version ]; then printf '%s\\n' ${quote(version)}; exit 0; fi\nprintf '%s\\n' "$@" > ${quote(logs.exec)}\npwd -P > ${quote(logs.cwd)}\nprintf '%s' "$PATH" > ${quote(logs.env)}`;
- const npmScript=`printf '%s\\n' "$@" > ${quote(logs.npm)}\npwd -P > ${quote(logs.cwd)}\nprintf '%s' "$PATH" > ${quote(logs.env)}`;
- await executable(path.join(bin,'node'),nodeScript(host));await executable(path.join(bin,'npm'),npmScript);
+ const nodeScript=(version,{isHost=false}={})=>`${isHost?`printf called >> ${quote(logs.host)}\n`:''}if [ "\${1-}" = --version ]; then printf '%s\\n' ${quote(version)}; exit 0; fi\npwd -P > ${quote(logs.cwd)}\nprintf '%s' "$PATH" > ${quote(logs.env)}\nif [ "\${1-}" = ${quote(path.join(root,'src/judge-requirements.mjs'))} ]; then printf '%s\\n' "$@" > ${quote(logs.requirements)};printf 'requirements\\n' >> ${quote(logs.events)};exit ${requirementsExit};fi\nprintf '%s\\n' "$@" > ${quote(logs.exec)}\nprintf 'start\\n' >> ${quote(logs.events)}`;
+ const npmScript=`printf '%s\\n' "$@" > ${quote(logs.npm)}\nprintf '%s\\n' "$0" > ${quote(logs.npmPath)}\nprintf 'install\\n' >> ${quote(logs.events)}\npwd -P > ${quote(logs.cwd)}\nprintf '%s' "$PATH" > ${quote(logs.env)}`;
+ await executable(path.join(bin,'node'),nodeScript(host,{isHost:true}));await executable(path.join(bin,'npm'),npmScript);
  await executable(path.join(bin,'curl'),`printf '%s\\n' "$@" > ${quote(logs.curl)}\nexit 7`);
  const env={...process.env,PATH:bin+':/usr/bin:/bin:/usr/sbin:/sbin'};t.after(()=>fs.rm(base,{recursive:true,force:true}));
  const runtime=path.join(root,'.local','judge-node-22.12.0-'+(arch==='x86_64'?'x64':arch));
@@ -37,13 +37,19 @@ async function downloadedFixture(f,{checksum=true,slow=false}={}){
  await executable(path.join(f.bin,'tar'),`printf '%s\\n' "$@" >> ${quote(f.logs.tar)}\nif [ "$1" = -tzf ]; then printf '%s\\n' ${quote(bundle+'/')} ${quote(bundle+'/bin/node')}; exit 0; fi\n[ "$1" = -xzf ] && [ "$3" = -C ]\nmkdir -p "$4/${bundle}/bin"\ncp ${quote(template)} "$4/${bundle}/bin/node"\ncp ${quote(npmTemplate)} "$4/${bundle}/bin/npm"`);
 }
 
-for(const host of ['v22.12.0','v22.21.0','v24.1.0','v24.10.0'])test('supported host '+host+' is reused without download or local provisioning',async t=>{
- const f=await fixture(t,{host}),before=await fs.readFile(path.join(f.bin,'node')),result=await run(f,['install']).done;
- assert.equal(result.code,0,result.err);assert.match(result.out,/global Node is unchanged/);assert.equal(await fs.readFile(f.logs.npm,'utf8'),'run\njudge:install\n');await absent(f.logs.curl);await absent(path.join(f.root,'.local'));assert.deepEqual(await fs.readFile(path.join(f.bin,'node')),before);assert.equal(await fs.readFile(f.logs.cwd,'utf8'),f.root+'\n');assert.equal((await fs.readFile(f.logs.env,'utf8')).split(':')[0],f.bin);
+for(const host of ['v22.12.0','v22.21.0','v24.1.0','v24.10.0'])test('supported host '+host+' is untouched while install uses pinned local22 after requirements',async t=>{
+ const f=await fixture(t,{host});await f.seed();const before=await fs.readFile(path.join(f.bin,'node')),result=await run(f,['install']).done;
+ assert.equal(result.code,0,result.err);assert.match(result.out,/global Node is unchanged/);assert.equal(await fs.readFile(f.logs.npm,'utf8'),'run\njudge:install\n');assert.equal(await fs.readFile(f.logs.npmPath,'utf8'),path.join(f.runtime,'bin/npm')+'\n');assert.equal(await fs.readFile(f.logs.events,'utf8'),'requirements\ninstall\n');await absent(f.logs.curl);await absent(f.logs.host);assert.deepEqual(await fs.readFile(path.join(f.bin,'node')),before);assert.equal(await fs.readFile(f.logs.cwd,'utf8'),f.root+'\n');assert.equal((await fs.readFile(f.logs.env,'utf8')).split(':')[0],path.join(f.runtime,'bin'));
 });
 for(const host of ['v22.11.0','v23.5.0','v24.0.0','v25.0.0','missing','v24.1.0-rc.1','v24.1','v24.1.0-junk'])test('unsupported host '+host+' selects known private22 and forwards exact start flags',async t=>{
  const f=await fixture(t,{host:host==='missing'?'not-a-node-version':host});await f.seed();const before=await fs.readFile(path.join(f.bin,'node')),result=await run(f,['start','--port','0','--consent-typing']).done;
- assert.equal(result.code,0,result.err);assert.equal(await fs.readFile(f.logs.exec,'utf8'),'--experimental-strip-types\n'+path.join(f.root,'scripts/judge-start.mjs')+'\n--port\n0\n--consent-typing\n');assert.equal((await fs.readFile(f.logs.env,'utf8')).split(':')[0],path.join(f.runtime,'bin'));await absent(f.logs.curl);await absent(f.logs.npm);assert.deepEqual(await fs.readFile(path.join(f.bin,'node')),before);
+ assert.equal(result.code,0,result.err);assert.equal(await fs.readFile(f.logs.exec,'utf8'),'--experimental-strip-types\n'+path.join(f.root,'scripts/judge-start.mjs')+'\n--port\n0\n--consent-typing\n');assert.equal((await fs.readFile(f.logs.env,'utf8')).split(':')[0],path.join(f.runtime,'bin'));await absent(f.logs.curl);await absent(f.logs.npm);await absent(f.logs.requirements);await absent(f.logs.host);assert.deepEqual(await fs.readFile(path.join(f.bin,'node')),before);
+});
+test('requirements uses pinned local22 but never installs or starts sessions',async t=>{
+ const f=await fixture(t,{host:'v24.1.0'});await f.seed();const result=await run(f,['requirements']).done;assert.equal(result.code,0,result.err);assert.equal(await fs.readFile(f.logs.requirements,'utf8'),path.join(f.root,'src/judge-requirements.mjs')+'\n');assert.equal(await fs.readFile(f.logs.events,'utf8'),'requirements\n');await absent(f.logs.npm);await absent(f.logs.exec);await absent(f.logs.host);await absent(f.logs.curl);assert.equal((await fs.readFile(f.logs.env,'utf8')).split(':')[0],path.join(f.runtime,'bin'));
+});
+test('failed requirements prevents npm install without changing host Node or the cache',async t=>{
+ const f=await fixture(t,{host:'v24.1.0',requirementsExit:7});await f.seed();const before=await fs.readFile(path.join(f.runtime,'.verified-sha256')),result=await run(f,['install']).done;assert.equal(result.code,7);assert.equal(await fs.readFile(f.logs.events,'utf8'),'requirements\n');await absent(f.logs.npm);await absent(f.logs.exec);await absent(f.logs.host);await absent(f.logs.curl);assert.deepEqual(await fs.readFile(path.join(f.runtime,'.verified-sha256')),before);
 });
 test('verified synthetic download installs atomically for reuse without global changes',async t=>{
  const f=await fixture(t);await downloadedFixture(f);const before=await fs.readFile(path.join(f.bin,'node')),result=await run(f,['install']).done;assert.equal(result.code,0,result.err);
@@ -67,7 +73,7 @@ test('unsafe cache or symlinked local destination is refused without deleting ex
  const other=await fixture(t),foreign=path.join(other.base,'foreign');await fs.mkdir(foreign);await fs.symlink(foreign,path.join(other.root,'.local'));result=await run(other,['install']).done;assert.equal(result.code,1);assert.match(result.err,/not a safe private directory/);assert.deepEqual(await fs.readdir(foreign),[]);await absent(other.logs.curl);
 });
 test('invalid arguments fail before provisioning and preserve the caller environment',async t=>{
- const f=await fixture(t),original=process.env.PATH;for(const args of [[],['install','--port','0'],['start','--port'],['start','--port','65536'],['start','--port','-1'],['start','--port','x'],['start','--port','1','--port','2'],['start','--consent-typing','--consent-typing'],['start','--access','private.json'],['start','--url','https://unexpected.invalid/']]){
+ const f=await fixture(t),original=process.env.PATH;for(const args of [[],['--help','extra'],['requirements','--port','0'],['requirements','--consent-typing'],['install','--port','0'],['start','--port'],['start','--port','65536'],['start','--port','-1'],['start','--port','x'],['start','--port','1','--port','2'],['start','--consent-typing','--consent-typing'],['start','--access','private.json'],['start','--url','https://unexpected.invalid/']]){
   const result=await run(f,args).done;assert.equal(result.code,2,JSON.stringify(args));assert.match(result.err,/Use:/);
  }await absent(f.logs.curl);await absent(path.join(f.root,'.local'));assert.equal(process.env.PATH,original);
 });

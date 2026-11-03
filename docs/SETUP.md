@@ -4,7 +4,7 @@ Start with the [judge quickstart](JUDGE-QUICKSTART.md) for prerequisites, your o
 
 ## Dependencies and offline checks
 
-Use Git and Node 22.12+ (22.x) or Node 24.1+ (24.x). After installing the official Muse Code CLI and configuring your own entitled, file-backed Muse authentication, run:
+Mac judges need Git and the official Muse Code CLI with their own entitled, file-backed login. Follow [Judge journey](JUDGE-QUICKSTART.md): its helper prepares checksum-verified checkout-local Node22.12.0 and uses it for requirements, install and start without changing global Node or nvm. Direct developer/npm commands below require Node22.12+ (22.x) or24.1+ (24.x). After configuring Muse authentication, run:
 
 ```sh
 npm run judge:install

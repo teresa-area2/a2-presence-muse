@@ -37,7 +37,9 @@ remain external. See [provenance](docs/PROVENANCE.md) and
 ## Try the demo
 
 **Start here: [Judge journey — clone, run, test and return results](docs/JUDGE-QUICKSTART.md).**
-Start with a fresh clone and its read-only requirements check, before installation.
+Start with a fresh clone; the Mac helper prepares pinned local Node and checks
+requirements before app installation. Your existing Node, nvm and shell settings
+stay unchanged.
 Follow that page through setup, your own Muse login,
 the coding test and its final export/return instructions. It is the same journey
 for judges and teammates; no separate handoff or externally supplied commit is
@@ -53,7 +55,7 @@ It distinguishes OP metadata, Meta/Muse coding and optional Observer requests,
 consent and saved evidence, with upstream terms still awaiting confirmation.
 
 Follow the [complete first-time judge quickstart](docs/JUDGE-QUICKSTART.md) from
-a fresh checkout. You need Git, Node 22.12+ (22.x) or 24.1+ (24.x), a reviewed Muse Code CLI
+a fresh checkout. You need Git and a reviewed Muse Code CLI
 and your own authorized model usage. An active Muse Code plan connected by browser
 onboarding is one route; your own stored Model API key with billing/credits is
 another. A separate manually created key is not always required. This harness
@@ -71,9 +73,9 @@ passed locally on 3 November; see [qualification status](docs/STATUS.md). After
 following the quickstart's account and prerequisite steps:
 
 ```sh
-npm run judge:install
+sh scripts/judge-mac.sh install
 # After reading the typing-metadata consent disclosure:
-npm run judge:start -- --consent-typing
+sh scripts/judge-mac.sh start --consent-typing
 ```
 
 Open the **exact URL printed by the launcher**, choose a task/model and open both sessions. The default is 8930;

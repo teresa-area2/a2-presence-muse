@@ -13,7 +13,7 @@ any reviewed public evidence.
 - Started from: macOS Terminal / Codex (note any per-command approval) / other:
 - Printed workspace URL and port (do not include bootstrap tokens):
 - Setup: fresh clone/install / resumed existing checkout; Muse installed/login pre-existing?
-- Requirements check: pass / failed row and its nonsecret fix/error:
+- Local runtime preparation / requirements check: pass / failed row and its nonsecret error:
 - Selected model (and whether it changed):
 - Typing consent enabled / genuine OP reading observed / ordinary fallback?
 - Export filename (or why unavailable):

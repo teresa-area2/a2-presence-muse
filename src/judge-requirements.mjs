@@ -46,7 +46,7 @@ export async function checkJudgeRequirements({platform=process.platform,nodeVers
  return{ok:checks.every(r=>r.ok),checks,scope:'local_requirements_only',not_verified:['Muse login','account entitlement','billing or credits','model access','Presence connection','browser capture compatibility']};
 }
 export function formatJudgeRequirements(report){
- return report.checks.map(r=>(r.ok?'PASS ':'FAIL ')+(r.version?.startsWith(r.label+' ')?r.version:r.label+(r.version?' '+r.version:''))+(r.fix?'\n     Fix: '+r.fix:'')).join('\n')+'\n\n'+(report.ok?'Local requirements passed. Next: npm run judge:install.':'Fix the failed requirements, then run this check again.')+'\nINFO: Login, account/billing/model access and Presence are not verified by this check.\n';
+ return report.checks.map(r=>(r.ok?'PASS ':'FAIL ')+(r.version?.startsWith(r.label+' ')?r.version:r.label+(r.version?' '+r.version:''))+(r.fix?'\n     Fix: '+r.fix:'')).join('\n')+'\n\n'+(report.ok?'Local requirements passed. Continue with installation in the Judge journey.':'Fix the failed requirements, then run this check again.')+'\nINFO: Login, account/billing/model access and Presence are not verified by this check.\n';
 }
 export async function runJudgeRequirements({args=[],...options}={}){
  if(!Array.isArray(args)||args.length)return{exitCode:2,output:'Use: sh scripts/judge-requirements.sh (no flags).\n'};
