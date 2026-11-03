@@ -3,6 +3,18 @@
 This candidate records checked behavior and remaining limits. It does not claim a
 complete independent judge journey or production qualification.
 
+- **Subscription session continuity:** reviewed Muse1.4.13/1.4.14 connection-wide
+  `usage/changed` and `account/changed` notices no longer look like foreign-session
+  events that close the pair. Valid notices are excluded from task text and token
+  counts; malformed/request/foreign/permission-drift guards remain. Twelve new
+  regressions cover continued work and second completed turns; three continuation
+  cases reproduced the old failure with nine safety cases passing. The assembled
+  release passed all1,854 offline tests on Node22.12.0, zero fail/skip, plus136
+  focused checks on Node24.1.0. These are offline regression results, not a traced
+  confirmation of Peña's exact event or a real subscription/model qualification.
+  The guide now allows any prepared task and explicitly asks testers to type the
+  first planning prompt themselves. Existing closure errors remain visible instead
+  of being hidden by the ordinary Closed label. No live session was restarted.
 - **Judge onboarding recovery:** the launcher tries8930 and, only when the default
   is occupied, binds once on an OS-assigned loopback port. Explicit ports are
   authoritative. The printed URL/checkout identifies the new workspace and older

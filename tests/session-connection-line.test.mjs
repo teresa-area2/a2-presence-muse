@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {presenceConnectionSentence} from '../web/session-app.mjs';
+import {presenceConnectionSentence,sessionClosureNotice} from '../web/session-app.mjs';
 const now=Date.parse('2026-10-28T18:30:00Z');
 const source=(extra={})=>({eligible:true,read_at:new Date(now-1000).toISOString(),received_at:new Date(now-43000).toISOString(),capture:{state:'collecting'},...extra});
 const sentence=s=>presenceConnectionSentence({source:s},{now});
@@ -25,4 +25,11 @@ test('buffered windows show waiting and expiry honestly',async()=>{
  assert.equal(textboxCaptureLabel({window:'closed',last_submission:'queued'}),'Typing sample waiting for OP; a newer sample replaces it.');
  assert.equal(textboxCaptureLabel({window:'closed',last_submission:'expired'}),'Waiting typing sample expired without being sent.');
  assert.equal(textboxCaptureLabel({window:'closed',last_submission:'cancelled'}),'Typing-window refresh cancelled.');
+});
+
+test('failure remains explained after pair cleanup reports Closed',()=>{
+ assert.equal(sessionClosureNotice({status:'closed',error:'session_failed'}),'Session stopped: session failed.');
+ assert.equal(sessionClosureNotice({status:'closed',error:'session_closed'}),'Session stopped: session closed.');
+ assert.equal(sessionClosureNotice({status:'closed',error:null}),'Both sessions are closed.');
+ assert.equal(sessionClosureNotice({status:'ready',error:null}),null);
 });

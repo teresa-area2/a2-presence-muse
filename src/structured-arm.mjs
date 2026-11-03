@@ -4,6 +4,18 @@ import {MuseUserInput} from './muse-user-input.mjs';
 import {humanSandboxPosture} from './memory-muse-session.mjs';
 const ref=x=>typeof x==='string'&&/^[A-Za-z0-9_.:-]{1,160}$/.test(x);
 const sourceRange=r=>r&&ref(r.stream?.kind)&&ref(r.stream?.id)&&ref(r.first?.id)&&ref(r.last?.id)&&Number.isSafeInteger(r.first.sequence)&&r.first.sequence>=0&&Number.isSafeInteger(r.last.sequence)&&r.last.sequence>=r.first.sequence;
+// These reviewed MSP1.4.13/1.4.14 notifications belong to the connection,
+// not a task session. Subscription percentages are not session token usage;
+// account labels/avatars are ignored, never projected or fetched. Neither
+// notification changes this session's independently checked permissions.
+const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+function connectionNotice(method,p){
+ if(!object(p)||Object.hasOwn(p,'sessionId'))return false;
+ if(method==='account/changed')return typeof p.credentialRequired==='boolean'&&['loggedOut','envKey','apiKey','accountLogin'].includes(p.state);
+ if(method!=='usage/changed')return false;
+ const block=x=>object(x)&&Number.isSafeInteger(x.resetsAtMs)&&Number.isSafeInteger(x.usedPercent)&&x.usedPercent>=0;
+ return Number.isSafeInteger(p.observedAtMs)&&typeof p.tier==='string'&&block(p.weekly)&&block(p.window)&&Number.isSafeInteger(p.window.windowDurationMins)&&p.window.windowDurationMins>0;
+}
 export class StructuredArm {
  constructor({client,ledger,usage,delivery=null,workspace=null,requestedModel=null,arm=null,nativeQuestions=false,onFatal,onChange=()=>{},now=()=>performance.now()}){
   if(!client?.sessionId||!ledger||!usage||typeof onFatal!=='function'||typeof onChange!=='function'||typeof now!=='function')throw Error('structured_arm_invalid');
@@ -23,6 +35,7 @@ export class StructuredArm {
   if(this.state==='starting'){if(this.queue.length>=256)return this.fail('event_capacity');this.queue.push({event,request});return;}
   try{
    const {method,params}=event??{};
+   if(!request&&connectionNotice(method,params))return;
    if(method==='session/started'&&!request){const s=params?.session;if(!this.workspace||s?.sessionId!==this.client.sessionId||s.workspaceRoot!==this.workspace||s.path||s.parentSessionId||s.forkedFrom||s.sideFrom||s.spawnedBy||s.approvalMode?.mode!=='onRequest'||!humanSandboxPosture(s.permissionState))throw Error('foreign_session');return;}
    if(!params||params.sessionId!==this.client.sessionId)throw Error('foreign_session');
    if(method==='turn/started'&&!request){this.acceptNativeStart(params);return;}

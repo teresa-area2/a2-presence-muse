@@ -13,6 +13,12 @@ import {selectedArms,nextRecipientTarget,recipientTargetForGeneration,canSubmitT
 import {mountSessionPane} from './session-panes.mjs';
 export function newerSessionSnapshot(previous,next){return !!next&&typeof next==='object'&&Number.isSafeInteger(next.version)&&next.version>previous&&typeof next.status==='string'&&next.arms&&typeof next.arms==='object';}
 export function cleanupUnconfirmed(state){return state?.error==='cleanup_unconfirmed';}
+// A failure closes both sessions as part of cleanup; preserve that explanation
+// instead of letting the ordinary Closed label mask it.
+export function sessionClosureNotice(state){
+ if(state?.error)return 'Session stopped: '+String(state.error).replaceAll('_',' ')+'.';
+ return state?.status==='closed'?'Both sessions are closed.':null;
+}
 export function sessionStopReady({state,token,pending,confirmed}){return typeof token==='string'&&!!token&&!pending&&!confirmed&&!!state&&!['idle','closed','stopping'].includes(state.status);}
 export function textboxCaptureOptions(textboxPresence){
  const latestSupported=textboxPresence?.enabled===true&&textboxPresence?.latest_buffer_supported===true;
@@ -174,7 +180,7 @@ if(typeof document!=='undefined'){
   if(replyPrompt()){$('send-shared').setAttribute('aria-label','Reply to '+recipientName);$('send-shared').title='Reply to '+recipientName+' (up to 500 characters)';}
   const usage=terminalUsageView(state);for(const arm of arms)for(const label of ['calls','input','output','cache'])$('usage-'+label+'-'+arm).textContent=usage.values[arm][label];
   $('usage-note').textContent=usage.note;
-  $('mode-note').textContent=!connected?'Connection lost. Messages and approvals are paused; reconnect to restore the view.':starting||state?.status==='opening'?'Opening two isolated Muse sessions…':cleanupUnconfirmed(state)?'Cleanup could not be confirmed. Stop the workspace launcher and verify its owned processes before reopening.':state?.status==='idle'?'Open the sessions when ready.':state?.status==='closed'?'Both sessions are closed.':state?.error?'Session stopped: '+state.error.replaceAll('_',' ')+'.':target()==='both'&&arms.some(a=>currentQuestion(state,a))?'Choose the asking agent’s pane to reply, or use its options above.':composerRoute().kind==='stale_reply'?'That question ended. Your draft is kept; select a recipient to send it as a new instruction.':'Send to either agent or both. Send a new instruction while Muse works to update its direction. Handle approvals inside its pane.';
+  $('mode-note').textContent=!connected?'Connection lost. Messages and approvals are paused; reconnect to restore the view.':starting||state?.status==='opening'?'Opening two isolated Muse sessions…':cleanupUnconfirmed(state)?'Cleanup could not be confirmed. Stop the workspace launcher and verify its owned processes before reopening.':state?.status==='idle'?'Open the sessions when ready.':sessionClosureNotice(state)??(target()==='both'&&arms.some(a=>currentQuestion(state,a))?'Choose the asking agent’s pane to reply, or use its options above.':composerRoute().kind==='stale_reply'?'That question ended. Your draft is kept; select a recipient to send it as a new instruction.':'Send to either agent or both. Send a new instruction while Muse works to update its direction. Handle approvals inside its pane.');
   const delivery=museDeliveryView(state?.arms?.with?.delivery??(state?.status==='idle'?{status:'not_started'}:null));$('muse-delivery').textContent=delivery.compactLabel;$('muse-delivery').title=delivery.label+'. '+delivery.detail;$('muse-baseline-delivery').textContent=museBaselineView(state?.arms?.without?.delivery??(state?.status==='idle'?{status:'not_started'}:null));
   codeChecksPanel?.render(state,{connected});measurementPanel?.render(state,{connected});evidencePanel?.render(state,{connected});packagePanel?.render(state,{connected});observerPanel?.render(shown,{connected});captureSync?.setConnected(connected);textboxPanel?.render(state,{connected});renderPresence();
  }

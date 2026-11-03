@@ -64,19 +64,20 @@ a free port. Omit the consent flag to test ordinary fallback with live Presence 
 
 ## Test it
 
-1. Choose **Split a trip bill**, the same entitled model for both (start with
-   **Spark 1.3** if available), then **Open sessions** and select **Both**.
-2. Type naturally and send:
+1. Choose **any prepared task** and the same entitled model for both agents.
+   Click **Open sessions** and select **Both**.
+2. **Type the first prompt yourself in the message box. Do not copy and paste it.**
+   This exercises textbox Presence capture. For any prepared task, type:
 
-   > Read TASK.md and CONTRACT.md. Explain the problem and propose a short plan.
-   > Wait for my response before changing files.
+   > Read TASK.md and suggest an implementation plan. Wait for my response before
+   > making changes.
 
-3. Read both plans, then tell Both to implement and test. Handle approvals in their
-   own panes and native questions for that one agent. Ask Both a follow-up: “Why
-   does Cara owe €45? How do you split five cents three ways?” The example should
-   settle Ben paying Alice €15 and Cara paying Alice €45.
+3. Read both plans, then continue the conversation: ask Both to implement and test,
+   ask questions or request changes. Handle approvals in their own panes and native
+   questions for the asking agent. A finished reply should return to **Ready**;
+   keep the same sessions open for follow-ups.
 4. Once both are **Ready**, reselect **Both → Check code**. If checks fail, use
-   **Send CI feedback**, let the agents repair and recheck. Before every check or
+   **Send CI feedback**, let the agents repair and recheck. Before each check or
    feedback send, wait for both Ready and reselect Both. New turns make earlier
    checks stale; an unavailable check is not a pass.
 
