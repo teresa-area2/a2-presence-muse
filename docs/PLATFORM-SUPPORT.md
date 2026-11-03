@@ -15,6 +15,20 @@ Implemented paths and checked mechanisms are different from a complete judge jou
 
 Echo is a synthetic native-provider check; it establishes no Meta model behavior, OP reading or human benefit. See [qualification status](STATUS.md).
 
+## Browser support for the judge rehearsal
+
+Use **Chrome or Firefox**. Teresa reported working textbox capture in both on
+the Mini. Exact browser versions and broad cross-version coverage are unverified.
+
+**Safari is not supported for this judge rehearsal.** Textbox capture failed in
+Teresa's Mini Screen Sharing test. The exact version and cause remain unverified;
+this observation does not establish that Safari fails in every environment.
+Other browsers have not been qualified. Screen Sharing alone was not established
+as the cause: Chrome and Firefox worked in the reported Mini setup.
+
+Opening the printed workspace URL is followed by **Open sessions** in the page.
+Wait for both panes to show **Ready** before typing the first coding instruction.
+
 ## Local-machine trust
 
 These routes assume a trusted personal machine/session. Loopback and browser

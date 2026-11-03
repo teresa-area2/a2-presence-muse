@@ -5,6 +5,9 @@
 Node is prepared automatically inside this checkout; no existing Node or nvm is
 needed. Need another prerequisite? See [setup help](JUDGE-REFERENCE.md).
 
+Safari is not supported for this judge rehearsal. For Intel Mac, Linux and
+Windows/WSL qualification limits, see [platform support](PLATFORM-SUPPORT.md).
+
 ## Quick setup
 
 **1. Fresh clone and requirements check** in macOS Terminal:
@@ -62,10 +65,14 @@ Keep Terminal open and open the **exact printed URL** in Chrome or Firefox.
 OP access is retrieved automatically; Cipher needs no npm token. Busy 8930 selects
 a free port. Omit the consent flag to test ordinary fallback with live Presence off.
 
+**4. Open the coding sessions in the browser.** Choose any prepared task and the
+same entitled model for both agents. Click **Open sessions**, wait for both panes
+to show **Ready**, then select **Both**. Opening the page alone does not open the
+Muse sessions; no coding task starts until you send a message.
+
 ## Test it
 
-1. Choose **any prepared task** and the same entitled model for both agents.
-   Click **Open sessions** and select **Both**.
+1. Confirm both panes are **Ready** and **Both** is selected.
 2. **Type the first prompt yourself in the message box. Do not copy and paste it.**
    This exercises textbox Presence capture. For any prepared task, type:
 
