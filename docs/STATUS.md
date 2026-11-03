@@ -24,4 +24,4 @@ Both agents use the same isolation of personal imports. Without Presence is the 
 
 Exports do not restore native conversations. Keep the app on a trusted personal machine: loopback and browser Origin checks do not authenticate other local users or processes. See [local trust](JUDGE-REFERENCE.md#local-trust-boundary) and [recovery](JUDGE-REFERENCE.md#installer-recovery).
 
-[Provenance and notices](PROVENANCE.md) describe reused code and licensing; they do not constitute an organizer's eligibility ruling.
+[Provenance and notices](PROVENANCE.md) describe reused code and licensing.
