@@ -1,35 +1,45 @@
 # Judge journey
 
 **Requirements:** macOS, Git, Node **22.12+ (22.x) or 24.1+ (24.x)**, Muse Code
-**1.4.13 or1.4.14** with your own entitled account, and **Chrome or Firefox**.
+**1.4.13 or 1.4.14** with your own entitled account, and **Chrome or Firefox**.
 Need a prerequisite? See [setup help](JUDGE-REFERENCE.md).
 
 ## Quick setup
 
-**1. Clone and install** in macOS Terminal:
+**1. Fresh clone and requirements check** in macOS Terminal:
 
 ```sh
 (
   set -e
   umask 077
   mkdir -p "$HOME/Developer"
-  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse"
-  cd "$HOME/Developer/open-presence-muse"
-  npm run judge:install
+  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
+  cd "$HOME/Developer/open-presence-muse-judge"
+  sh scripts/judge-requirements.sh
 )
 ```
 
-Already cloned? With sessions closed, enter that checkout, run
-`git pull --ff-only`, then `npm run judge:install`. Keep your existing login.
+Continue only when the local requirements check passes. It checks tools and
+browser availability without installing anything or making a model/OP request;
+account entitlement is checked by the first real task. If it fails, follow its
+listed fix and rerun `(cd "$HOME/Developer/open-presence-muse-judge" && sh scripts/judge-requirements.sh)`.
+Use a new unused folder for a fresh rehearsal; keep the previous clone untouched.
 
-**2. Sign in to Muse** if you are not already signed in:
+**2. Install and sign in** from the new checkout:
 
 ```sh
-MUSE_NO_AUTO_UPDATE=1 muse --contributor-mode off
+(
+  set -e
+  cd "$HOME/Developer/open-presence-muse-judge"
+  npm run judge:install
+  MUSE_NO_AUTO_UPDATE=1 muse --contributor-mode off
+)
 ```
 
 Complete browser sign-in or `/login`, then exit Muse without sending a task.
-If Meta requests payment, it needs your own entitled plan or API billing; OP access
+Existing Muse installations/logins can remain; record them as pre-existing. A
+fresh clone tests repository setup, not first-time account enrollment. If Meta
+requests payment, it needs your own entitled plan or API billing; OP access
 supplies neither. The [account reference](JUDGE-REFERENCE.md#1-connect-your-own-muse-account)
 covers installation and login trouble.
 
@@ -41,7 +51,7 @@ Send. Coding messages go separately to Muse. If you agree:
 ```sh
 (
   set -e
-  cd "$HOME/Developer/open-presence-muse"
+  cd "$HOME/Developer/open-presence-muse-judge"
   npm run judge:start -- --consent-typing
 )
 ```
@@ -99,9 +109,9 @@ export, return the failed step and exact nonsecret error.
 
 ## Help
 
-For unsupported/missing Node on macOS, `sh scripts/judge-mac.sh install` selects a
-supported project runtime without changing global Node; use the same wrapper with
-`start --consent-typing` afterward. Other help and verification limits:
+For missing prerequisites, use the [setup reference](JUDGE-REFERENCE.md), then
+repeat the requirements check before installing the project. Use Node 22.12+
+within 22.x or 24.1+ within 24.x. Other help and verification limits:
 
 - [Setup reference](JUDGE-REFERENCE.md) · [Qualification status](STATUS.md)
 - <a id="installer-recovery"></a>[Installer recovery](JUDGE-REFERENCE.md#installer-recovery)

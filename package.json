@@ -23,6 +23,7 @@
     "judge:start": "node --experimental-strip-types scripts/judge-start.mjs",
     "demo:offline": "node scripts/simulate-textbox.mjs",
     "check:linux-sandbox": "node scripts/check-linux-sandbox.mjs",
-    "evidence:public": "node scripts/export-public-evidence.mjs"
+    "evidence:public": "node scripts/export-public-evidence.mjs",
+    "judge:requirements": "sh scripts/judge-requirements.sh"
   }
 }

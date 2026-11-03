@@ -37,7 +37,8 @@ remain external. See [provenance](docs/PROVENANCE.md) and
 ## Try the demo
 
 **Start here: [Judge journey — clone, run, test and return results](docs/JUDGE-QUICKSTART.md).**
-Follow that page from the public clone through setup, your own Muse login,
+Start with a fresh clone and its read-only requirements check, before installation.
+Follow that page through setup, your own Muse login,
 the coding test and its final export/return instructions. It is the same journey
 for judges and teammates; no separate handoff or externally supplied commit is
 required.

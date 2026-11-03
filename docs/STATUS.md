@@ -25,6 +25,14 @@ complete independent judge journey or production qualification.
   engine metadata now admits stable22.12+ or24.1+ within their respective majors.
   The short Judge journey has requirements and three setup blocks; advanced
   account/platform/recovery detail is retained in JUDGE-REFERENCE.
+- **Before-setup requirements:** the fresh-clone path runs a read-only local check
+  before dependency installation.21 focused checks pass on both Node22/24; actual
+  local CLI runs passed on22.12.0 and24.1.0. It reports OS, Git, Node, npm, reviewed
+  Muse build and installed Chrome/Firefox, with bounded version probes and
+  credential-free environments. It does not install, log in, launch a browser,
+  call OP/models or verify account entitlement/browser capture. Missing Node and
+  invalid arguments fail clearly without npm/dependencies. Existing clones and
+  credentials are preserved; a fresh clone is not a first-time account enrollment.
 - **Shared evidence home:** future launches use a private per-user home outside
   source checkouts for checkpoints and exports. Directory ownership/permissions,
   symlink/inode/currentness and atomic-save behavior are checked. Existing live

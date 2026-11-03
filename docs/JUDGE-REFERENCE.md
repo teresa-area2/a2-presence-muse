@@ -2,6 +2,9 @@
 
 Start with the short [Judge journey](JUDGE-QUICKSTART.md). This page retains
 advanced account, privacy, recovery and platform detail for troubleshooting.
+Run `sh scripts/judge-requirements.sh` from the fresh clone before installation.
+It checks local tools/browser availability; account/billing/model access is not
+proved by a local requirements check.
 The optional Mac helper can select a compatible project runtime; direct npm
 commands below require Node 22.12+ (22.x) or 24.1+ (24.x) already selected in that shell.
 
