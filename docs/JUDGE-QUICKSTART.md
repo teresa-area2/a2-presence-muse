@@ -89,12 +89,16 @@ Muse sessions; no coding task starts until you send a message.
    checks stale; an unavailable check is not a pass.
 
 A message during work steers the selected agent(s); Escape in the shared box
-interrupts the selected agent(s) while keeping sessions open. Notice the Presence
-readings and replies; no difference or ordinary fallback is useful feedback too.
+interrupts the selected agent(s) while keeping sessions open. Notice the displayed
+Presence policy and readings, compare the replies and approvals, and inspect the
+code-check results. Similar replies, unchanged guidance or ordinary fallback are
+valid observations too; a visible difference alone does not establish a benefit.
 
 ## Save and return results
 
-Before closing each pair, open **Testing and diagnostics**:
+If you are rehearsing for Teresa, complete these steps before closing each pair
+and return your results privately. Judges can inspect or save an export optionally;
+the export is not uploaded automatically. Open **Testing and diagnostics**:
 
 1. Complete **Effort and experience** if you can judge it. Leave unknown ratings
    blank, stop review timers and wait for **Recorded for this pair.**
@@ -106,8 +110,8 @@ Before closing each pair, open **Testing and diagnostics**:
    ~/.local/share/a2-presence-muse/evidence/evidence-packages/
    ```
 
-4. Return the JSON privately to the person who asked you to test (Teresa for this
-   rehearsal), with browser/macOS/Muse versions, task/model, checkout revision,
+4. For teammate rehearsals, return the JSON privately to the person who asked you
+   to test (Teresa for this rehearsal), with browser/macOS/Muse versions, task/model, checkout revision,
    what worked or blocked and what felt easier, harder or the same. To get the
    revision, run the command below, using your clone's path if you chose another:
 
@@ -119,9 +123,11 @@ Before closing each pair, open **Testing and diagnostics**:
    real typing and raw exports out of Git/public issues.
 
 Try the [other prepared tasks](MAC-TESTER-TASKS.md), then optionally **Your own task**,
-if time/allowance permit. Use a fresh pair and export per task. After the last
-export, **Close sessions**, then **Ctrl-C in the launch Terminal**. If blocked before
-export, return the failed step and exact nonsecret error.
+if time/allowance permit. Use a fresh pair for each task; if exporting, save a
+package for each pair before closing it. When finished, **Close sessions**, then
+**Ctrl-C in the launch Terminal**. If you're
+rehearsing for Teresa and are blocked before export, return the failed step and
+exact nonsecret error.
 
 ## Help
 

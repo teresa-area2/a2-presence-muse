@@ -2,6 +2,10 @@
 
 A side-by-side coding workspace for exploring how Open Presence guidance can shape collaboration with Muse Code. Two separate Muse sessions work on the same task; eligible Presence guidance goes only to the **With Presence** session. You can converse with both, review approvals, check their work and compare reported resources.
 
+Coding agents can interrupt at awkward moments or give more detail than a person needs in that interaction. This prototype explores a different approach: with the user's consent, Open Presence turns textbox interaction metadata into temporary collaboration guidance. The workspace uses that guidance to suggest response depth, optional-update timing and conversation style while the person remains in control of the task and approvals.
+
+Muse Code was used substantially in implementing and testing the project during the hackathon. Muse Code and Meta's Muse models also power the two coding sessions in the submitted experience.
+
 ## Try the demo
 
 **[Follow the Judge journey](docs/JUDGE-QUICKSTART.md)** to set up, run a coding task and return your results. You need a Mac, Git, a supported Muse Code installation and your own entitled Muse account. Use Chrome or Firefox. The Mac setup prepares a verified Node runtime inside the checkout; it does not change your system Node or shell settings.
@@ -26,4 +30,4 @@ The repository includes [redacted historical evidence](evidence/README.md) and a
 
 The event work includes the Muse-specific experience and the current Presence, coding and evidence integration. An earlier Area2 demo informed its visual design. Agent Lab/Pulse and the Capsule validator are reused code; Cipher, Muse and Open Presence inference are external. See the [event build record](docs/EVENT-BUILD.md), [provenance](docs/PROVENANCE.md), and [dependencies and notices](docs/DEPENDENCIES.md).
 
-For troubleshooting and advanced setup, see the [judge reference](docs/JUDGE-REFERENCE.md), [qualification status](docs/STATUS.md) and [setup guide](docs/SETUP.md).
+For a concise map of the experience, evidence and limitations, see [How to assess the demo](docs/ASSESSING-THE-DEMO.md). For troubleshooting and advanced setup, see the [judge reference](docs/JUDGE-REFERENCE.md), [qualification status](docs/STATUS.md) and [setup guide](docs/SETUP.md).
