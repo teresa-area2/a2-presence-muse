@@ -19,6 +19,7 @@ Windows/WSL qualification limits, see [platform support](PLATFORM-SUPPORT.md).
   mkdir -p "$HOME/Developer"
   git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
   cd "$HOME/Developer/open-presence-muse-judge"
+  git checkout --detach submission-2026-11-04
   sh scripts/judge-mac.sh requirements
 )
 ```
@@ -51,7 +52,9 @@ covers installation and login trouble.
 <a id="3-start-with-explicit-typing-consent"></a>
 **3. Start the workspace.** Read [Privacy & Data Use](PRIVACY-DATA-USE.md) first.
 The consent flag enables textbox timing/category metadata to OP, including before
-Send. Coding messages go separately to Muse. If you agree:
+Send. Coding messages go separately to Muse. Testers share an OP calibration
+dataset; a fixed deletion date is not enforced. The privacy notice explains how
+to stop capture and request deletion. If you agree:
 
 ```sh
 (
