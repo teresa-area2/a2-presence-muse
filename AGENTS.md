@@ -19,3 +19,8 @@ repo's qualification CI with deployment CI. Coordinate shared-interface changes
 with the hosting owner before porting them. Synchronization means verified bytes
 for an explicit shared scope, with audience-specific docs and access kept separate;
 it does not mean identical histories. Keep publication and runtime changes separate.
+
+The owner-authorized 3 November 20:23 UTC audit under `evidence/audit-2026-11-03`
+also publishes reviewed numeric ratings and historical telemetry through a separate
+closed projection. Its source derivatives contain no conversation bodies. See
+`evidence/METHOD.md`; this publication does not make ordinary local exports public.

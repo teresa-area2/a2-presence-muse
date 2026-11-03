@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "presence_public_audit_manifest",
+  "freeze_cutoff_utc": "2026-11-03T20:23:08.088810+00:00",
+  "source_derivative_sha256": {
+    "input-records.json": "d69183e95baf78907d00048010af586e7a52c85bbc1ad8789686d21ba1161b2e",
+    "eligibility-ledger.json": "9c125c283526f5727d7d77ae3c7c8265437c1c90a28a8111224ab78414847f47",
+    "source-ledger.json": "b0212e5fd64ba7ab12708159ae0b9dabbf40ef43861855246c17707289283872",
+    "quality-history-ledger.json": "cbf4e29ac606574a965d7b60ab73094cb349296458682d8d543856f2f6ace746",
+    "metrics.json": "39e524143ed114ac4125c9d515707684284c0f12e90466b501444762358dc0da",
+    "observer-ledger.json": "aa091cf696181d457ca54116a35a814d3da666f8f842fccbc14ca0b339c82f97"
+  },
+  "files": {
+    "audit.json": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+    "summary.json": "aefb05bc4f2a59f07112cc4105d1afd72401f96198136417866617dcd2a5fdd5"
+  },
+  "transformations": [
+    "Pseudonyms replace full run/generation identities; no short-prefix merges.",
+    "Original IDs, source locators and individual timestamps removed; ordered policy/read sequences retained.",
+    "Closed field/type/enum projection excludes arbitrary extra fields, narrative, secrets, typing, Capsules and reasoning.",
+    "Authorized numeric ratings, usage, original usage and labelled analysis normalization retained.",
+    "Every selected case retained, including unrated, one-arm, no-paired-work, failures and provisional endpoints.",
+    "All retained quality-check variants and source commitments preserved; originals not rewritten.",
+    "Browser event projections kept separately; epoch times replaced by intervals since each arm projection began.",
+    "Observer numeric history kept separate from coding totals; narrative, coverage detail and per-response attribution arrays omitted.",
+    "No quoted exchanges are present in these source derivatives; none reconstructed.",
+    "Summary independently recomputed from published case rows and outcome-specific eligibility."
+  ],
+  "original_files": "Private; these are derived audit records, not raw exports or verified provider bills.",
+  "review_scope": "Data projection and numeric reproduction only; no new user/model/provider/OP test."
+}

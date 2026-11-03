@@ -1,13 +1,75 @@
 # Recorded evidence method and limits
 
-The frozen saved-file cutoff is2026-11-03T14:15:07.768Z. The input scope is the researcher’s declared historical/current evidence folders plus the shared private evidence home. Stable reads, exact file/checkpoint hashes and package identities were checked. Select the highest stable uncontested revision per full run ID plus session generation. Copies, exports, revisions and observer reports do not add comparison cases or people. Preserve prior versions privately.
+## Selection and denominators
 
-There are77 saved identities:31 with eligible paired ratings,15 additional paired-resource cases,3 one-arm resource cases and28 with no paired observed work. Missing is not zero. Keep cancelled, incomplete, adverse and failed cases. Paired resources require positive valid observed counts on both arms; existing explicit native/trace agreement can support a labelled analysis projection, without changing original records or claiming billing. Complete timing requires both arms complete. Report paired N per outcome.
+The current saved-file cutoff is **2026-11-03T20:23:08.088810Z**. The authoritative
+frozen consolidation contains 82 full run-ID/session-generation keys, 200 retained
+source hashes and 133 checkpoint versions. The latest stable uncontested revision
+per full key is selected. Copies and revisions do not create cases. Historical
+check variants remain available; a later pass never erases an earlier failure.
 
-Means are used for1–5 effort ratings, noticed interruptions and complete summed turn seconds. Tokens, calls and approval decisions use paired sums. Percentage change is100×(With−Without)/Without on the same eligible subset; zero baseline is undefined. Input already includes cached input. Uncached=input−cache; input+output does not add cache again. A scale-point change in effort is not calibrated cognitive-workload reduction. Counts and timing include different native scopes/waits; model calls can be observed completed responses rather than all internal/provider activity.
+Every case is in the [public audit](audit-2026-11-03/audit.json): 33 with paired
+ratings, 18 additional paired-resource cases, three one-arm resource cases and
+28 with no paired observed work. Absence is not verified zero activity. The
+publication retains incomplete, adverse and unmatched cases. Previously suggested
+linkage between private review aliases R079 and R082 was withdrawn: their full
+keys differ and they are not merged or assumed related.
 
-The one known rated participant is an unblinded repeated pilot. Unrated origins/comparable work are less certain;21/46resource records have matched-context true and25 false. The records span multiple tasks, models and code versions. Ten rated endpoints remain provisional; pair closure alone is not participant-review closure. Latest rated checks are stale or missing;8rated and3unrated resource cases retain earlier frozen-test failures. Later passes never erase earlier failures, and stale failures are not final-artifact verdicts. General quality equivalence, cost savings, faster work, state measurement and causal/population effects are unverified.
+Paired resources require both arms to have positive valid observed usage. For
+13 cases, a labelled analysis projection uses explicitly recorded native/trace
+exact agreement; both source usage and normalized analysis usage are retained.
+This is not provider billing verification. Paired ratings also require both valid
+1–5 effort ratings and nonnegative interruption counts. Complete paired timing
+requires both arms' elapsed status to be completed and no incomplete turns. The
+reproduction command recomputes these flags and rejects contradictory inclusion.
 
-The current closed projector omits individual ratings, timestamps and original IDs and cannot represent five eligible legacy resource cases. Resource snapshots cover41/46; aggregates retain46. Ratings aggregates retain31 although individual snapshots cover30/31 and intentionally omit their rating values. index.json accounts for all77cases. Public files are redacted/pseudonymized, not anonymous, and do not independently verify withheld originals or every aggregate. Reported harness fingerprints are source-snapshot metadata, not independent deployed-server/browser proof.
+## Arithmetic
 
-Observer and development/review model usage are separate from coding totals. Actual billing and full Presence/collector overhead remain unavailable. No model/provider/OP call, new participant test or raw typing simulation was used to prepare these files. The checks verify extraction/arithmetics/privacy fields, not a new independent scientific replication.
+Means are used for effort ratings, noticed interruptions and summed completed-turn
+seconds. Tokens, observed model calls and approval decisions use paired sums.
+Percentage change is 100 × (With − Without) / Without on the same eligible subset;
+a zero baseline is undefined. **Input already includes cached input**:
+uncached = input − cache; input + output does not add cache again. A scale-point
+rating change is not a calibrated workload reduction. Turn times include waits
+and do not establish accepted-work speed or equal realized work.
+
+## Quality and interpretation
+
+The known rated participant is one unblinded repeated pilot, not 33 independent
+people. Eighteen resource cases are unrated and have uncertain origin/comparability.
+Tasks, models, histories and builds differ; the recorded matched-context flag is
+not independent proof of equivalent work. Twelve rated saved endpoints remain
+provisional, including 11 operationally closed without confirmed participant
+review closure. Only one rated and one unrated resource pair have current passed
+common frozen checks. Ten rated and four unrated resource cases retain earlier
+frozen-test failures. Stale failures are not verdicts on a later artifact.
+
+Guidance-labelled requests, linked finals and browser hold/release records support
+engineering observations, not model compliance, causal benefit or human effort
+reduction. App-reported `live` mode does not independently establish origin;
+unknown fixture metadata and batch-import origins stay visible. Controlled
+synthetic diagnostics and selected visual examples are separate from this cohort
+and are not added to its denominators.
+
+Observer history is separate: 15 retained reports (14 completed, one failed),
+15 calls, 396,482 input / 89,767 output tokens, no recorded cached input, and
+467.346 seconds summed report latency. These are retained observations, not
+lifetime overhead. Development, review and observer calls are not added to coding
+totals. Actual billing and full Presence/collector overhead are unavailable.
+
+## Publication and verification
+
+The closed [offline projector](../scripts/evidence-audit.mjs) accepts only reviewed
+fields, types and enums. It replaces identities with freeze-local case aliases,
+removes source locators and individual timestamps, and preserves within-projection
+event intervals. Each record is explicitly a derivative; no original checksum is
+presented as validating changed public bytes. [The manifest](audit-2026-11-03/manifest.json)
+hashes the public files and identifies private derivative inputs by hash.
+Retained source/checkpoint hashes are commitments to private history, not fresh
+independent verification of those originals.
+
+The [audit schema](audit-2026-11-03/README.md) lists retained fields and omissions.
+Reproduction checks extraction, inclusion and arithmetic from public data. It is
+not independent scientific replication, a fresh provider run or qualification of
+every final-release feature. Earlier cutoffs are overlapping historical views,
+kept separately; never pool their rows with this freeze.

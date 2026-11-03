@@ -1,18 +1,49 @@
-# Redacted recorded comparisons
+# Recorded comparisons and reproducible results
 
-This release contains67 intentionally prepared, redacted snapshots under `runs/`, a77-case availability index and a frozen aggregate summary. See [results](RESULTS.md), [method](METHOD.md), [index](index.json) and [aggregate values](summary.json).
+The latest reviewed freeze is **3 November 2026, 20:23:08 UTC (21:23:08 Madrid)**.
+It publishes all **82 saved comparison cases**, including failures, provisional
+endpoints, unrated and incomplete cases. Of these, **33 have paired ratings,
+51 paired resource measurements and 39 complete paired timings**. These groups
+overlap; they are not separate participants. Ratings come from one known person
+in an unblinded repeated pilot. Unrated origins and comparable work are uncertain.
 
-The individual files in `runs/` are snapshots of recorded comparison checkpoints for review. They omit original run and reading IDs, timestamps, messages, code, raw typing, Capsules, ratings and private narratives. Presence controls are still sensitive context: pseudonymization is not anonymity.
+- [Results](RESULTS.md) and [method](METHOD.md)
+- [All-case index](index.json) and [aggregate values](summary.json)
+- [Individual numeric records, policy/request history and check history](audit-2026-11-03/audit.json)
+- [Audit schema, redactions and reproduction](audit-2026-11-03/README.md)
+- [File hashes and transformations](audit-2026-11-03/manifest.json)
 
-A public record's SHA-256 identifies its own bytes. A separately labelled original-package digest is a commitment to a withheld private original and cannot independently verify that private original from this repository. A reported harness fingerprint or task-source commit does not prove the deployed server or browser bytes. Unknown or unverified evidence remains unknown; observed guidance does not prove model compliance, human benefit or causal savings. Recorded checks cover only their stated test cases.
+To verify the public files and reproduce all ten aggregate metrics, run from the
+repository root with a supported Node version:
 
-To prepare a redacted review file, use `node scripts/export-public-evidence.mjs --input /absolute/path/to/private-package.json` from a shell with a supported Node version on its PATH. This is an advanced command; the Mac judge helper does not change the parent shell's PATH. The command writes only to this checkout's `evidence/runs/`; it does not commit, publish or run a model. Inspect the redacted record before sharing.
+```sh
+node scripts/evidence-audit.mjs reproduce evidence/audit-2026-11-03
+```
 
+No login, installation, model call or Open Presence call is needed for that command.
+Numbers are recomputed from the individual published values, checking eligibility
+per outcome. Input includes cached input. The higher uncached-input total is
+retained alongside the reported effort and interruption differences.
 
-## Coverage and preparation
+These are **reviewed derivatives**, not untouched raw exports. Numeric ratings,
+usage, checks, policy sequences and presentation events are published; original
+identifiers, private source paths and individual clock times are removed. The
+selected derivatives contain no conversation bodies; missing exchanges are not
+reconstructed. Originals remain private, with source/checkpoint hash commitments.
+Those commitments do not independently verify withheld original bytes. Policies
+and ratings remain potentially identifying even after pseudonymization.
 
-The selected source cut is3November2026 at14:15:07UTC. The77 saved identities include31 paired ratings,46 paired-resource records and34 complete paired timings; these overlap. They are not77 participants.67 individual checkpoints pass the existing closed projection, including41/46resource and30/31rated cases. Ten legacy inventory cases lack supported task/fixture metadata; five have eligible paired resources and one has paired ratings. They remain in aggregates and index.json with explicit omissions.
+## Earlier publication
 
-The individual records were prepared as new `saved_snapshot` packages around exact hash-verified historical checkpoints, then redacted. They are not earlier manual exports or new trials. Their wrapper digests bind retained private assembly bytes. No missing metadata was retrofitted and no source checkpoint changed. Full original run IDs, individual times, rating values, transcripts, code, typing, Capsules and observer narrative stay private. Aggregate means/totals are a separate summary and cannot all be independently reproduced from these intentionally limited public snapshots.
+The [earlier 14:15 UTC freeze](archive-2026-11-03-141507/README.md) reported
+31 rated / 46 resource / 34 timing pairs. Its 67 closed-projection snapshots remain
+unchanged under [runs/](runs/). They overlap with the current inventory: **do not add
+the freezes, exports, checkpoints or observer reports as extra trials**. Case
+aliases are local to each freeze. The new audit also represents the ten legacy
+cases whose missing fixture metadata prevented the older snapshot projection;
+their unknown metadata stays unknown.
 
-Historical failures, incomplete/unrated cases and unmatched histories remain accounted for; do not select the compatible41 cases as the whole resource cohort or treat historical runs as tests of the final code build. Publication and final submission figures remain the owner’s decision.
+The existing `scripts/export-public-evidence.mjs` still prepares the older,
+more restrictive single-package projection. It does not publish files or include
+individual ratings. Preparing a new audit is an explicit, reviewed release action;
+ordinary local exports remain local and are not automatically uploaded.
