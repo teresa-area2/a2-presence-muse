@@ -1,3 +1,4 @@
+// CI evidence consumes TAP explicitly; Node22/24 reporter defaults can differ.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -120,7 +121,7 @@ export async function runVerification({workspace,labRoot,node=process.execPath,a
     const ownFiles=(await fs.readdir(path.join(snapshot,'test'))).filter(name=>/^[\w.-]+\.test\.m?js$/.test(name)).sort().map(name=>'test/'+name);
     if(!ownFiles.length)return fail('verification_own_tests_missing');
     let failed=false;
-    for(const args of [['--test',...ownFiles],['--test',acceptance]]){
+    for(const args of [['--test','--test-reporter=tap',...ownFiles],['--test','--test-reporter=tap',acceptance]]){
       const result=await boundedProcess({node,args,policy,cwd:snapshot,env,deadline,onOutput:consume});
       if(result.code!==0)failed=true;
       if(result.reason)return fail(result.reason);
@@ -227,7 +228,7 @@ export async function runProjectVerification({workspace, node = process.execPath
       : 'verification_trusted_plan_invalid';
     return {state: 'failed', stdout: label + '\n', exit_code: 1};
   }
-  const frozenOwnArgs = ownTestDiscovery === 'node-default' ? ['--test'] : ['--test', ...frozenOwn];
+  const frozenOwnArgs = ownTestDiscovery === 'node-default' ? ['--test','--test-reporter=tap'] : ['--test','--test-reporter=tap', ...frozenOwn];
   const frozenArtifactHash = artifactHash;
   const frozenDeadlineMs = deadlineMs;
   const frozenRunTests = runTests;
@@ -323,7 +324,7 @@ export async function runProjectVerification({workspace, node = process.execPath
     // the outside snapshot.
     const ownEnv = {...baseEnv, A2_CANDIDATE_WORKSPACE: snapshot};
     const trustedEnv = {...baseEnv, A2_CANDIDATE_WORKSPACE: overlay};
-    for (const [args, cwd, env] of [[frozenOwnArgs, snapshot, ownEnv], [['--test', ...frozenTrustedNames], overlay, trustedEnv]]) {
+    for (const [args, cwd, env] of [[frozenOwnArgs, snapshot, ownEnv], [['--test','--test-reporter=tap', ...frozenTrustedNames], overlay, trustedEnv]]) {
       const result = await run({node, args, cwd, env, deadline});
       if (result && typeof result.stdout === 'string' && result.stdout && !output.includes(result.stdout)) {
         output += result.stdout;

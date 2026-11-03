@@ -1,6 +1,6 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {assertJudgePlatform,judgePlatformMessage} from '../src/judge-platform.mjs';
+import {assertJudgePlatform,assertJudgeNode,judgePlatformMessage} from '../src/judge-platform.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const abort=new AbortController();
@@ -9,7 +9,7 @@ const stop=()=>abort.abort();
 process.on('SIGINT',stop);process.on('SIGTERM',stop);process.on('SIGHUP',stop);
 try{
  assertJudgePlatform();
- const [major,minor]=process.versions.node.split('.').map(Number);if(major!==22||minor<12)throw Error('judge_node_22_12_required');
+ assertJudgeNode();
  const {judgeArguments}=await import('../src/judge-access.mjs');
  const {runJudgeInstall}=await import('../src/judge-install-runner.mjs');
  const options=judgeArguments(process.argv.slice(2));if(options.consent||options.port!==null)throw Error('judge_install_argument_invalid');

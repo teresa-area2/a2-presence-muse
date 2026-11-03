@@ -11,7 +11,7 @@ import {collectArtifactFiles, hashArtifactFiles} from '../src/artifact-source.mj
 const digest = x => createHash('sha256').update(x).digest('hex');
 
 // Direct Node runner for offline tests (no sandbox-exec): enforces the same
-// contract the sandboxed production runner enforces — fixed `node --test`
+// contract the sandboxed production runner enforces — fixed `node --test --test-reporter=tap`
 // args only, scrubbed env, per-run deadline — without requiring macOS
 // sandbox qualification (a separate coordinator release check).
 function directRunner(calls) {
@@ -19,7 +19,8 @@ function directRunner(calls) {
     calls.push({args: [...args], cwd, envKeys: Object.keys(env).sort()});
     assert.equal(node, process.execPath);
     assert.equal(args[0], '--test');
-    for (const a of args.slice(1)) {
+    assert.equal(args[1], '--test-reporter=tap');
+    for (const a of args.slice(2)) {
       assert.match(a, /\.test\.mjs$/);
       assert.ok(!a.includes('..') && !path.isAbsolute(a));
     }
@@ -101,8 +102,8 @@ test('project verification passes without package.json and hashes CSS/HTML/new f
   assert.equal(result.artifact_sha256, artifactHash);
   assert.equal(result.trusted_plan_hash, planHash);
   assert.equal(calls.length, 2);
-  assert.deepEqual(calls[0].args, ['--test', 'tests/value.test.mjs']);
-  assert.deepEqual(calls[1].args, ['--test', TRUSTED_NAME]);
+  assert.deepEqual(calls[0].args, ['--test', '--test-reporter=tap', 'tests/value.test.mjs']);
+  assert.deepEqual(calls[1].args, ['--test', '--test-reporter=tap', TRUSTED_NAME]);
 });
 
 test('stale reviewed artifact refuses all execution', async t => {
@@ -253,8 +254,8 @@ test('opt-in Node discovery catches added JS tests while explicit frozen selecti
   const result = await runProjectVerification({workspace, artifactHash, ownTestDiscovery:'node-default', ownTests:['tests/value.test.mjs'], trustedFiles, expectedPlanHash, runTests:directRunner(calls)});
   assert.equal(result.state, 'failed');
   assert.match(result.stdout, /additional regression/);
-  assert.deepEqual(calls[0].args, ['--test']);
-  assert.deepEqual(calls[1].args, ['--test', TRUSTED_NAME]);
+  assert.deepEqual(calls[0].args, ['--test', '--test-reporter=tap']);
+  assert.deepEqual(calls[1].args, ['--test', '--test-reporter=tap', TRUSTED_NAME]);
 });
 
 test('Node discovery cannot hide a deleted required public test', async t => {

@@ -6,6 +6,7 @@ import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {terminalEnvironment} from '../src/terminal-env.mjs';
 import {createIsolatedMuseConfigs, removeIsolatedMuseConfigs} from '../src/isolated-muse-config.mjs';
+import {supportsJudgeNode} from '../src/judge-platform.mjs';
 
 const VERSIONS=new Set(['Muse Code 1.4.13 (1.4.13-R6996.1)','Muse Code 1.4.14 (1.4.14-R7309.1)']);
 const PROMPT='Return exactly {"ready":true}.';
@@ -116,7 +117,7 @@ export async function qualify({args,system={platform:process.platform,env:proces
  try{
   const {mode,allowed}=parseArgs(args??[]);report.mode=mode;
   if(system.platform!=='linux'||!isWSL2(system.platform,await o.readKernel()))fail('wsl2_required');report.wsl2=true;
-  const [major,minor]=(system.nodeVersion??'').split('.').map(Number);if(major!==22||minor<12||!Number.isInteger(minor))fail('node_version_unqualified');
+  if(!supportsJudgeNode(system.nodeVersion))fail('node_version_unqualified');
   if(mode==='login'&&(!system.tty||system.env.CI))fail('interactive_terminal_required');
   const env=terminalEnvironment(system.env),binary=await o.findBinary(env);session=await o.newWorkspace(env);
   const versionEnv=terminalEnvironment({...env,HOME:session,XDG_CONFIG_HOME:path.join(session,'empty-config')});

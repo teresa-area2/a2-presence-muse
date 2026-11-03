@@ -10,7 +10,7 @@ const acceptance = path.join(task, 'checks/acceptance.test.mjs');
 function run(files, workspace, override = true) {
   const env = {...process.env}; delete env.NODE_TEST_CONTEXT; delete env.TASK_PROJECT_DIR;
   if (override) env.TASK_PROJECT_DIR = workspace;
-  return spawnSync(process.execPath, ['--test', ...files], {cwd: workspace, env, encoding: 'utf8', timeout: 10000});
+  return spawnSync(process.execPath, ['--test','--test-reporter=tap', ...files], {cwd: workspace, env, encoding: 'utf8', timeout: 10000});
 }
 function passed(result) { assert.equal(result.status, 0, result.stdout + result.stderr); }
 function intendedFailure(result) {

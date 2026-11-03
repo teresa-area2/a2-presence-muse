@@ -7,6 +7,7 @@ Implemented paths and checked mechanisms are different from a complete judge jou
 | Route | Checked behavior | Still open |
 | --- | --- | --- |
 | macOS arm64, Node22, Muse1.4.13/1.4.14 | Dependency build/setup, existing-account model use and native control mechanisms | Independent fresh login and complete coding/approval/real OP/export journey; full 1.4.14 coding qualification |
+| macOS arm64, Node24.1.0 | Anonymous install/build and no-consent server startup; full offline checks in STATUS | Native Muse pair, real OP capture and human outcomes on this Node version |
 | Linux arm64 | Dependency build/setup and native Echo startup, steering, interruption, continuation and cleanup | Fresh registry access, real account/model/OP journey and Linux x86 qualification |
 | Linux Check code | Missing or denied Bubblewrap isolation returns unavailable, without host execution fallback | Positive sandbox execution and independent descendant-cleanup qualification |
 | Windows via WSL2 | Availability diagnostic implemented; hosted WSL2 installation unavailable | WSL2 kernel, localhost forwarding, own login/model access and full judge journey |

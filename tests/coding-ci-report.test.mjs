@@ -206,11 +206,11 @@ test('real Node TAP: flat frozen diagnostics and nested public suites retain cor
   const publicFile = path.join(dir,'public.test.mjs'), frozenFile = path.join(dir,'frozen.test.mjs');
   await fs.writeFile(publicFile,"import{describe,it}from'node:test';describe('public suite',()=>{it('one',()=>{});it('two',()=>{});});\n");
   const env = {...process.env}; delete env.NODE_TEST_CONTEXT;
-  const publicTap = execFileSync(process.execPath,['--test',publicFile],{encoding:'utf8',env});
+  const publicTap = execFileSync(process.execPath,['--test','--test-reporter=tap',publicFile],{encoding:'utf8',env});
   for (const shouldFail of [false,true]) {
     await fs.writeFile(frozenFile,"import test from'node:test';test('frozen one',()=>{});test('frozen two',()=>{"+(shouldFail?"throw Error('SECRET_DIAGNOSTIC_TOKEN');":"")+"});\n");
     let frozenTap;
-    try {frozenTap=execFileSync(process.execPath,['--test',frozenFile],{encoding:'utf8',env,stdio:['ignore','pipe','pipe']});}
+    try {frozenTap=execFileSync(process.execPath,['--test','--test-reporter=tap',frozenFile],{encoding:'utf8',env,stdio:['ignore','pipe','pipe']});}
     catch (error) {assert.equal(error.status,1);frozenTap=error.stdout;}
     const summary=summarizeCI(resultFor(publicTap+frozenTap,shouldFail?'failed':'passed',shouldFail?1:0),['frozen one','frozen two']);
     assert.equal(summary.state,shouldFail?'failed':'passed');

@@ -14,6 +14,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {isPlaceholder, validateSetupConfigObject} from './setup-config.mjs';
 import {runGit} from './git-ops.mjs';
+import {supportsJudgeNode,JUDGE_NODE_REQUIREMENT} from './judge-platform.mjs';
 
 const execute = promisify(execFile);
 
@@ -23,16 +24,10 @@ function check(name, ok, detail = '') {
   return {name, ok, detail: String(detail).slice(0, 500)};
 }
 
-export function satisfiesNodeRequirement(version, required = '>=22.12.0 <23.0.0') {
-  // Minimal parser for the documented ">=22.12.0 <23.0.0" range.
-  const match = /^v?(\d+)\.(\d+)\.(\d+)/.exec(String(version ?? ''));
-  if (!match) return false;
-  const major = Number(match[1]), minor = Number(match[2]), patch = Number(match[3]);
+export function satisfiesNodeRequirement(version, required = JUDGE_NODE_REQUIREMENT) {
+  // This preflight uses the same reviewed release bands as install/start.
   void required;
-  if (major !== 22) return false;
-  if (minor < 12) return false;
-  if (minor === 12 && patch < 0) return false;
-  return true;
+  return supportsJudgeNode(version);
 }
 
 export function satisfiesPythonRequirement(versionOutput, majorMin = 3, minorMin = 11) {
@@ -90,7 +85,7 @@ export async function runSetupCheck({mode = 'complete', config = {}, requirement
   }
   // Offline: Node only, no external calls.
   const nodeOk = satisfiesNodeRequirement(runner.nodeVersion ?? process.version);
-  checks.push(check('node', nodeOk, nodeOk ? String(runner.nodeVersion ?? process.version) : `requires >=22.12.0 <23.0.0, saw ${String(runner.nodeVersion ?? process.version)}`));
+  checks.push(check('node', nodeOk, nodeOk ? String(runner.nodeVersion ?? process.version) : `requires ${JUDGE_NODE_REQUIREMENT}, saw ${String(runner.nodeVersion ?? process.version)}`));
   if (mode === 'offline') {
     return {mode, ok: checks.every(c => c.ok), checks};
   }

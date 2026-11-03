@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
-import {judgePlatform, assertJudgePlatform, judgePlatformMessage} from '../src/judge-platform.mjs';
+import {judgePlatform, assertJudgePlatform, judgePlatformMessage, supportsJudgeNode,assertJudgeNode} from '../src/judge-platform.mjs';
 import {runJudgeInstall} from '../src/judge-install-runner.mjs';
 
 test('only macOS and Linux pass the preflight; unsupported systems are distinct', () => {
@@ -18,6 +18,15 @@ test('only macOS and Linux pass the preflight; unsupported systems are distinct'
   assert.match(judgePlatformMessage(Error('judge_install_process_group_unavailable'), 'win32'), /WSL2.*docs\/JUDGE-QUICKSTART\.md/);
   assert.equal(judgePlatformMessage(Error('judge_install_process_group_unavailable'), 'linux'), null);
   assert.match(judgePlatformMessage(Error('judge_platform_unsupported'), 'freebsd'), /operating system/);
+});
+
+test('judge Node gates allow reviewed22/24 releases and explain recovery for other versions',()=>{
+  for(const version of ['22.12.0','v22.20.1','24.1.0','v24.21.0']){assert.equal(supportsJudgeNode(version),true,version);assert.doesNotThrow(()=>assertJudgeNode(version));}
+  for(const version of ['20.19.0','22.11.9','23.1.0','24.0.0','25.0.0','24.1.0-rc.1','24.1.0garbage','24.1',null]){
+    assert.equal(supportsJudgeNode(version),false,String(version));assert.throws(()=>assertJudgeNode(version),/judge_node_version_required/);
+  }
+  assert.match(judgePlatformMessage(Error('judge_node_version_required')),/Node 22\.12.*Node 24\.1/);
+  assert.match(judgePlatformMessage(Error('judge_node_version_required')),/sh scripts\/judge-mac\.sh install/);
 });
 
 test('direct installer rejects Windows before argument validation or reading credentials', async () => {

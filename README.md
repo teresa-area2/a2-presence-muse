@@ -52,7 +52,7 @@ It distinguishes OP metadata, Meta/Muse coding and optional Observer requests,
 consent and saved evidence, with upstream terms still awaiting confirmation.
 
 Follow the [complete first-time judge quickstart](docs/JUDGE-QUICKSTART.md) from
-a fresh checkout. You need Git, Node22.12+ within Node22, a reviewed Muse Code CLI
+a fresh checkout. You need Git, Node 22.12+ (22.x) or 24.1+ (24.x), a reviewed Muse Code CLI
 and your own authorized model usage. An active Muse Code plan connected by browser
 onboarding is one route; your own stored Model API key with billing/credits is
 another. A separate manually created key is not always required. This harness
@@ -91,7 +91,8 @@ not isolate it. Scope, dated grant expiry and deletion limits are in
 Mac collector is not required: explicit consent enables timing metadata from the
 app textbox. Without consent, the workspace uses ordinary fallback.
 
-The exercised local path is macOS on Apple Silicon. Linux and Windows/WSL have
+Setup is checked on Apple Silicon macOS with Node22.12.0 and24.1.0; real Muse/OP
+journey limits remain in the platform matrix. Linux and Windows/WSL have
 specific, incomplete qualifications; see [platform support](docs/PLATFORM-SUPPORT.md).
 Native Windows harness launch is unsupported, even though Muse Code itself has
 a Windows CLI. A fresh independent judge's login/coding/OP journey remains open.

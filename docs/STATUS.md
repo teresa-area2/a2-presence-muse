@@ -12,12 +12,19 @@ complete independent judge journey or production qualification.
   works and capture works in Chrome/Firefox; Safari failed under Screen Sharing,
   with exact browser versions/cause unverified. Each teammate's fresh own-account
   coding/approval/export journey remains a rehearsal gate.
-- **Clean candidate checks:** on 3 November, the updated release tree passed
-  all 1,795 offline tests with zero failures/skips on Node 22.12.0, including the
-  installed PowerShell parser checks. A fresh empty-cache anonymous judge install
-  passed on the preceding1,790-test release; dependencies/install code are unchanged
-  by this onboarding update. Earlier 1,755-test installation qualifications cover predecessor source;
-  source checks are not an independent human judge or live OP admission test.
+- **Node22/24 and quick setup:** the candidate passed all1,818 offline tests with
+  zero failures/skips on **Node22.12.0 and Peña's exact Node24.1.0**, including the
+  installed PowerShell parser. Empty-cache anonymous install/build and no-consent
+  server startup/health/owned shutdown passed under both on macOS arm64. No Muse
+  pair was opened and no OP/model call was made; this is not a fresh account or
+  human coding/adaptation qualification. Node24 changed child-test reporter defaults;
+  CI now requests TAP explicitly rather than relaxing report/quality checks.
+  The optional Mac helper's21 offline checks and an actual checksum-verified
+  official Node22 fallback download/install passed. Host Node, nvm, shell profiles
+  and Muse settings are unchanged. Dependencies/versions are unchanged; package
+  engine metadata now admits stable22.12+ or24.1+ within their respective majors.
+  The short Judge journey has requirements and three setup blocks; advanced
+  account/platform/recovery detail is retained in JUDGE-REFERENCE.
 - **Shared evidence home:** future launches use a private per-user home outside
   source checkouts for checkpoints and exports. Directory ownership/permissions,
   symlink/inode/currentness and atomic-save behavior are checked. Existing live

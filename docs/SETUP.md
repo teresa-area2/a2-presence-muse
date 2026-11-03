@@ -4,7 +4,7 @@ Start with the [judge quickstart](JUDGE-QUICKSTART.md) for prerequisites, your o
 
 ## Dependencies and offline checks
 
-Use Git and Node 22.12 or later within Node 22. After installing the official Muse Code CLI and configuring your own entitled, file-backed Muse authentication, run:
+Use Git and Node 22.12+ (22.x) or Node 24.1+ (24.x). After installing the official Muse Code CLI and configuring your own entitled, file-backed Muse authentication, run:
 
 ```sh
 npm run judge:install

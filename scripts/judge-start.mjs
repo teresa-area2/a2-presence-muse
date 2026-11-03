@@ -1,4 +1,4 @@
-import path from'node:path';import{fileURLToPath}from'node:url';import{assertJudgePlatform,judgePlatformMessage}from'../src/judge-platform.mjs';
+import path from'node:path';import{fileURLToPath}from'node:url';import{assertJudgePlatform,assertJudgeNode,judgePlatformMessage}from'../src/judge-platform.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));let privateAccess,app,requestedPort;
 const controller=new AbortController(),abort=()=>controller.abort();
 // Do not exit midway through setup: let each owned async operation settle, then
@@ -15,7 +15,7 @@ function listen(server,port){return new Promise((resolve,reject)=>{
 });}
 try{
  assertJudgePlatform();
- const [major,minor]=process.versions.node.split('.').map(Number);if(major!==22||minor<12)throw Error('judge_node_22_12_required');
+ assertJudgeNode();
  const {readJudgeAccess,prepareJudgeAccess,judgeArguments}=await import('../src/judge-access.mjs');
  const options=judgeArguments(process.argv.slice(2)),port=options.port??8930;
  requestedPort=port;

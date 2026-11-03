@@ -92,8 +92,18 @@ test('node/python requirement parsing is strict', () => {
   assert.equal(satisfiesNodeRequirement('v22.20.1'), true);
   assert.equal(satisfiesNodeRequirement('v21.9.0'), false);
   assert.equal(satisfiesNodeRequirement('v23.0.0'), false);
+  assert.equal(satisfiesNodeRequirement('v24.1.0'), true);
+  assert.equal(satisfiesNodeRequirement('v24.9.1'), true);
+  for(const version of ['v22.11.9','v24.0.9','v25.0.0','v24.1.0-rc.1','v24.1.0extra','v24.1','garbage'])assert.equal(satisfiesNodeRequirement(version),false,version);
   assert.equal(satisfiesPythonRequirement('Python 3.11.4'), true);
   assert.equal(satisfiesPythonRequirement('Python 3.7.17'), false);
+});
+
+test('Node24 offline setup passes without touching machine config, tools or credentials',async()=>{
+ let calls=0;
+ const touch=async()=>{calls++;throw Error('unexpected_machine_access');};
+ const result=await runSetupCheck({mode:'offline',config:{bad:'ignored'},requirements,io:{nodeVersion:'v24.1.0',execGit:touch,execTool:touch,lstat:touch,existsFile:touch}});
+ assert.equal(result.ok,true);assert.equal(calls,0);
 });
 
 test('env overrides win and no personal paths leak into example/config sources', async t => {
