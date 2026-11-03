@@ -26,7 +26,9 @@ The resource view reports available usage, which can include reasoning and tool 
 
 ## Evidence and project origins
 
-The repository includes [all 82 saved cases as reviewed audit records](evidence/README.md) and [reproducible aggregate results](evidence/RESULTS.md): 33 rated pairs, 51 paired resource records and 39 complete paired timings. [Concrete examples](evidence/impact-2026-11-03/README.md) connect available guidance to response differences and optional-update handling, with mixed results and attribution limits. The ratings come from a one-person, unblinded pilot across different tasks, models and versions; historical results do not qualify every feature of this release. Inspect any locally exported evidence before sharing it; exports are saved locally and are not uploaded automatically.
+**[Read the overall Presence impact assessment](evidence/overall-2026-11-03/README.md).** It weighs reported experience, observed behavior, quality and resource/time trade-offs across all eligible comparisons. The pilot shows favorable reported experience alongside mixed resource use; net productivity, quality and cost benefit remain unestablished.
+
+The [reviewed audit](evidence/README.md) retains all 82 saved cases: 33 rated pairs, 51 paired resource records and 39 complete paired timings. [Supporting examples](evidence/impact-2026-11-03/README.md) illustrate response and update-handling differences, with mixed results and attribution limits. Ratings come from one known participant in an unblinded pilot across tasks, models and versions; historical results do not qualify every release feature. Local exports are not uploaded automatically; inspect them before sharing.
 
 The event work includes the Muse-specific experience and the current Presence, coding and evidence integration. An earlier Area2 demo informed its visual design. Agent Lab/Pulse and the Capsule validator are reused code; Cipher, Muse and Open Presence inference are external. See the [event build record](docs/EVENT-BUILD.md), [provenance](docs/PROVENANCE.md), and [dependencies and notices](docs/DEPENDENCIES.md).
 

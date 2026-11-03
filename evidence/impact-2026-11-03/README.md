@@ -1,4 +1,4 @@
-# What Presence changed in the recorded comparisons
+# Supporting examples of Presence’s impact
 
 The question is **what Presence changes in Muse's collaboration, and whether that
 helps the developer while maintaining useful, correct work**. Tokens and time are
@@ -8,6 +8,10 @@ The strongest evidence here is favorable reported experience and a demonstrated
 browser mechanism for holding optional updates. Response examples show differences
 consistent with some guidance, alongside mixed and unlinked cases. They do not
 establish a causal benefit or reliable model adherence across the cohort.
+
+The [overall Presence impact assessment](../overall-2026-11-03/README.md) draws
+its conclusion from all eligible pairs. The episodes below support that assessment;
+they do not replace the whole-cohort analysis.
 
 ## Five concrete episodes
 

@@ -7,6 +7,7 @@ endpoints, unrated and incomplete cases. Of these, **33 have paired ratings,
 overlap; they are not separate participants. Ratings come from one known person
 in an unblinded repeated pilot. Unrated origins and comparable work are uncertain.
 
+- [Overall Presence impact assessment](overall-2026-11-03/README.md), based on the full frozen inventory and outcome-specific eligible pairs
 - [Concrete Presence-impact examples](impact-2026-11-03/README.md), including mixed and unverified results
 - [Results](RESULTS.md) and [method](METHOD.md)
 - [All-case index](index.json) and [aggregate values](summary.json)

@@ -83,3 +83,13 @@ trial, source rescan, complete native transcript or semantic-adherence estimate.
 The underlying numeric audit and its hashes are unchanged. The all-case coverage
 matrix makes absent/unlinked response evidence explicit, while examples keep
 model behavior, browser gating, self-report and coordinator actions separate.
+
+## Overall assessment and secondary analysis
+
+The [overall assessment](overall-2026-11-03/README.md) uses all 82 inventoried cases
+and outcome-specific 33/51/39 paired subsets. Its secondary joint experience,
+per-pair direction and same-rated-cohort resource summaries are reproducible from
+the unchanged public audit. They do not redefine eligibility or pool independent
+participants. No causal estimate, semantic-adherence rate or numeric net-benefit
+score is inferred from missing/heterogeneous evidence. Five episodes remain
+illustrative only.

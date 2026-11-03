@@ -6,21 +6,32 @@ one person in an unblinded repeated pilot; the resource cohort also includes
 18 unrated cases with uncertain origins and comparable work. Records span tasks,
 models and builds. These are descriptive results, not a causal estimate.
 
-## What changed in collaboration
+## Overall Presence impact assessment
 
-The analysis follows **Presence guidance → observed Muse response or browser
-presentation → developer experience**, with correctness and resource trade-offs
-assessed alongside it. [Five traceable episodes](impact-2026-11-03/README.md) show:
+**Across the frozen pilot, Presence is associated with favorable reported
+collaboration experience, alongside mixed resource use and a substantial
+cache-reuse trade-off. Net productivity, correctness or cost benefit is not
+established.** This conclusion uses all eligible evidence, not the five
+illustrative episodes.
 
-- A compact plan and decision-first questions consistent with recorded guidance.
-- A detailed repair response despite terse guidance, and a formatting difference
-  whose request attribution is unresolved.
-- Optional updates held under defer while an essential final stayed visible, plus
-  disconnected views where those same messages were shown.
+- **Experience:** 29/33 rated cases report lower effort; 25/33 fewer interruptions;
+  **24/33 report both lower**. Four report more interruptions. The pilot has one
+  known rated participant; twelve rated endpoints remain provisional.
+- **Behavior:** guidance-labelled requests and browser holding are recorded across
+  the inventory, but response-text coverage is limited. A cohort-wide model
+  adherence rate for Depth, Format or Conversation cannot be estimated.
+- **Quality:** only two resource pairs have saved current common passing checks;
+  earlier failures and missing/stale checks prevent a general equivalence claim.
+- **Resources and timing:** output is lower in 34/51 resource pairs, while uncached
+  input is higher in 50/51. With is faster in 19/39 complete timing pairs and
+  slower in 20. More consumption may be appropriate when it supports useful work;
+  independent usefulness, accepted-work value and actual billing are unavailable.
 
-These are illustrative observations from two comparisons, with reviewed response
-excerpts and source links. They do not establish a causal or cohort-wide adherence
-result. More tokens or time may be appropriate when they support useful work.
+Read the [overall assessment](overall-2026-11-03/README.md) for the whole-cohort
+judgment, joint experience outcomes and same-rated-cohort resource analysis.
+The [five traceable episodes](impact-2026-11-03/README.md) are supporting
+illustrations of compact planning, questioning and update handling, including
+mixed, ambiguous and disconnected-view cases.
 
 ## Experience, quality and resource outcomes
 

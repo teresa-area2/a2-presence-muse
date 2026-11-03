@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "presence_overall_assessment_manifest",
+  "freeze_cutoff_utc": "2026-11-03T20:23:08.088810Z",
+  "base_public_commit": "c31f8ec03c334e563e1846974066e7499f38eec2",
+  "source_public_audit_sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+  "source_public_primary_summary_sha256": "aefb05bc4f2a59f07112cc4105d1afd72401f96198136417866617dcd2a5fdd5",
+  "source_reviewed_response_catalog_sha256": "d2da402f0bfb000d6560ddf97ab7bebd4dd2ec07165c982917337e018a867e11",
+  "private_research_derivative_commitments": {
+    "overall-assessment.md": "d783dbfc9b766f472762a29a9d166fb2430054807f8cc4e86b7308038e2c50d3",
+    "overall-values.json": "9bf0abea915d6783da52404d90fc7b74e475beb76a5898613d1f8c9dac4fa17c",
+    "claim-source-map.json": "8e8945e1ad0ad27556537b5b7a3914025f8ed24067fb8627b927dc7756b8ec16",
+    "validation.json": "c00fade401dfa7340fe9398861dab7fa40754ff0c32fc33a587487df0f1aeef2"
+  },
+  "source_commitment_scope": "Private analysis derivatives, not original participant/provider receipts. Public files have separate byte hashes.",
+  "files": {
+    "README.md": "e8a59742e4a2c72a210d6a900d7e9ed30d223ba5c55199f71baba2b710b7cb27",
+    "reproduce.mjs": "32f2b27cb1118a9b7965c388a484f3c4c39015cdf3d666514e1a728ed1e6d376",
+    "quantitative-evidence.json": "db6676381514628c670593b27a784d6a3db3d1c60d2554f2b9544657ad2dec1b"
+  },
+  "analysis_scope": "All82saved cases; eligible33rated/51resource/39timing; secondary direction,joint and rated-subset descriptions without changing main cohorts.",
+  "overall_net_benefit_score": null,
+  "cohort_semantic_adherence_estimate": null,
+  "new_trials": 0,
+  "new_Muse_OP_or_evaluator_calls": 0,
+  "original_numeric_audit_and_primary_aggregates_unchanged": true
+}
