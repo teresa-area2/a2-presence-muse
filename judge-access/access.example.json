@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "purpose": "hackathon-judge-evaluation",
+  "open_presence": {
+    "environment": "production",
+    "client_id": "REPLACE_WITH_DESIGNATED_TEMPORARY_OP_CLIENT",
+    "client_secret": "REPLACE_WITH_DESIGNATED_TEMPORARY_OP_SECRET",
+    "expires_on": "2026-11-15"
+  }
+}

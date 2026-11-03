@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "kind": "presence_public_evidence",
+  "classification": "redacted_recorded_snapshot",
+  "public_id": "0c5e2b56-aa57-4c01-b949-7920383b570e",
+  "source": {
+    "original_package_commitment_sha256": "10c9226ba3a9310f70a0d14dae45b412a9ca39db79daea42ec5a7e9c9f629450",
+    "commitment_scope": "withheld_private_original_bytes_not_publicly_verifiable",
+    "assembly_mode": "saved_snapshot",
+    "coding_task_source_commit": "51e86633dbe0ce85105f651c82941564ce288920",
+    "coding_task_source_commit_role": "coding_task_source_not_harness_commit",
+    "reported_harness_fingerprint": "09b1a68301e5389e01567912605f890442853eb8c81ea93113623194307f9eb7",
+    "harness_fingerprint_scope": "reported_not_deployment_or_browser_proof",
+    "muse_version": null,
+    "presentation_version": null
+  },
+  "task": {
+    "id": "CODING-save-conflicts",
+    "profile": "save-conflicts",
+    "fixture_version": "1.0.4-draft",
+    "model": "muse-wonder-1.0",
+    "contributor_mode": "off",
+    "evidence_mode": "live"
+  },
+  "comparison": {
+    "matched_context": true,
+    "quality_scope": "recorded_snapshot_checks_only"
+  },
+  "arms": {
+    "without": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "observed",
+        "source": "native",
+        "input_tokens": 132810,
+        "output_tokens": 3873,
+        "cache_read_tokens": 117628,
+        "cache_relation": "within_input",
+        "completed_response_count": 12,
+        "model_calls_source": "provider_trace_completed_responses",
+        "coverage": "unknown",
+        "trace_status": "observed",
+        "trace_coverage": "observed",
+        "source_disagreement": "same_observed_totals"
+      },
+      "delivery": {
+        "status": "baseline_isolated",
+        "requests_observed": 12,
+        "turn_ordinal": 1,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [],
+        "request_rows_included": 0,
+        "request_rows_provided": 0,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": null,
+        "turn_ordinal": null,
+        "artifact_hash_present": false,
+        "plan_hash_matches_metadata": null,
+        "summary_state": null,
+        "public_tests": null,
+        "frozen_tests": null,
+        "reports_recorded": 0,
+        "reports_omitted": 0
+      }
+    },
+    "with": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "observed",
+        "source": "native",
+        "input_tokens": 39109,
+        "output_tokens": 3058,
+        "cache_read_tokens": 24412,
+        "cache_relation": "within_input",
+        "completed_response_count": 4,
+        "model_calls_source": "provider_trace_completed_responses",
+        "coverage": "unknown",
+        "trace_status": "observed",
+        "trace_coverage": "observed",
+        "source_disagreement": "same_observed_totals"
+      },
+      "delivery": {
+        "status": "guidance_observed",
+        "requests_observed": 4,
+        "turn_ordinal": 1,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "read_marker_matched",
+        "response_linkage": "public_final_matched",
+        "request_rows": [
+          {
+            "ordinal": 1,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 2,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 3,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 4,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          }
+        ],
+        "request_rows_included": 4,
+        "request_rows_provided": 4,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": null,
+        "turn_ordinal": null,
+        "artifact_hash_present": false,
+        "plan_hash_matches_metadata": null,
+        "summary_state": null,
+        "public_tests": null,
+        "frozen_tests": null,
+        "reports_recorded": 0,
+        "reports_omitted": 0
+      }
+    }
+  },
+  "assessment": {
+    "status": "unknown",
+    "included_report_count": 0,
+    "narrative": "omitted"
+  },
+  "limitations": [
+    "redacted_and_pseudonymized_not_anonymous",
+    "source_original_withheld_no_public_independent_verification",
+    "no_messages_code_raw_typing_capsules_timestamps_original_ids_or_subjective_ratings",
+    "checks_are_recorded_snapshots_not_general_correctness",
+    "usage_is_observed_not_billing_or_causal_savings",
+    "request_guidance_observation_does_not_prove_model_adherence",
+    "response_linkage_and_unknowns_must_not_be_inferred",
+    "single_pair_does_not_establish_human_benefit"
+  ]
+}

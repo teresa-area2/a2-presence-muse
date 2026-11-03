@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "kind": "presence_public_evidence",
+  "classification": "redacted_recorded_snapshot",
+  "public_id": "3a4c8ea6-74e1-4da0-9d64-0160dee56e95",
+  "source": {
+    "original_package_commitment_sha256": "5d7f0746869f3f76c3eead29fe2cfbb3726e1870c6408922e97214d674f6c696",
+    "commitment_scope": "withheld_private_original_bytes_not_publicly_verifiable",
+    "assembly_mode": "saved_snapshot",
+    "coding_task_source_commit": "b579c853f009bda3096ea048d1b2f9b85c0b9483",
+    "coding_task_source_commit_role": "coding_task_source_not_harness_commit",
+    "reported_harness_fingerprint": "cec638c497746a473e97fd8fa14802ab536aac72c44af56190baa52d3aa4f383",
+    "harness_fingerprint_scope": "reported_not_deployment_or_browser_proof",
+    "muse_version": null,
+    "presentation_version": null
+  },
+  "task": {
+    "id": "CODING-save-conflicts",
+    "profile": "save-conflicts",
+    "fixture_version": "1.0.4-draft",
+    "model": "muse-wonder-1.0",
+    "contributor_mode": "off",
+    "evidence_mode": "live"
+  },
+  "comparison": {
+    "matched_context": false,
+    "quality_scope": "recorded_snapshot_checks_only"
+  },
+  "arms": {
+    "without": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "observed",
+        "source": "provider_trace",
+        "input_tokens": 675832,
+        "output_tokens": 12446,
+        "cache_read_tokens": 639944,
+        "cache_relation": "within_input",
+        "completed_response_count": 27,
+        "model_calls_source": null,
+        "coverage": "observed",
+        "trace_status": null,
+        "trace_coverage": null,
+        "source_disagreement": null
+      },
+      "delivery": {
+        "status": "baseline_isolated",
+        "requests_observed": 7,
+        "turn_ordinal": 4,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [],
+        "request_rows_included": 0,
+        "request_rows_provided": 0,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": false,
+        "turn_ordinal": 4,
+        "artifact_hash_present": true,
+        "plan_hash_matches_metadata": true,
+        "summary_state": "passed",
+        "public_tests": {
+          "tests": 5,
+          "pass": 5,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "frozen_tests": {
+          "tests": 15,
+          "pass": 15,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "reports_recorded": 3,
+        "reports_omitted": 0
+      }
+    },
+    "with": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "observed",
+        "source": "provider_trace",
+        "input_tokens": 469490,
+        "output_tokens": 9968,
+        "cache_read_tokens": 248720,
+        "cache_relation": "within_input",
+        "completed_response_count": 22,
+        "model_calls_source": null,
+        "coverage": "observed",
+        "trace_status": null,
+        "trace_coverage": null,
+        "source_disagreement": null
+      },
+      "delivery": {
+        "status": "guidance_observed",
+        "requests_observed": 7,
+        "turn_ordinal": 4,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "read_marker_matched",
+        "response_linkage": "public_final_matched",
+        "request_rows": [
+          {
+            "ordinal": 1,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 2,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 3,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 4,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 5,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 6,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 7,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": null,
+              "status": "unverified"
+            }
+          }
+        ],
+        "request_rows_included": 7,
+        "request_rows_provided": 7,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": false,
+        "turn_ordinal": 4,
+        "artifact_hash_present": true,
+        "plan_hash_matches_metadata": true,
+        "summary_state": "passed",
+        "public_tests": {
+          "tests": 5,
+          "pass": 5,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "frozen_tests": {
+          "tests": 15,
+          "pass": 15,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "reports_recorded": 2,
+        "reports_omitted": 0
+      }
+    }
+  },
+  "assessment": {
+    "status": "unknown",
+    "included_report_count": 0,
+    "narrative": "omitted"
+  },
+  "limitations": [
+    "redacted_and_pseudonymized_not_anonymous",
+    "source_original_withheld_no_public_independent_verification",
+    "no_messages_code_raw_typing_capsules_timestamps_original_ids_or_subjective_ratings",
+    "checks_are_recorded_snapshots_not_general_correctness",
+    "usage_is_observed_not_billing_or_causal_savings",
+    "request_guidance_observation_does_not_prove_model_adherence",
+    "response_linkage_and_unknowns_must_not_be_inferred",
+    "single_pair_does_not_establish_human_benefit"
+  ]
+}

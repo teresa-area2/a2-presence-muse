@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "kind": "presence_public_evidence",
+  "classification": "redacted_recorded_snapshot",
+  "public_id": "f053fd40-26a3-4138-85c8-c0268cf63969",
+  "source": {
+    "original_package_commitment_sha256": "102aa7851ac370ad00152cc0e7163ecffaf4c1fe274422b909e98995c604328a",
+    "commitment_scope": "withheld_private_original_bytes_not_publicly_verifiable",
+    "assembly_mode": "saved_snapshot",
+    "coding_task_source_commit": "ce165eefd6a53be4b27a52d13a84bdc9555ef81e",
+    "coding_task_source_commit_role": "coding_task_source_not_harness_commit",
+    "reported_harness_fingerprint": "9c9a880ff7c2b62b93099fddea5f5cca5a1901b0bb067604283d01cedd337f37",
+    "harness_fingerprint_scope": "reported_not_deployment_or_browser_proof",
+    "muse_version": null,
+    "presentation_version": null
+  },
+  "task": {
+    "id": "CODING-notification-routing",
+    "profile": "notification-routing",
+    "fixture_version": "1.0.4-draft",
+    "model": "muse-wonder-1.0",
+    "contributor_mode": "off",
+    "evidence_mode": "live"
+  },
+  "comparison": {
+    "matched_context": true,
+    "quality_scope": "recorded_snapshot_checks_only"
+  },
+  "arms": {
+    "without": {
+      "status": "closed",
+      "last_turn_terminal": null,
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "not_observed",
+        "source": "unknown",
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "cache_relation": "unknown",
+        "completed_response_count": null,
+        "model_calls_source": null,
+        "coverage": "unknown",
+        "trace_status": null,
+        "trace_coverage": null,
+        "source_disagreement": null
+      },
+      "delivery": {
+        "status": "not_started",
+        "requests_observed": 0,
+        "turn_ordinal": null,
+        "turn_completed": false,
+        "public_finals": 0,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [],
+        "request_rows_included": 0,
+        "request_rows_provided": 0,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": null,
+        "turn_ordinal": null,
+        "artifact_hash_present": false,
+        "plan_hash_matches_metadata": null,
+        "summary_state": null,
+        "public_tests": null,
+        "frozen_tests": null,
+        "reports_recorded": 0,
+        "reports_omitted": 0
+      }
+    },
+    "with": {
+      "status": "closed",
+      "last_turn_terminal": null,
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "not_observed",
+        "source": "unknown",
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_read_tokens": null,
+        "cache_relation": "unknown",
+        "completed_response_count": null,
+        "model_calls_source": null,
+        "coverage": "unknown",
+        "trace_status": null,
+        "trace_coverage": null,
+        "source_disagreement": null
+      },
+      "delivery": {
+        "status": "not_started",
+        "requests_observed": 0,
+        "turn_ordinal": null,
+        "turn_completed": false,
+        "public_finals": 0,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [],
+        "request_rows_included": 0,
+        "request_rows_provided": 0,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": null,
+        "turn_ordinal": null,
+        "artifact_hash_present": false,
+        "plan_hash_matches_metadata": null,
+        "summary_state": null,
+        "public_tests": null,
+        "frozen_tests": null,
+        "reports_recorded": 0,
+        "reports_omitted": 0
+      }
+    }
+  },
+  "assessment": {
+    "status": "unknown",
+    "included_report_count": 0,
+    "narrative": "omitted"
+  },
+  "limitations": [
+    "redacted_and_pseudonymized_not_anonymous",
+    "source_original_withheld_no_public_independent_verification",
+    "no_messages_code_raw_typing_capsules_timestamps_original_ids_or_subjective_ratings",
+    "checks_are_recorded_snapshots_not_general_correctness",
+    "usage_is_observed_not_billing_or_causal_savings",
+    "request_guidance_observation_does_not_prove_model_adherence",
+    "response_linkage_and_unknowns_must_not_be_inferred",
+    "single_pair_does_not_establish_human_benefit"
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "kind": "presence_public_evidence",
+  "classification": "redacted_recorded_snapshot",
+  "public_id": "0798b431-9435-48a7-925b-22cac8d57e86",
+  "source": {
+    "original_package_commitment_sha256": "da7fe0e3dea4d574f93593644e163c4caf75aeaa63b187753a7b574bea2be2b2",
+    "commitment_scope": "withheld_private_original_bytes_not_publicly_verifiable",
+    "assembly_mode": "saved_snapshot",
+    "coding_task_source_commit": "151be7e71d73b2bb2c1fdffc42e9a66376416e9e",
+    "coding_task_source_commit_role": "coding_task_source_not_harness_commit",
+    "reported_harness_fingerprint": "bfbd75bcc8f9a885038b8990c357177aca8570be797997a715f662832020e9f5",
+    "harness_fingerprint_scope": "reported_not_deployment_or_browser_proof",
+    "muse_version": null,
+    "presentation_version": null
+  },
+  "task": {
+    "id": "CODING-notification-routing",
+    "profile": "notification-routing",
+    "fixture_version": "1.0.4-draft",
+    "model": "muse-spark-1.3",
+    "contributor_mode": "off",
+    "evidence_mode": "live"
+  },
+  "comparison": {
+    "matched_context": true,
+    "quality_scope": "recorded_snapshot_checks_only"
+  },
+  "arms": {
+    "without": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-spark-1.3",
+      "usage": {
+        "status": "observed",
+        "source": "provider_trace",
+        "input_tokens": 153386,
+        "output_tokens": 8386,
+        "cache_read_tokens": 130440,
+        "cache_relation": "within_input",
+        "completed_response_count": 9,
+        "model_calls_source": null,
+        "coverage": "observed",
+        "trace_status": null,
+        "trace_coverage": null,
+        "source_disagreement": null
+      },
+      "delivery": {
+        "status": "baseline_isolated",
+        "requests_observed": 9,
+        "turn_ordinal": 1,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [],
+        "request_rows_included": 0,
+        "request_rows_provided": 0,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": false,
+        "turn_ordinal": 1,
+        "artifact_hash_present": true,
+        "plan_hash_matches_metadata": true,
+        "summary_state": "passed",
+        "public_tests": {
+          "tests": 2,
+          "pass": 2,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "frozen_tests": {
+          "tests": 3,
+          "pass": 3,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "reports_recorded": 1,
+        "reports_omitted": 0
+      }
+    },
+    "with": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-spark-1.3",
+      "usage": {
+        "status": "observed",
+        "source": "provider_trace",
+        "input_tokens": 187676,
+        "output_tokens": 6591,
+        "cache_read_tokens": 125034,
+        "cache_relation": "within_input",
+        "completed_response_count": 10,
+        "model_calls_source": null,
+        "coverage": "observed",
+        "trace_status": null,
+        "trace_coverage": null,
+        "source_disagreement": null
+      },
+      "delivery": {
+        "status": "guidance_observed",
+        "requests_observed": 10,
+        "turn_ordinal": 1,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "read_marker_matched",
+        "response_linkage": "public_final_matched",
+        "request_rows": [
+          {
+            "ordinal": 1,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 2,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 3,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 4,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 5,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 6,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 7,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "defer",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 8,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "defer",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 9,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "defer",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 10,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "full",
+              "unsolicited_update": "defer",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          }
+        ],
+        "request_rows_included": 10,
+        "request_rows_provided": 10,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": false,
+        "turn_ordinal": 1,
+        "artifact_hash_present": true,
+        "plan_hash_matches_metadata": true,
+        "summary_state": "passed",
+        "public_tests": {
+          "tests": 2,
+          "pass": 2,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "frozen_tests": {
+          "tests": 3,
+          "pass": 3,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "todo": 0
+        },
+        "reports_recorded": 1,
+        "reports_omitted": 0
+      }
+    }
+  },
+  "assessment": {
+    "status": "unknown",
+    "included_report_count": 0,
+    "narrative": "omitted"
+  },
+  "limitations": [
+    "redacted_and_pseudonymized_not_anonymous",
+    "source_original_withheld_no_public_independent_verification",
+    "no_messages_code_raw_typing_capsules_timestamps_original_ids_or_subjective_ratings",
+    "checks_are_recorded_snapshots_not_general_correctness",
+    "usage_is_observed_not_billing_or_causal_savings",
+    "request_guidance_observation_does_not_prove_model_adherence",
+    "response_linkage_and_unknowns_must_not_be_inferred",
+    "single_pair_does_not_establish_human_benefit"
+  ]
+}

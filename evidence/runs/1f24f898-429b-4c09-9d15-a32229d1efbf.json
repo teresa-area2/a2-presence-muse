@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "kind": "presence_public_evidence",
+  "classification": "redacted_recorded_snapshot",
+  "public_id": "1f24f898-429b-4c09-9d15-a32229d1efbf",
+  "source": {
+    "original_package_commitment_sha256": "6de79dfc746e19c16d47d7fd14b367fceaee6158dc3347e4176a2f1f733b9c09",
+    "commitment_scope": "withheld_private_original_bytes_not_publicly_verifiable",
+    "assembly_mode": "saved_snapshot",
+    "coding_task_source_commit": "2bab0c812da9e91c5a7b8180e77a2bf63f0bfde9",
+    "coding_task_source_commit_role": "coding_task_source_not_harness_commit",
+    "reported_harness_fingerprint": "76fbab9e4898e89fbe61704b010fb308a5da995234c2f4a07b1f41ce1857761f",
+    "harness_fingerprint_scope": "reported_not_deployment_or_browser_proof",
+    "muse_version": null,
+    "presentation_version": null
+  },
+  "task": {
+    "id": "USER-free-task",
+    "profile": "free-task",
+    "fixture_version": "1.0.4-draft",
+    "model": "muse-wonder-1.0",
+    "contributor_mode": "off",
+    "evidence_mode": "live"
+  },
+  "comparison": {
+    "matched_context": false,
+    "quality_scope": "recorded_snapshot_checks_only"
+  },
+  "arms": {
+    "without": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "observed",
+        "source": "native",
+        "input_tokens": 371554,
+        "output_tokens": 10356,
+        "cache_read_tokens": 341416,
+        "cache_relation": "within_input",
+        "completed_response_count": 19,
+        "model_calls_source": "provider_trace_completed_responses",
+        "coverage": "unknown",
+        "trace_status": "observed",
+        "trace_coverage": "observed",
+        "source_disagreement": "same_observed_totals"
+      },
+      "delivery": {
+        "status": "baseline_isolated",
+        "requests_observed": 18,
+        "turn_ordinal": 2,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [],
+        "request_rows_included": 0,
+        "request_rows_provided": 0,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": null,
+        "turn_ordinal": null,
+        "artifact_hash_present": false,
+        "plan_hash_matches_metadata": null,
+        "summary_state": null,
+        "public_tests": null,
+        "frozen_tests": null,
+        "reports_recorded": null,
+        "reports_omitted": null
+      }
+    },
+    "with": {
+      "status": "closed",
+      "last_turn_terminal": "completed",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "status": "observed",
+        "source": "native",
+        "input_tokens": 387380,
+        "output_tokens": 8479,
+        "cache_read_tokens": 161008,
+        "cache_relation": "within_input",
+        "completed_response_count": 17,
+        "model_calls_source": "provider_trace_completed_responses",
+        "coverage": "unknown",
+        "trace_status": "observed",
+        "trace_coverage": "observed",
+        "source_disagreement": "same_observed_totals"
+      },
+      "delivery": {
+        "status": "unverified",
+        "requests_observed": 16,
+        "turn_ordinal": 2,
+        "turn_completed": true,
+        "public_finals": 1,
+        "hook_linkage": "unverified",
+        "response_linkage": "unverified",
+        "request_rows": [
+          {
+            "ordinal": 1,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "send",
+              "conversation_style": "self_contained"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 2,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 3,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 4,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 5,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 6,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 7,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 8,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 9,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 10,
+            "status": "guidance_observed",
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "send",
+              "conversation_style": "conversational"
+            },
+            "presentation": {
+              "version": 3,
+              "status": "matched"
+            }
+          },
+          {
+            "ordinal": 11,
+            "status": "unverified",
+            "controls": null,
+            "presentation": {
+              "version": 3,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 12,
+            "status": "unverified",
+            "controls": null,
+            "presentation": {
+              "version": 3,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 13,
+            "status": "unverified",
+            "controls": null,
+            "presentation": {
+              "version": 3,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 14,
+            "status": "unverified",
+            "controls": null,
+            "presentation": {
+              "version": 3,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 15,
+            "status": "unverified",
+            "controls": null,
+            "presentation": {
+              "version": 3,
+              "status": "unverified"
+            }
+          },
+          {
+            "ordinal": 16,
+            "status": "unverified",
+            "controls": null,
+            "presentation": {
+              "version": 3,
+              "status": "unverified"
+            }
+          }
+        ],
+        "request_rows_included": 16,
+        "request_rows_provided": 16,
+        "request_rows_omitted": 0,
+        "request_rows_source_limit": 64
+      },
+      "checks": {
+        "status": null,
+        "current_at_snapshot": null,
+        "turn_ordinal": null,
+        "artifact_hash_present": false,
+        "plan_hash_matches_metadata": null,
+        "summary_state": null,
+        "public_tests": null,
+        "frozen_tests": null,
+        "reports_recorded": null,
+        "reports_omitted": null
+      }
+    }
+  },
+  "assessment": {
+    "status": "unknown",
+    "included_report_count": 0,
+    "narrative": "omitted"
+  },
+  "limitations": [
+    "redacted_and_pseudonymized_not_anonymous",
+    "source_original_withheld_no_public_independent_verification",
+    "no_messages_code_raw_typing_capsules_timestamps_original_ids_or_subjective_ratings",
+    "checks_are_recorded_snapshots_not_general_correctness",
+    "usage_is_observed_not_billing_or_causal_savings",
+    "request_guidance_observation_does_not_prove_model_adherence",
+    "response_linkage_and_unknowns_must_not_be_inferred",
+    "single_pair_does_not_establish_human_benefit"
+  ]
+}
