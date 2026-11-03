@@ -35,7 +35,5 @@ existing React/core import names. The public-package migration was integrated
 and checked on 3 November to make judge installation independent of npm tokens. The original private package names
 are separate. The implementations are installed from the registry, not shipped in Git as code, archives or a compiled browser bundle. Open Presence
 inference and Muse Code/model access remain external. The event integration was
-developed using Muse Code and additional development/review tools. Component
-disclosure and owner licensing do not settle hackathon eligibility; no new
-organizer ruling is claimed. [Qualification status](STATUS.md) remains separate
-from evidence interpretation and the owner's final submission decisions.
+developed using Muse Code and additional development/review tools. See
+[qualification status](STATUS.md) for the tested behavior and its limits.

@@ -9,7 +9,7 @@ This record summarizes pre-existing foundations, then the progress and testing r
 - **Agent Lab/Pulse:** Selected reused code, including extraction and session foundations recorded on 24–25 October and later refinements on 28 October. The included snapshot therefore contains work from different dates.
 - **Capsule validator:** A reused selected snapshot based on an upstream checkout with uncommitted local changes. Its base commit alone does not establish the date or derivation of the exact retained artifact.
 
-On 31 October, distribution of the selected Area2-owned Lab/Pulse and validator files was authorized under Apache 2.0, preserving applicable third-party notices. The public [provenance record](PROVENANCE.md) and [dependency notices](DEPENDENCIES.md) describe the selected components. This authorization and disclosure do not settle the organizers' eligibility interpretation for reused code.
+On 31 October, distribution of the selected Area2-owned Lab/Pulse and validator files was authorized under Apache 2.0, preserving applicable third-party notices. The [provenance record](PROVENANCE.md) and [dependency notices](DEPENDENCIES.md) describe the selected components.
 
 ## Day-by-day progress and testing
 
