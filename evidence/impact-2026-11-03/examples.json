@@ -1,0 +1,1327 @@
+{
+  "schema_version": 1,
+  "kind": "presence_impact_illustrative_episodes",
+  "research_question": "What does Presence change in Muse collaboration, and how does it relate to developer experience, quality and resources?",
+  "freeze_cutoff_utc": "2026-11-03T20:23:08.088810+00:00",
+  "audit_sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+  "selection": "Completeness and policy contrast;five episodes within two comparisons,not five trials;not representative.",
+  "cases": 2,
+  "episodes_count": 5,
+  "scope": "Historical illustrative episodes; no new trial, causal/compliance estimate or final-release qualification.",
+  "primary_source_scope": "Previously reviewed public Muse final fragments; participant prompts and complete exchanges are unavailable.",
+  "format_signal": "Derived from the existing three controls, not a fourth OP signal.",
+  "episodes": [
+    {
+      "episode_id": "E1",
+      "case_id": "case-076",
+      "dimension": "Depth and derived Format",
+      "status": "linked comparison with incomplete attribution",
+      "source_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/75",
+        "case_id": "case-076",
+        "line": 66716,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L66716"
+      },
+      "request_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/75/requests/2",
+        "case_id": "case-076",
+        "line": 66716,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L66716",
+        "arm": "with",
+        "turn_ordinal": 1,
+        "request_ordinal": 3,
+        "recorded_controls": {
+          "response_extent": "terse",
+          "unsolicited_update": "send",
+          "conversation_style": "self_contained"
+        },
+        "recorded_status": "guidance_observed"
+      },
+      "observation": "The With final uses a compact numbered plan. Without expands assumptions, risks and a separate validation section. Both wait for authorization;neither arm removes that boundary.",
+      "inference_limit": "Consistent with available terse and self-contained guidance;not a causal effect or compliance verdict because participant instructions are omitted.",
+      "earlier_turn_linkage": {
+        "artifact": "reviewed baseline-v2/corpus.json",
+        "sha256": "31294bbaacecc068f70dff69b2ea511e8abf00390caea3e7ed0174cb553f9b73",
+        "projection_version": "V064",
+        "json_pointer": "/versions/63/projection/delivery_history/17",
+        "turn_ordinal": 1,
+        "response_linkage": "public_final_matched",
+        "hook_linkage": "read_marker_matched",
+        "attribution_status": "partial",
+        "final_attribution": [
+          {
+            "ordinal": 1,
+            "status": "final_linked",
+            "request_ordinal": 3,
+            "presence": "guidance"
+          }
+        ],
+        "association_limit": "Ordered final-answer catalog plus one-final-per-turn metadata;not a reconstructed provider execution or full exchange."
+      },
+      "same_case_context": {
+        "matched_context_reported": false,
+        "participant_submissions": {
+          "submissions": 6,
+          "shared_submissions": 4,
+          "partial_submissions": 0,
+          "unconfirmed_submissions": 0
+        },
+        "actor_actions": {
+          "participant": {
+            "without": {
+              "steering_accepted": 1,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 1,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "coordinator": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "unattributed": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          }
+        },
+        "review": {
+          "without": {
+            "effort_rating": 4,
+            "interruption_count": 4,
+            "completed_review_segments": 1
+          },
+          "with": {
+            "effort_rating": 2,
+            "interruption_count": 3,
+            "completed_review_segments": 0
+          }
+        },
+        "completed_seconds": {
+          "without": 112.80311037599994,
+          "with": 118.85537787499977
+        },
+        "uncached_input_tokens": {
+          "without": 35888,
+          "with": 220770
+        },
+        "latest_checks": {
+          "without": {
+            "status": "stale",
+            "current": false,
+            "consumed": false,
+            "turn_ordinal": 4,
+            "summary": {
+              "state": "passed",
+              "artifact_sha256": "c706fceab144106eea51178df030f15a48e01b6fda5fb51dd9f1826d1f14f71c",
+              "trusted_plan_hash": "c4ecb0ff6436c6bbc6523ad3478ccd46d71df681d2ba1ba80c4f2968ce658175",
+              "public_tests": {
+                "tests": 5,
+                "pass": 5,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              },
+              "frozen_tests": {
+                "tests": 15,
+                "pass": 15,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              }
+            }
+          },
+          "with": {
+            "status": "stale",
+            "current": false,
+            "consumed": false,
+            "turn_ordinal": 4,
+            "summary": {
+              "state": "passed",
+              "artifact_sha256": "3729773a168a2a7c51f4a84be34885396a80213f800680f3cc3a210806987a95",
+              "trusted_plan_hash": "c4ecb0ff6436c6bbc6523ad3478ccd46d71df681d2ba1ba80c4f2968ce658175",
+              "public_tests": {
+                "tests": 5,
+                "pass": 5,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              },
+              "frozen_tests": {
+                "tests": 15,
+                "pass": 15,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              }
+            }
+          }
+        },
+        "source_prompt_available": false,
+        "independent_usefulness_rating": null
+      },
+      "selected_response_fragments": [
+        {
+          "arm": "with",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "b26b9153744ceb4742338e17fb0cfee9854495f901a37419115048d47583913b",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/0/rows/6",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/0"
+          },
+          "source_redaction_changed_text": false,
+          "available_source_text_characters": 1164,
+          "fragments": [
+            {
+              "text": "**Proposed plan (no changes yet):**",
+              "sha256": "021cefd18c04ae5856ef424b85e3468694b9786574d7a3b725f442271b5e65e1"
+            },
+            {
+              "text": "Waiting for your go-ahead before making any changes.",
+              "sha256": "8766efd4a9285b2b0ce5a58bbde045400ef44fbf22d41280c72ca696d0e9d6c3"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        },
+        {
+          "arm": "without",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "ca7faea8c2b6591436ff7a10411aa27d5bfac3656492b684d3f88d30ae733f30",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/0/rows/10",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/4"
+          },
+          "source_redaction_changed_text": false,
+          "available_source_text_characters": 2508,
+          "fragments": [
+            {
+              "text": "## Goal",
+              "sha256": "3eed03b9f55ea7abe5a257dd9cc6443fc956fe43942fea21f8471f2b8ae7ff6a"
+            },
+            {
+              "text": "## Approach / Steps",
+              "sha256": "c071e9223e23bea5ef199ea0c5e5704b657993b0ebf3419f0a1c33f999cc22e4"
+            },
+            {
+              "text": "## Validation Plan",
+              "sha256": "3ba70fe05f43a98f2dfa37d017aa5f5c3decf1b435e35b0c8fbaf00c332322dc"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        }
+      ],
+      "browser_event_refs": []
+    },
+    {
+      "episode_id": "E2",
+      "case_id": "case-076",
+      "dimension": "Depth and task stage",
+      "status": "mixed counterexample to a fixed length interpretation",
+      "source_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/75",
+        "case_id": "case-076",
+        "line": 66716,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L66716"
+      },
+      "request_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/75/requests/21",
+        "case_id": "case-076",
+        "line": 66716,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L66716",
+        "arm": "with",
+        "turn_ordinal": 4,
+        "request_ordinal": 7,
+        "recorded_controls": {
+          "response_extent": "terse",
+          "unsolicited_update": "send",
+          "conversation_style": "conversational"
+        },
+        "recorded_status": "guidance_observed"
+      },
+      "observation": "Despite a terse label,the later With repair handback includes headings,implementation explanation,regression cases,complexity and limitations. The task stage has changed. Both arms distinguish their self-run tests from a new frozen result.",
+      "inference_limit": "Terse guidance does not imply a uniform length cap. Saved 15/15 frozen summaries per arm are stale;not a newly verified final-artifact result.",
+      "earlier_turn_linkage": {
+        "artifact": "reviewed baseline-v2/corpus.json",
+        "sha256": "31294bbaacecc068f70dff69b2ea511e8abf00390caea3e7ed0174cb553f9b73",
+        "projection_version": "V064",
+        "json_pointer": "/versions/63/projection/delivery_history/105",
+        "turn_ordinal": 4,
+        "response_linkage": "public_final_matched",
+        "hook_linkage": "read_marker_matched",
+        "attribution_status": "partial",
+        "final_attribution": [
+          {
+            "ordinal": 1,
+            "status": "final_linked",
+            "request_ordinal": 7,
+            "presence": "guidance"
+          }
+        ],
+        "association_limit": "Ordered final-answer catalog plus one-final-per-turn metadata;not a reconstructed provider execution or full exchange."
+      },
+      "same_case_context": {
+        "matched_context_reported": false,
+        "participant_submissions": {
+          "submissions": 6,
+          "shared_submissions": 4,
+          "partial_submissions": 0,
+          "unconfirmed_submissions": 0
+        },
+        "actor_actions": {
+          "participant": {
+            "without": {
+              "steering_accepted": 1,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 1,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "coordinator": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "unattributed": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          }
+        },
+        "review": {
+          "without": {
+            "effort_rating": 4,
+            "interruption_count": 4,
+            "completed_review_segments": 1
+          },
+          "with": {
+            "effort_rating": 2,
+            "interruption_count": 3,
+            "completed_review_segments": 0
+          }
+        },
+        "completed_seconds": {
+          "without": 112.80311037599994,
+          "with": 118.85537787499977
+        },
+        "uncached_input_tokens": {
+          "without": 35888,
+          "with": 220770
+        },
+        "latest_checks": {
+          "without": {
+            "status": "stale",
+            "current": false,
+            "consumed": false,
+            "turn_ordinal": 4,
+            "summary": {
+              "state": "passed",
+              "artifact_sha256": "c706fceab144106eea51178df030f15a48e01b6fda5fb51dd9f1826d1f14f71c",
+              "trusted_plan_hash": "c4ecb0ff6436c6bbc6523ad3478ccd46d71df681d2ba1ba80c4f2968ce658175",
+              "public_tests": {
+                "tests": 5,
+                "pass": 5,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              },
+              "frozen_tests": {
+                "tests": 15,
+                "pass": 15,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              }
+            }
+          },
+          "with": {
+            "status": "stale",
+            "current": false,
+            "consumed": false,
+            "turn_ordinal": 4,
+            "summary": {
+              "state": "passed",
+              "artifact_sha256": "3729773a168a2a7c51f4a84be34885396a80213f800680f3cc3a210806987a95",
+              "trusted_plan_hash": "c4ecb0ff6436c6bbc6523ad3478ccd46d71df681d2ba1ba80c4f2968ce658175",
+              "public_tests": {
+                "tests": 5,
+                "pass": 5,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              },
+              "frozen_tests": {
+                "tests": 15,
+                "pass": 15,
+                "fail": 0,
+                "skipped": 0,
+                "cancelled": 0,
+                "todo": 0
+              }
+            }
+          }
+        },
+        "source_prompt_available": false,
+        "independent_usefulness_rating": null
+      },
+      "selected_response_fragments": [
+        {
+          "arm": "with",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "34d50ee6ac0b93f50c06239ae189b174b87e32504ec6c91a29588b7cec7f9885",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/0/rows/9",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/3"
+          },
+          "source_redaction_changed_text": false,
+          "available_source_text_characters": 1949,
+          "fragments": [
+            {
+              "text": "Fixed — the three draft-mutation failures are addressed, and my own test run passes; no new frozen result is claimed.",
+              "sha256": "eebe984d8b7d98ccd3580a1a7f0a5e390d79db656d7a54ebe6cde9c2e1443a02"
+            },
+            {
+              "text": "**Root cause:** `saveEdit` passed the caller's `draft` object itself to `client.save(...)`, so a client that normalizes (mutates) its patch argument mutated the caller's draft, and the conflict retry then merged the mutated values.",
+              "sha256": "c7cbaa5ed852b7d092a8d1233a8f28884fe8ebb7c53254edf255c372cbf04639"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        },
+        {
+          "arm": "without",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "cfeeafef5b6a4da3e4878d4939ccf45f81cb283a54ec9a1bba370db640749ea3",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/0/rows/12",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/6"
+          },
+          "source_redaction_changed_text": true,
+          "available_source_text_characters": 3507,
+          "fragments": [
+            {
+              "text": "Fixed — the three frozen failures were an aliasing bug, and the corrected flow now passes my local runs; no new frozen result is claimed without a new independent check.",
+              "sha256": "beaa07cc9dbfa9a10e49a158daa30fbd25a1d156437a470b13b6a6a2bb197825"
+            },
+            {
+              "text": "**Root cause and fix (`src/save.mjs`)**",
+              "sha256": "07c53e5bdd41363923b3d23275b4dc103a83d555624ce7ad8c2e61f494e9a2d3"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        }
+      ],
+      "browser_event_refs": []
+    },
+    {
+      "episode_id": "E3",
+      "case_id": "case-014",
+      "dimension": "Conversation and Depth",
+      "status": "linked interaction contrast with appropriateness unknown",
+      "source_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/13",
+        "case_id": "case-014",
+        "line": 14759,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L14759"
+      },
+      "request_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/13/requests/0",
+        "case_id": "case-014",
+        "line": 14759,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L14759",
+        "arm": "with",
+        "turn_ordinal": 1,
+        "request_ordinal": 1,
+        "recorded_controls": {
+          "response_extent": "full",
+          "unsolicited_update": "send",
+          "conversation_style": "conversational"
+        },
+        "recorded_status": "guidance_observed"
+      },
+      "observation": "With asks three decisions before developing the component plan. Without develops a provisional plan with assumptions and questions. Both ask questions;only With is not a defensible claim.",
+      "inference_limit": "Decision-first interaction is consistent with conversational guidance,but the missing participant prompt prevents judging which response was more appropriate. Full guidance did not mean supplying a full plan before clarification.",
+      "earlier_turn_linkage": {
+        "artifact": "reviewed baseline-v2/corpus.json",
+        "sha256": "31294bbaacecc068f70dff69b2ea511e8abf00390caea3e7ed0174cb553f9b73",
+        "projection_version": "V115",
+        "json_pointer": "/versions/114/projection/delivery_history/11",
+        "turn_ordinal": 1,
+        "response_linkage": "public_final_matched",
+        "hook_linkage": "read_marker_matched",
+        "attribution_status": "linked",
+        "final_attribution": [
+          {
+            "ordinal": 1,
+            "status": "final_linked",
+            "request_ordinal": 1,
+            "presence": "guidance"
+          }
+        ],
+        "association_limit": "Ordered final-answer catalog plus one-final-per-turn metadata;not a reconstructed provider execution or full exchange."
+      },
+      "same_case_context": {
+        "matched_context_reported": true,
+        "participant_submissions": {
+          "submissions": 3,
+          "shared_submissions": 3,
+          "partial_submissions": 0,
+          "unconfirmed_submissions": 0
+        },
+        "actor_actions": {
+          "participant": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "coordinator": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "unattributed": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          }
+        },
+        "review": {
+          "without": {
+            "effort_rating": 4,
+            "interruption_count": 4,
+            "completed_review_segments": 1
+          },
+          "with": {
+            "effort_rating": 1,
+            "interruption_count": 2,
+            "completed_review_segments": 0
+          }
+        },
+        "completed_seconds": {
+          "without": 103.48821262500063,
+          "with": 92.0748307080008
+        },
+        "uncached_input_tokens": {
+          "without": 45508,
+          "with": 329964
+        },
+        "latest_checks": {
+          "without": {
+            "status": null,
+            "current": null,
+            "consumed": null,
+            "turn_ordinal": null,
+            "summary": {
+              "state": null,
+              "artifact_sha256": null,
+              "trusted_plan_hash": null,
+              "public_tests": null,
+              "frozen_tests": null
+            }
+          },
+          "with": {
+            "status": null,
+            "current": null,
+            "consumed": null,
+            "turn_ordinal": null,
+            "summary": {
+              "state": null,
+              "artifact_sha256": null,
+              "trusted_plan_hash": null,
+              "public_tests": null,
+              "frozen_tests": null
+            }
+          }
+        },
+        "source_prompt_available": false,
+        "independent_usefulness_rating": null
+      },
+      "selected_response_fragments": [
+        {
+          "arm": "with",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "aefcfe7c1aab8b03648af0b55079922dad9b760c3d684577e260d94d52851300",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/1/rows/2",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/7"
+          },
+          "source_redaction_changed_text": false,
+          "available_source_text_characters": 901,
+          "fragments": [
+            {
+              "text": "Para planificar bien la web con todos sus componentes necesito cerrar 3 decisiones clave antes de proponerte la estructura:",
+              "sha256": "499151a6d4dfb5bfb2e8bdd9a949cd6828a30d0611f79a0f11a6707260487870"
+            },
+            {
+              "text": "**1. ¿Quién la va a usar principalmente?**",
+              "sha256": "403b3784508bc961e5ac1da1a35dacd7f46bca30db100bccdad5411dac7fcfe1"
+            },
+            {
+              "text": "**2. ¿Cuál es el objetivo principal de lo interactivo?**",
+              "sha256": "fb1bb7a252e7a20324d0c405a0ed3e857c4de31cf4660d58d38867ffd1271d1c"
+            },
+            {
+              "text": "**3. ¿Qué alcance quieres para esta primera versión?**",
+              "sha256": "7919192a826dc6811c38450561219e25a03a7159a98d1ba7d8e290bf9117091d"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        },
+        {
+          "arm": "without",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "963e904162302c7ada8e858855a221773c15e3d0e275b3a36989abc0a8989691",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/1/rows/4",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/9"
+          },
+          "source_redaction_changed_text": false,
+          "available_source_text_characters": 3669,
+          "fragments": [
+            {
+              "text": "## Goal",
+              "sha256": "3eed03b9f55ea7abe5a257dd9cc6443fc956fe43942fea21f8471f2b8ae7ff6a"
+            },
+            {
+              "text": "## Success Criteria",
+              "sha256": "d12a84bb99da053254eacf300bd5a9267d182b3621db8e22d55effcc96c77dda"
+            },
+            {
+              "text": "## Approach",
+              "sha256": "cbb88670af2d5e795d291f29214a9b4fcdeff4ffe4aeb1604e0b792716438c72"
+            },
+            {
+              "text": "## Steps",
+              "sha256": "04e379c6932bff1c589362d6982930b2c138dcfe9fe69c56c9c028b070168dc3"
+            },
+            {
+              "text": "## Risks / Open Questions",
+              "sha256": "a4cbd2d94ae61644fb4ca02eacda080e7020771581a4d0a5b25e11ebb28fe96f"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        }
+      ],
+      "browser_event_refs": []
+    },
+    {
+      "episode_id": "E4",
+      "case_id": "case-014",
+      "dimension": "Derived Format",
+      "status": "visible difference with policy attribution unresolved",
+      "source_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/13",
+        "case_id": "case-014",
+        "line": 14759,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L14759"
+      },
+      "request_ref": null,
+      "observation": "With gives a paragraph-based handback;Without uses file/component and validation lists plus a next step. Both discuss test reporting and limitations.",
+      "inference_limit": "Final-turn requests10–13 are ambiguous,with no matched final/read linkage. A browser control snapshot cannot repair request attribution. Different self-authored test totals are not common quality evidence.",
+      "earlier_turn_linkage": {
+        "artifact": "reviewed baseline-v2/corpus.json",
+        "sha256": "31294bbaacecc068f70dff69b2ea511e8abf00390caea3e7ed0174cb553f9b73",
+        "projection_version": "V115",
+        "json_pointer": "/versions/114/projection/delivery_history/79",
+        "turn_ordinal": 3,
+        "response_linkage": "unverified",
+        "hook_linkage": "unverified",
+        "attribution_status": "unverified",
+        "final_attribution": [],
+        "association_limit": "Ordered final-answer catalog plus one-final-per-turn metadata;not a reconstructed provider execution or full exchange."
+      },
+      "same_case_context": {
+        "matched_context_reported": true,
+        "participant_submissions": {
+          "submissions": 3,
+          "shared_submissions": 3,
+          "partial_submissions": 0,
+          "unconfirmed_submissions": 0
+        },
+        "actor_actions": {
+          "participant": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "coordinator": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "unattributed": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          }
+        },
+        "review": {
+          "without": {
+            "effort_rating": 4,
+            "interruption_count": 4,
+            "completed_review_segments": 1
+          },
+          "with": {
+            "effort_rating": 1,
+            "interruption_count": 2,
+            "completed_review_segments": 0
+          }
+        },
+        "completed_seconds": {
+          "without": 103.48821262500063,
+          "with": 92.0748307080008
+        },
+        "uncached_input_tokens": {
+          "without": 45508,
+          "with": 329964
+        },
+        "latest_checks": {
+          "without": {
+            "status": null,
+            "current": null,
+            "consumed": null,
+            "turn_ordinal": null,
+            "summary": {
+              "state": null,
+              "artifact_sha256": null,
+              "trusted_plan_hash": null,
+              "public_tests": null,
+              "frozen_tests": null
+            }
+          },
+          "with": {
+            "status": null,
+            "current": null,
+            "consumed": null,
+            "turn_ordinal": null,
+            "summary": {
+              "state": null,
+              "artifact_sha256": null,
+              "trusted_plan_hash": null,
+              "public_tests": null,
+              "frozen_tests": null
+            }
+          }
+        },
+        "source_prompt_available": false,
+        "independent_usefulness_rating": null
+      },
+      "selected_response_fragments": [
+        {
+          "arm": "with",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "762e36a65e7262191a9de3dc424274980f5ff29a45047fd13e1d8c0827dd41d9",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/1/rows/3",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/8"
+          },
+          "source_redaction_changed_text": true,
+          "available_source_text_characters": 1426,
+          "fragments": [
+            {
+              "text": "Lista: la web está montada y sus 18 pruebas pasan (`# pass 18, # fail 0` con `node --test`).",
+              "sha256": "1971335b9211ffe952306f67b4f7ef237370b8ee390fd78c9de0aff1eaff2438"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        },
+        {
+          "arm": "without",
+          "phase": "public_final",
+          "retained_reviewed_source_text_sha256": "bc7c7dd5b9486e4d9cba065fe35faf8ed2e4da4e0f5fa85601b4690cc3da0e56",
+          "source_artifact_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+          "source_json_pointer": "/1/rows/5",
+          "source_scope": "previously reviewed redacted public-final catalog; whole catalog withheld, selected final text published separately",
+          "public_response_ref": {
+            "artifact": "response-excerpts.json",
+            "json_pointer": "/responses/10"
+          },
+          "source_redaction_changed_text": true,
+          "available_source_text_characters": 1505,
+          "fragments": [
+            {
+              "text": "La web ya está funcionando en local con los 6 componentes del plan.",
+              "sha256": "f45dd5773894b3627566b19a6ed2c309ef37f4f4222ad67765f258e03a8ab49f"
+            },
+            {
+              "text": "Qué he construido en tu workspace:",
+              "sha256": "bb639d75399ee9b41f68cb0a7dfbf284164c87290869f40d8946e2d70f2a074c"
+            },
+            {
+              "text": "Validación:",
+              "sha256": "5584ce10ef1047cdeea22e1060a1e05dce04ede4be0a0bc82a2bdf59d0da1d8d"
+            }
+          ],
+          "fragment_scope": "exact selected substrings; fragments are not the full response or participant exchange"
+        }
+      ],
+      "browser_event_refs": []
+    },
+    {
+      "episode_id": "E5",
+      "case_id": "case-014",
+      "dimension": "Updates",
+      "status": "browser mechanism with a disconnected-view counterexample",
+      "source_ref": {
+        "artifact": "audit.json",
+        "commit": "62ab48e",
+        "sha256": "88ea16d2b107e82031cddad8739b9c0c92266dd4ead6edc60e1efce41b7a7b10",
+        "json_pointer": "/records/13",
+        "case_id": "case-014",
+        "line": 14759,
+        "url": "https://github.com/teresa-area2/a2-presence-muse/blob/62ab48e/evidence/audit-2026-11-03/audit.json#L14759"
+      },
+      "request_ref": null,
+      "observation": "Connected ledger1 holds message ordinals4,5,8,9 under defer,shows final message10 as mandatory,and later records releases26–29. Ledgers2and3 show those four message ordinals as shown/disconnected.",
+      "inference_limit": "This is presentation-layer gating with actual emitted message opportunities,not Muse changing text or proof of human interruption benefit. Released reason not_held does not establish the release cause.",
+      "earlier_turn_linkage": null,
+      "same_case_context": {
+        "matched_context_reported": true,
+        "participant_submissions": {
+          "submissions": 3,
+          "shared_submissions": 3,
+          "partial_submissions": 0,
+          "unconfirmed_submissions": 0
+        },
+        "actor_actions": {
+          "participant": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "coordinator": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          },
+          "unattributed": {
+            "without": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            },
+            "with": {
+              "steering_accepted": 0,
+              "interrupt_accepted": 0,
+              "interrupt_unconfirmed": 0
+            }
+          }
+        },
+        "review": {
+          "without": {
+            "effort_rating": 4,
+            "interruption_count": 4,
+            "completed_review_segments": 1
+          },
+          "with": {
+            "effort_rating": 1,
+            "interruption_count": 2,
+            "completed_review_segments": 0
+          }
+        },
+        "completed_seconds": {
+          "without": 103.48821262500063,
+          "with": 92.0748307080008
+        },
+        "uncached_input_tokens": {
+          "without": 45508,
+          "with": 329964
+        },
+        "latest_checks": {
+          "without": {
+            "status": null,
+            "current": null,
+            "consumed": null,
+            "turn_ordinal": null,
+            "summary": {
+              "state": null,
+              "artifact_sha256": null,
+              "trusted_plan_hash": null,
+              "public_tests": null,
+              "frozen_tests": null
+            }
+          },
+          "with": {
+            "status": null,
+            "current": null,
+            "consumed": null,
+            "turn_ordinal": null,
+            "summary": {
+              "state": null,
+              "artifact_sha256": null,
+              "trusted_plan_hash": null,
+              "public_tests": null,
+              "frozen_tests": null
+            }
+          }
+        },
+        "source_prompt_available": false,
+        "independent_usefulness_rating": null
+      },
+      "selected_response_fragments": [],
+      "browser_event_refs": [
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/3",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 4,
+            "revision": 4,
+            "history_epoch": 0,
+            "ordinal": 4,
+            "event": "held",
+            "kind": "message",
+            "reason": "defer",
+            "since_first_arm_event_ms": 51540,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/4",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 5,
+            "revision": 5,
+            "history_epoch": 0,
+            "ordinal": 5,
+            "event": "held",
+            "kind": "message",
+            "reason": "defer",
+            "since_first_arm_event_ms": 53356,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/7",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 8,
+            "revision": 8,
+            "history_epoch": 0,
+            "ordinal": 8,
+            "event": "held",
+            "kind": "message",
+            "reason": "defer",
+            "since_first_arm_event_ms": 101150,
+            "controls": {
+              "response_extent": "standard",
+              "unsolicited_update": "defer",
+              "conversation_style": "conversational"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/18",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 19,
+            "revision": 19,
+            "history_epoch": 0,
+            "ordinal": 9,
+            "event": "held",
+            "kind": "message",
+            "reason": "defer",
+            "since_first_arm_event_ms": 150903,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/24",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 25,
+            "revision": 25,
+            "history_epoch": 0,
+            "ordinal": 10,
+            "event": "shown",
+            "kind": "message",
+            "reason": "mandatory",
+            "since_first_arm_event_ms": 169341,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/25",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 26,
+            "revision": 26,
+            "history_epoch": 0,
+            "ordinal": 4,
+            "event": "released",
+            "kind": "message",
+            "reason": "not_held",
+            "since_first_arm_event_ms": 171848,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/26",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 27,
+            "revision": 27,
+            "history_epoch": 0,
+            "ordinal": 5,
+            "event": "released",
+            "kind": "message",
+            "reason": "not_held",
+            "since_first_arm_event_ms": 173384,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/27",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 28,
+            "revision": 28,
+            "history_epoch": 0,
+            "ordinal": 8,
+            "event": "released",
+            "kind": "message",
+            "reason": "not_held",
+            "since_first_arm_event_ms": 222094,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/0/arms/1/events/28",
+          "ledger_ordinal": 1,
+          "event": {
+            "sequence": 29,
+            "revision": 29,
+            "history_epoch": 0,
+            "ordinal": 9,
+            "event": "released",
+            "kind": "message",
+            "reason": "not_held",
+            "since_first_arm_event_ms": 271094,
+            "controls": {
+              "response_extent": "terse",
+              "unsolicited_update": "defer",
+              "conversation_style": "self_contained"
+            }
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/1/arms/1/events/3",
+          "ledger_ordinal": 2,
+          "event": {
+            "sequence": 4,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 4,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/1/arms/1/events/4",
+          "ledger_ordinal": 2,
+          "event": {
+            "sequence": 5,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 5,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/1/arms/1/events/7",
+          "ledger_ordinal": 2,
+          "event": {
+            "sequence": 8,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 8,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/1/arms/1/events/8",
+          "ledger_ordinal": 2,
+          "event": {
+            "sequence": 9,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 9,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/1/arms/1/events/9",
+          "ledger_ordinal": 2,
+          "event": {
+            "sequence": 10,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 10,
+            "event": "shown",
+            "kind": "message",
+            "reason": "mandatory",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/2/arms/1/events/3",
+          "ledger_ordinal": 3,
+          "event": {
+            "sequence": 4,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 4,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/2/arms/1/events/4",
+          "ledger_ordinal": 3,
+          "event": {
+            "sequence": 5,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 5,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/2/arms/1/events/7",
+          "ledger_ordinal": 3,
+          "event": {
+            "sequence": 8,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 8,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/2/arms/1/events/8",
+          "ledger_ordinal": 3,
+          "event": {
+            "sequence": 9,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 9,
+            "event": "shown",
+            "kind": "message",
+            "reason": "disconnected",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        },
+        {
+          "json_pointer": "/records/13/presentation_projections/2/arms/1/events/9",
+          "ledger_ordinal": 3,
+          "event": {
+            "sequence": 10,
+            "revision": 1,
+            "history_epoch": 0,
+            "ordinal": 10,
+            "event": "shown",
+            "kind": "message",
+            "reason": "mandatory",
+            "since_first_arm_event_ms": 0,
+            "controls": null
+          }
+        }
+      ]
+    }
+  ]
+}

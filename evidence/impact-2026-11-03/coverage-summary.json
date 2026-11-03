@@ -1,0 +1,68 @@
+{
+  "frozen_cutoff_utc": "2026-11-03T20:23:08.088810+00:00",
+  "case_counts": {
+    "all_saved_comparison_keys": 82,
+    "paired_ratings": 33,
+    "paired_resources": 51,
+    "complete_paired_timing": 39,
+    "retained_source_hashes": 200,
+    "checkpoint_versions": 133
+  },
+  "cases_with_readings": 56,
+  "cases_with_policy_events": 82,
+  "cases_with_with_requests": 50,
+  "readings": 235,
+  "policy_events": 496,
+  "with_request_rows": 770,
+  "request_status_counts": {
+    "guidance_observed": 723,
+    "fallback_observed": 13,
+    "unverified": 24,
+    "ambiguous": 10
+  },
+  "control_values": {
+    "unsolicited_update": {
+      "defer": 196,
+      "send": 527,
+      "unknown": 47
+    },
+    "response_extent": {
+      "standard": 193,
+      "terse": 392,
+      "unknown": 47,
+      "full": 138
+    },
+    "conversation_style": {
+      "self_contained": 354,
+      "conversational": 369,
+      "unknown": 47
+    }
+  },
+  "cases_with_request_policy_contrast": 44,
+  "with_public_final_matched_cases": 35,
+  "with_read_marker_matched_cases": 42,
+  "with_attribution_statuses": {
+    "partial": 32,
+    "unverified": 35,
+    "unknown": 12,
+    "linked": 3
+  },
+  "reviewed_primary_final_excerpt_cases": [
+    "case-014",
+    "case-076"
+  ],
+  "primary_final_excerpts": 11,
+  "all_case_full_exchange_coverage": 0,
+  "browser_projections": 102,
+  "browser_projection_events_nonadditive": 1912,
+  "browser_event_labels_nonadditive": {
+    "shown": 1858,
+    "held": 27,
+    "released": 27
+  },
+  "cases_with_any_held_counter": 13,
+  "cases_with_recorded_held_events": 13,
+  "observer_reports_separate": 15,
+  "no_semantic_adherence_rate_estimated": true,
+  "no_new_participants_or_calls": true
+}

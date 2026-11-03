@@ -7,6 +7,7 @@ endpoints, unrated and incomplete cases. Of these, **33 have paired ratings,
 overlap; they are not separate participants. Ratings come from one known person
 in an unblinded repeated pilot. Unrated origins and comparable work are uncertain.
 
+- [Concrete Presence-impact examples](impact-2026-11-03/README.md), including mixed and unverified results
 - [Results](RESULTS.md) and [method](METHOD.md)
 - [All-case index](index.json) and [aggregate values](summary.json)
 - [Individual numeric records, policy/request history and check history](audit-2026-11-03/audit.json)
@@ -27,9 +28,10 @@ retained alongside the reported effort and interruption differences.
 
 These are **reviewed derivatives**, not untouched raw exports. Numeric ratings,
 usage, checks, policy sequences and presentation events are published; original
-identifiers, private source paths and individual clock times are removed. The
-selected derivatives contain no conversation bodies; missing exchanges are not
-reconstructed. Originals remain private, with source/checkpoint hash commitments.
+identifiers, private source paths and individual clock times are removed. The original
+numeric derivatives contain no conversation bodies. A separate reviewed impact
+supplement adds 11 retained Muse final-answer excerpts from two cases; participant
+prompts and full exchanges remain unavailable and are not reconstructed. Originals remain private, with source/checkpoint hash commitments.
 Those commitments do not independently verify withheld original bytes. Policies
 and ratings remain potentially identifying even after pseudonymization.
 

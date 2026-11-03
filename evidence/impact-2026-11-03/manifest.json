@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "presence_impact_publication_manifest",
+  "freeze_cutoff_utc": "2026-11-03T20:23:08.088810+00:00",
+  "base_public_commit": "62ab48eec3e57948c7ed6682fad2a0e7c03112d4",
+  "source_commitments": {
+    "impact-report.md": "55bceee725a09e40440b691efcdfe7beee77a111fb8410097384a7eef30814de",
+    "illustrative-episodes.json": "931177d9ff9f31958f3579685a6c08842ecdb041d123a520d3a94b75d4154112",
+    "coverage-evidence-matrix.json": "7a658e43d67fa4ef5e54f19ce779f09fe8c99f58de932e45c8b007dac3173ddc",
+    "coverage-summary.json": "61312e97ce45f49d3e55dae99438681b78ee1a01ec8fa118aa3a900f61765bbc",
+    "validation.json": "522750fe0ed964948d02a6560acfa95e5adaf207a72fe258e7cfedff780c2624"
+  },
+  "primary_reviewed_excerpt_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9",
+  "earlier_linkage_corpus_sha256": "31294bbaacecc068f70dff69b2ea511e8abf00390caea3e7ed0174cb553f9b73",
+  "source_commitment_scope": "Private reviewed derivatives, not original provider receipts; changed public files have separate hashes.",
+  "files": {
+    "examples.json": "37327837840c0b5b53792c6f4952fe74e03423906d830edd04a46c59c1b99428",
+    "coverage.json": "f7d1d55da8d4b892165e247774a0ab38b5690a5e93962e2252172f35026d248a",
+    "coverage-summary.json": "61312e97ce45f49d3e55dae99438681b78ee1a01ec8fa118aa3a900f61765bbc",
+    "response-excerpts.json": "d2da402f0bfb000d6560ddf97ab7bebd4dd2ec07165c982917337e018a867e11",
+    "README.md": "a5ff457af77c0dab9cb30bf8b6be4c36290d0060d10f03855ef7c1ad85be6275"
+  },
+  "review_scope": "Offline source/quote/linkage/arithmetic review; no new participant, model, OP, evaluator or code-check run.",
+  "privacy": "Only previously reviewed redacted Muse public finals and selected exact fragments; no participant prompts, code-file bodies, raw typing, Capsules, credentials, native streams or hidden reasoning.",
+  "cohort_changes": false,
+  "new_trials": 0
+}

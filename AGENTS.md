@@ -24,3 +24,9 @@ The owner-authorized 3 November 20:23 UTC audit under `evidence/audit-2026-11-03
 also publishes reviewed numeric ratings and historical telemetry through a separate
 closed projection. Its source derivatives contain no conversation bodies. See
 `evidence/METHOD.md`; this publication does not make ordinary local exports public.
+
+The separately authorized `evidence/impact-2026-11-03` supplement contains eleven
+reviewed/redacted Muse public final-answer excerpts and five bounded illustrative
+episodes. It is separate from the body-free numeric audit and is not a complete
+native transcript. Participant prompts, intermediate/private streams, hidden
+reasoning and original exports remain excluded.

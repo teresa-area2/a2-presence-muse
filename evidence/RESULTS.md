@@ -6,6 +6,24 @@ one person in an unblinded repeated pilot; the resource cohort also includes
 18 unrated cases with uncertain origins and comparable work. Records span tasks,
 models and builds. These are descriptive results, not a causal estimate.
 
+## What changed in collaboration
+
+The analysis follows **Presence guidance → observed Muse response or browser
+presentation → developer experience**, with correctness and resource trade-offs
+assessed alongside it. [Five traceable episodes](impact-2026-11-03/README.md) show:
+
+- A compact plan and decision-first questions consistent with recorded guidance.
+- A detailed repair response despite terse guidance, and a formatting difference
+  whose request attribution is unresolved.
+- Optional updates held under defer while an essential final stayed visible, plus
+  disconnected views where those same messages were shown.
+
+These are illustrative observations from two comparisons, with reviewed response
+excerpts and source links. They do not establish a causal or cohort-wide adherence
+result. More tokens or time may be appropriate when they support useful work.
+
+## Experience, quality and resource outcomes
+
 | Outcome | Without Presence | With Presence | Paired comparisons |
 | --- | ---: | ---: | ---: |
 | Mean effort rating (1 easier–5 harder) | 3.82 | 1.70 | 33 |

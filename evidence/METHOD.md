@@ -73,3 +73,13 @@ Reproduction checks extraction, inclusion and arithmetic from public data. It is
 not independent scientific replication, a fresh provider run or qualification of
 every final-release feature. Earlier cutoffs are overlapping historical views,
 kept separately; never pool their rows with this freeze.
+
+## Response-level impact supplement
+
+The [impact supplement](impact-2026-11-03/README.md) adds five illustrative episodes
+from two existing comparisons, supported by 11 previously reviewed/redacted Muse
+final-answer excerpts and earlier saved turn-linkage metadata. It is not a new
+trial, source rescan, complete native transcript or semantic-adherence estimate.
+The underlying numeric audit and its hashes are unchanged. The all-case coverage
+matrix makes absent/unlinked response evidence explicit, while examples keep
+model behavior, browser gating, self-report and coordinator actions separate.

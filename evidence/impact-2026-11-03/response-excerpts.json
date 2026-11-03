@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "reviewed_muse_public_final_excerpts",
+  "scope": "Previously reviewed final-answer text from two comparisons; full available redacted text retained. Not a complete session/native transcript; participant prompts, intermediate messages and reasoning excluded.",
+  "model_claims": "Statements about tests or task success are model reports, not independent verification.",
+  "new_trials": 0,
+  "responses": [
+    {
+      "case_id": "case-076",
+      "arm": "with",
+      "phase": "public_final",
+      "source_row_ordinal": 2,
+      "text": "**Goal:** Preserve the user's latest unsaved edit when `save` reports a conflict, without mutating the caller's draft — per `CONTRACT.md`.\n\nCurrently `src/save.mjs` just forwards to `client.save(id, draft, revision)` with no conflict handling.\n\n**Proposed plan (no changes yet):**\n\n1. **Edit only `src/save.mjs`** — in `saveEdit(client, id, draft, revision)`: return the result on first-try success; propagate non-`CONFLICT` errors immediately with no `get`/retry.\n2. **On `code: 'CONFLICT'` only:** call `client.get(id)` once, build a new merged patch `{...server.fields, ...draft}` (draft fields win; neither `draft` nor the server record is mutated), and retry `client.save(id, merged, server.revision)` at most once.\n3. **If the retry fails:** propagate that failure with no further `get`/`save` writes. Successful saves (first or retry) return the saved record.\n4. **Verify:** run `node --test` (the public suite: conflict merge expects patch `{title:'New', status:'open'}` at revision `4` from that merged shape). I won't claim the separate frozen acceptance checks passed — they're not in this worktree.\n\nWaiting for your go-ahead before making any changes.",
+      "text_sha256": "b26b9153744ceb4742338e17fb0cfee9854495f901a37419115048d47583913b",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/0/rows/6",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-076",
+      "arm": "with",
+      "phase": "public_final",
+      "source_row_ordinal": 4,
+      "text": "Done — the save-conflict fix is implemented in `src/save.mjs` and the public tests pass (2/2).\n\nOn a `code: 'CONFLICT'` rejection, `saveEdit` now calls `client.get(id)` once, builds a new merged patch `{...server.fields, ...draft}` (draft fields win), and retries `client.save(id, merged, server.revision)` at most once using the fetched revision. The caller's `draft` is never mutated (verified with a frozen draft), non-conflict errors propagate with no `get`/retry, a failed retry propagates with no further writes (verified: 2 saves, 1 get), and successful saves return the saved record.\n\nVerification: `node --test` passed both public tests, plus ad-hoc checks for retry-failure, non-conflict, and happy-path behavior. The separate frozen acceptance checks are not in this worktree, so I can't claim those passed.",
+      "text_sha256": "4ddd086e34ebc11d460ed5e1650af907c1e9277c75dba6c700c586c981418784",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/0/rows/7",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-076",
+      "arm": "with",
+      "phase": "public_final",
+      "source_row_ordinal": 7,
+      "text": "Top finding: the failures reproduce — the current `src/save.mjs` passes the caller's `draft` object directly to `client.save(...)`, so a client that normalizes/mutates its patch argument mutates the caller's draft, and the conflict retry then merges the already-mutated values instead of the original pending fields.\n\nWhere I am: I've added regression tests in `test/draft-isolation.test.mjs` covering exactly the three frozen failures (successful normalization, normalization before a non-`CONFLICT` failure, and normalization on the conflicting first attempt), and all 3 fail against the current code as expected. I have **not** yet changed `src/save.mjs`.\n\nNext step: snapshot/copy the draft before the first `save` so the client only ever receives a copy, build the conflict-retry merge from the pristine pending fields, then re-run `node --test` myself and report those results separately from the independent frozen results (which I won't claim without a new independent check).",
+      "text_sha256": "a14000ec860c64aa88f51b036d546fa08e1eee86343dddd859dcb2f8dcb4f659",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/0/rows/8",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-076",
+      "arm": "with",
+      "phase": "public_final",
+      "source_row_ordinal": 9,
+      "text": "Fixed — the three draft-mutation failures are addressed, and my own test run passes; no new frozen result is claimed.\n\n**Root cause:** `saveEdit` passed the caller's `draft` object itself to `client.save(...)`, so a client that normalizes (mutates) its patch argument mutated the caller's draft, and the conflict retry then merged the mutated values.\n\n**Change (`src/save.mjs` only, API unchanged):** The draft is deep-copied into a pristine `pending` snapshot before any client call (via `structuredClone`, with a recursive plain-object/array-copy fallback that keeps uncloneable leaf values as-is). The client only ever receives copies — one for the first `save`, and for the conflict retry a fresh merge `{...copied(server.fields), ...copied(pending)}` at `server.revision`, at most one retry, non-`CONFLICT` errors propagate with no `get`/retry. Cost: with `n` = nested values in the draft and `m` = nested values in the fetched server fields, copying is O(n) time/auxiliary space on the first attempt (snapshot + transmitted copy) and O(n+m) additional on a conflict (merged patch); the saved record returned by the client is passed through unchanged.\n\n**Regression tests (`test/draft-isolation.test.mjs`, 3 new):** client normalization on success, normalization before a non-`CONFLICT` failure (also asserting 1 save / 0 gets), and normalization on the conflicting first attempt (retry must send the original pending fields, e.g. untrimmed `'  New  '`, merged over server fields at revision 4) — including nested-field mutation. All 3 failed before the fix and pass now; this self-written suite passing does not by itself prove all requirements.\n\n**Verification (my execution):** `node --test` — 5 tests, 5 passed, 0 failed (the original 2 public tests plus the 3 new regression tests). This is distinct from the independent frozen run you reported (15 tests, 12 passed, 3 failed); I have not re-run those and do not claim a new frozen result.",
+      "text_sha256": "34d50ee6ac0b93f50c06239ae189b174b87e32504ec6c91a29588b7cec7f9885",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/0/rows/9",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-076",
+      "arm": "without",
+      "phase": "public_final",
+      "source_row_ordinal": 2,
+      "text": "This is a plan, not a special mode; I haven’t started implementation. Reply `go` to execute this plan, or tell me what to change.\n\n## Goal\n\nFix `src/save.mjs` (`saveEdit(client, id, draft, revision)`, currently a single pass-through to `client.save`) so a `CONFLICT` rejection doesn't lose the user's latest unsaved edit, per `CONTRACT.md`.\n\n## Approach / Steps\n\n1. **Happy path unchanged:** call `client.save(id, draft, revision)` once; on success return the saved record, with no `get` call.\n2. **On conflict only** (rejection with `code: 'CONFLICT'`; other errors propagate with no fetch/retry): call `client.get(id)` to fetch the current server record.\n3. **Merge and retry at most once:** retry `client.save(id, merged, fetched.revision)` where `merged = { ...server.fields, ...draft }` — pending edited fields win, e.g. draft `{title:'New'}` over server fields `{title:'Old', status:'open'}` at revision `4` retries with `{title:'New', status:'open'}` and revision `4` (the shape asserted in `test/behavior.test.mjs`). If the retry fails, propagate that failure with no further writes — total `save` calls ≤ 2.\n4. **Preserve the caller's draft:** build the merged patch as a new object via spread; never mutate `draft` (or the fetched fields). This copy costs auxiliary space proportional to the number of keys in the server fields plus the draft; the merge visits only those keys.\n5. **Scope:** edit only `src/save.mjs`; keep the single exported name (guarded by `test/smoke.test.mjs`); no installs, commits, or new validation rules beyond the fixed contract.\n\n## Validation Plan\n\n- Run `node --test` in this worktree before handback and report the actual result.\n- Also verify the negative paths not covered by the public tests — non-conflict error (no `get`, no retry), retry failure (exactly two `save` calls, failure propagates), and draft immutability after a conflict — noting that a passing public suite does not by itself prove these, and that the harness's frozen acceptance checks are separate and I won't claim they passed.\n\n## Risks / Open Questions\n\n- **Assumption:** \"return the failure\" on retry means the returned promise rejects (consistent with the current API, where `client.save` rejects), rather than resolving to an error value. Flag if you want the other reading.\n- Highest-risk check: the retry-once bound and the exact merged-patch shape, since facilitator checks may cover additional examples of the same behavior.\n\nReply `go` to execute this plan, or tell me what to change.",
+      "text_sha256": "ca7faea8c2b6591436ff7a10411aa27d5bfac3656492b684d3f88d30ae733f30",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/0/rows/10",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-076",
+      "arm": "without",
+      "phase": "public_final",
+      "source_row_ordinal": 7,
+      "text": "Top finding: the bug is aliasing — `saveEdit` passes the caller's `draft` object itself to `client.save`, so any in-place “normalization” by the client mutates the caller's draft, and a conflict retry then merges that already-mutated object instead of the original pending fields.\n\nWhere I am:\n- Reproduced all three independent frozen failures with a new regression file, `test/draft-preservation.test.mjs` (client normalization on success, normalization before a non-`CONFLICT` failure, and normalization before a conflict retry). Against the current code it runs **0 passed / 3 failed**, as expected for a reproduction — that's my own suite, distinct from the independent results you quoted (public 2/2, frozen 12/15).\n- No fix applied yet. Next step: change `src/save.mjs` so the client only ever receives copies — a pristine snapshot of the draft taken before the first call, a fresh copy handed to each `save` attempt, and the conflict-retry merge built from the untouched snapshot — then rerun the regression tests plus the full public suite (`node --test`) and report those results separately from any future independent frozen check.\n\nWant me to proceed with that fix?",
+      "text_sha256": "58c1bc12b79b6d9b01cce63580f49275e987634fe54044ec7b37ab9f758aa325",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/0/rows/11",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-076",
+      "arm": "without",
+      "phase": "public_final",
+      "source_row_ordinal": 9,
+      "text": "Fixed — the three frozen failures were an aliasing bug, and the corrected flow now passes my local runs; no new frozen result is claimed without a new independent check.\n\n**Root cause and fix (`src/save.mjs`)**\n- Before: `saveEdit` handed the caller's `draft` object itself to `client.save(id, draft, revision)`, so a client that normalizes its patch in place (trimming a value, adding a flag, deleting a field) mutated the caller's draft — on success, before a non-`CONFLICT` failure, and before a conflict retry, where the retry then merged the normalized object instead of the original pending fields.\n- Now: a pristine snapshot of the draft is taken before any client call, and only fresh copies are ever passed to `client.save`. The conflict path is otherwise unchanged: on `code: 'CONFLICT'` only, `client.get(id)` is fetched, `{ ...server.fields, ...copy-of-snapshot }` is retried once at the fetched revision, a retry failure propagates with no further writes, non-conflict errors propagate with no fetch/retry, and successful saves return whatever record the client returns. The public API is preserved — still the single export `saveEdit(client, id, draft, revision)`.\n\n**Regression tests added (`test/draft-preservation.test.mjs`, 3 tests, mirroring the failed cases)**\n- Client-normalized successful request leaves the caller draft unchanged (including nested `meta.tags` mutation by the client).\n- Client normalization before a non-`CONFLICT` failure cannot modify the draft — also asserts exactly 1 save, 0 gets, original error propagates.\n- Conflict retry preserves original pending fields even if the first request was normalized — asserts the retry patch is `{title:'  New  ', status:'open', priority:'high'}` at revision 4 (no injected/deleted/trimmed fields) and the draft is intact.\n- These failed 0/3 against the old code and pass 3/3 after the fix.\n\n**My test executions (distinct from the independent results you quoted)**\n- Original public files (`test/behavior.test.mjs`, `test/smoke.test.mjs`): **2 passed, 0 failed**.\n- Full suite via `node --test` (run as `[REDACTED_LOCAL_PATH] --test`, since `node` isn't on the sandbox PATH): **5 passed, 0 failed** — the 2 public tests plus my 3 new regression tests. Passing my self-written suite does not prove all requirements; the frozen 15-test check (last independently reported at 12 passed / 3 failed) has **not** been rerun independently, so I make no claim about its new result.\n\n**Cost and limitations (from the actual implementation)**\n- Let *n* be the total number of values reachable through plain-object properties and array elements of `draft`. Each defensive copy visits all *n* values once: O(*n*) time and O(*n*) working storage per copy (snapshot plus one copy per save attempt; the calls are sequential, so peak extra working storage stays O(*n*), separate from the input draft and the returned record). The retry merge additionally visits only the top-level keys of the fetched `fields` and the snapshot — a bounded copy of those keys, not a rescan of anything else.\n- The copy recurses through plain objects, arrays, and `Date`s. Non-plain nested values (class instances, `Map`/`Set`, functions) are passed by reference, so a client mutating such a nested value in place could still reach the caller's object, and a circular draft would recurse indefinitely — neither case appears in the contract's field examples, and neither is covered by tests, so I state both as unverified limitations rather than handled behavior.",
+      "text_sha256": "cfeeafef5b6a4da3e4878d4939ccf45f81cb283a54ec9a1bba370db640749ea3",
+      "source_text_was_redacted": true,
+      "source_json_pointer": "/0/rows/12",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-014",
+      "arm": "with",
+      "phase": "public_final",
+      "source_row_ordinal": 2,
+      "text": "Para planificar bien la web con todos sus componentes necesito cerrar 3 decisiones clave antes de proponerte la estructura:\n\n**1. ¿Quién la va a usar principalmente?**\n- Recomendada: niños/as autistas con apoyo de familia o profesionales\n- Opciones: adolescentes / adultos autistas autónomos / familias y educadores / mixto\n\n**2. ¿Cuál es el objetivo principal de lo interactivo?**\n- Recomendado: rutinas + comunicación + regulación sensorial en un mismo sitio\n- Opciones: solo aprendizaje/juegos, solo comunicación con pictogramas, solo rutinas y agenda visual, todo combinado\n\n**3. ¿Qué alcance quieres para esta primera versión?**\n- Recomendado: web sencilla, accesible, sin login, que funcione en móvil y ordenador\n- Opciones: con cuentas y progreso guardado / con zona para profesionales / prototipo muy simple de una sola página\n\nDime estas 3 cosas y te preparo el plan completo por componentes.",
+      "text_sha256": "aefcfe7c1aab8b03648af0b55079922dad9b760c3d684577e260d94d52851300",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/1/rows/2",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-014",
+      "arm": "with",
+      "phase": "public_final",
+      "source_row_ordinal": 10,
+      "text": "Lista: la web está montada y sus 18 pruebas pasan (`# pass 18, # fail 0` con `node --test`).\nTienes 7 secciones: Inicio predecible, Mi día con rutinas y progreso guardado en `localStorage`, Hablar con tablero + frases rápidas y voz, Zona calma con respiración y sonido opcional, Jugar sin perder con emociones y orden, Ajustes sensoriales y Familias. Para verla usa `python3 -m http.server 8000` y abre `[REDACTED_URL] —por usar módulos ES, abrir directo con `file://` puede bloquear los imports—.\n\nSímbolos: `n` = nº de pasos/tokens/posiciones; escanear = recorre candidatos de entrada aunque pocos coincidan; copia acotada = solo recorre el rango copiado. Costes reales: `routineProgress` es tiempo `O(n)` con auxiliar `O(1)` porque debe escanear todos los pasos para el total exacto; `buildSentence` es tiempo `O(n)` con auxiliar `O(n)` por arrays temporales de `filter/map` más el string de salida; `addToken` valida en `O(1)` y hace copia acotada `O(n)`; `checkOrder` es `O(n)` con auxiliar `O(1)`; los JSON se cargan enteros en memoria. Validé entradas en frontera con negativos: título/pasos vacíos, índice fuera de rango, token vacío, frase llena, `voiceRate`/`brightness` fuera de rango y cero coincidencias.\n\nLímites sin verificar: la voz `speechSynthesis` varía por navegador y solo tiene degradado a texto visible, no probado en todos los navegadores; el aprobado de mi suite no prueba todo el comportamiento real.",
+      "text_sha256": "762e36a65e7262191a9de3dc424274980f5ff29a45047fd13e1d8c0827dd41d9",
+      "source_text_was_redacted": true,
+      "source_json_pointer": "/1/rows/3",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-014",
+      "arm": "without",
+      "phase": "public_final",
+      "source_row_ordinal": 4,
+      "text": "This is a plan, not a special mode; I haven’t started implementation. Reply `go` to execute this plan, or tell me what to change.\n\n## Goal\nCrear una web interactiva, calmada y predecible, de apoyo a personas con autismo, planificada por componentes independientes para construirla por fases en este workspace vacío (solo `README.md`, `TASK.md`, `package.json` con `node --test`).\n\nSupuestos reversibles: web estática simple sin backend ni dependencias nuevas, todo en este worktree, sin cuentas. Si quieres otra cosa, lo cambiamos con `go`.\n\n## Success Criteria\n- La web abre en local con navegación clara entre componentes y vuelve siempre a Inicio sin perderse.\n- Cada componente interactivo responde de forma predecible: sin sonidos/autoplay sorpresivos, sin animaciones bruscas, con opción de pausa/salir.\n- Personalización básica funciona: modo calmado, tamaño de botones/texto, y se mantiene al recargar si se aprueba guardado local.\n- Contenido piloto cargado: 1 agenda de ejemplo, 1 tablero de comunicación, 1 ejercicio de calma.\n\n## Approach\nEnfoque por componentes desacoplados sobre una misma base accesible: una página Inicio calmada + 5-6 módulos independientes que comparten cabecera, estilos suaves y navegación. Nada de framework nuevo: reutilizar lo existente del workspace y validación con `node --test` más comprobación manual. Decisiones clave:\n- Primero base sensorialmente segura (colores suaves, iconos grandes, texto claro), después módulos.\n- Contenido inicial de ejemplo en ficheros locales, sin cuentas ni servidor, para evitar re-trabajo si luego quieres persistencia real.\n- Alternativa rechazada por ahora: app con login/backend — añade riesgo y no es necesaria para el primer prototipo útil.\n\n## Steps\n1. **Base + Inicio calmado:** estructura de carpetas, cabecera/nav simple, página Inicio con accesos grandes a cada módulo y ajustes globales (texto grande, reducir movimiento, alto contraste suave).\n2. **Agenda visual / anticipación:** crear-ver-completar pasos de una rutina con pictogramas/texto, orden claro, botón “hecho” y vista “qué viene ahora”.\n3. **Comunicación y emociones:** tablero de necesidades (“quiero”, “necesito ayuda”, “descanso”) + selector de cómo me siento con frases de ejemplo.\n4. **Rincón de calma:** temporizador visual, ejercicio de respiración guiada paso a paso con pausa, y botón salir siempre visible.\n5. **Juegos de aprendizaje social:** 1-2 mini-juegos de turnos / reconocimiento de emociones con feedback amable sin penalizar errores.\n6. **Zona familias y educadores:** guías breves de uso de cada módulo y cómo personalizar rutinas y ajustes.\n\n## Validation Plan\n- `npm test` / `node --test`: crear prueba mínima de que el contenido de ejemplo carga (agenda, tablero) y los ajustes no rompen la navegación; reportar resultado real sin afirmar cobertura total.\n- Manual: navegar todo solo con teclado; activar cada ajuste y recargar; comprobar que no hay autoplay, parpadeos ni sonidos inesperados; probar en móvil y escritorio.\n- Vecino: comprobar que cambiar un módulo no rompe Inicio ni los enlaces a los demás.\n\n## Risks / Open Questions\n- **1. ¿Quién es el usuario principal?** Recomendado: niños + familias/educadores. Condiciona vocabulario, tamaño de botones y ejemplos. Por defecto planifico para ese perfil.\n- **2. ¿Guardado y privacidad?** Recomendado: solo guardado local en el propio navegador, sin cuentas ni envío de datos. Si necesitas multi-dispositivo, el plan cambia a backend.\n- **3. ¿Alcance del primer `go`?** Recomendado: base + Agenda + Calma primero, resto después. Dime si quieres el prototipo completo de una vez.\n\nReply `go` to execute this plan, or tell me what to change.",
+      "text_sha256": "963e904162302c7ada8e858855a221773c15e3d0e275b3a36989abc0a8989691",
+      "source_text_was_redacted": false,
+      "source_json_pointer": "/1/rows/4",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    },
+    {
+      "case_id": "case-014",
+      "arm": "without",
+      "phase": "public_final",
+      "source_row_ordinal": 12,
+      "text": "La web ya está funcionando en local con los 6 componentes del plan.\n\nQué he construido en tu workspace:\n- `index.html`: Inicio calmado + Agenda, Comunicar, Calma, Juegos y Familias, con botones grandes y navegación por hash.\n- `styles.css`: diseño suave, texto grande, reducir movimiento y contraste suave.\n- `app.js` + `src/datos.js` + `src/logica.js`: agenda (ahora/después, añadir, marcar, reiniciar), tablero de comunicación con frase y lectura en voz alta solo si se pulsa, emociones, temporizador visual con pausa/parar, respiración guiada, juego de turnos y juego de emociones sin penalizar, ajustes guardados solo en ese navegador.\n- `servidor.js`: servidor estático sin dependencias (`node servidor.js 8000`).\n- `test/web.test.js`: 14 pruebas con camino feliz y casos negativos (agenda vacía, id inexistente, entradas inválidas, puertos fuera de rango, bloqueo de `..`).\n\nValidación:\n- `node --test`: 14 pass, 0 fail.\n- Comprobación estática de que `index.html` enlaza las 6 secciones.\n- Limitación honesta: en este entorno la sandbox bloquea escuchar puertos (`EPERM`), así que no pude hacer la prueba HTTP en vivo; la lógica del servidor sí está probada (`resolverContenido` y `parsearPuerto`). Mi suite prueba la lógica, no demuestra todo el comportamiento en navegador.\n\nPara verla: fuera de la sandbox ejecuta `python3 -m http.server 8000` o `node servidor.js 8000` y abre `[REDACTED_URL] Si quieres, siguiente paso que te recomiendo: añadir pictogramas propios y una rutina real de tu caso.",
+      "text_sha256": "bc7c7dd5b9486e4d9cba065fe35faf8ed2e4da4e0f5fa85601b4690cc3da0e56",
+      "source_text_was_redacted": true,
+      "source_json_pointer": "/1/rows/5",
+      "source_catalog_sha256": "f4a93465123bd8b106b515d6f569c171815978c2baaedb4eb176cbf5f69138c9"
+    }
+  ]
+}
