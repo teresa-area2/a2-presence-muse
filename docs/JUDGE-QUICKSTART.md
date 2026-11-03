@@ -1,7 +1,10 @@
-# Try Open Presence × Muse
+# Judge journey: clone, run, test and return results
 
-Start from a fresh clone on your own Mac. Record the commit and your Muse version
-with your feedback. Current verification limits are listed in [STATUS](STATUS.md).
+Follow this page from top to bottom on your own Mac. It contains the complete
+judge journey, including the final test, export and return instructions. No
+separate tester handoff, commit supplied by Teresa or credential handoff is needed.
+Record the actual checkout revision, browser and Muse version with your results.
+Current verification limits are listed in [STATUS](STATUS.md).
 
 **Use Chrome or Firefox for this rehearsal.** Teresa reports that the Mini works
 and textbox capture works in both browsers. Safari failed in the Screen Sharing
@@ -27,6 +30,28 @@ credentials or starting a workspace; use the WSL2 route below. **Check code** us
 Apple's sandbox on macOS, or an optional Bubblewrap sandbox on Linux. Missing or
 denied isolation leaves checks unavailable; generated tests never run directly on
 the host as a fallback. See [platform verification](PLATFORM-SUPPORT.md).
+
+## 0. Clone the public repository
+
+Use **macOS Terminal**. GitHub sign-in is not required. Clone once into a new
+folder under `~/Developer`:
+
+```sh
+(
+  set -e
+  umask 077
+  mkdir -p "$HOME/Developer"
+  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse"
+  git -C "$HOME/Developer/open-presence-muse" rev-parse HEAD
+)
+```
+
+Keep that full revision with your results; there is no extra SHA to request or
+paste. Read this journey from the cloned checkout so instructions match its code.
+If this directory already contains your working clone, keep it and resume at the
+first unfinished step. Do not overwrite it or pull changes during an open pair.
+Later command blocks explicitly enter this checkout; use your actual path if you
+chose another location.
 
 ## Comparison configuration
 
@@ -144,10 +169,6 @@ does not read this file.
 ```sh
 (
   set -e
-  umask 077
-  mkdir -p "$HOME/Developer"
-  # Public clone: no GitHub login is required.
-  git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse"
   cd "$HOME/Developer/open-presence-muse"
   node --version
   npm run judge:install
@@ -163,7 +184,7 @@ clone rather than overwriting a previous comparison.
 
 If the approved checkout, Node 22 and browser build are already ready, continue
 from startup in that checkout. No fresh clone or reinstall is required just to
-restart. Keep the approved commit recorded; use your existing path if different.
+restart. Keep the actual checkout revision recorded; use your existing path if different.
 
 The intended command performs the locked anonymous npm install without dependency
 install scripts, builds the browser bundle and checks setup. It reads no access
@@ -261,7 +282,12 @@ without the flag. Requesting an Observer explanation/assessment is a separate ac
 After reading the notice and agreeing to this typing-metadata processing:
 
 ```sh
-npm run judge:start -- --consent-typing
+(
+  set -e
+  cd "$HOME/Developer/open-presence-muse"
+  node --version
+  npm run judge:start -- --consent-typing
+)
 ```
 
 Open the **exact URL printed by this startup** in Chrome or Firefox. Without
@@ -295,10 +321,11 @@ testers in the 28–29 October Muse configuration: local session IDs do not isol
 norms and one participant's activity can influence later normalization. Teresa
 accepts this for the demo. Quotas, current server state and deletion remain unverified.
 
-## 4. One understandable interactive test
+## 4. Complete one coding conversation
 
 Select **Split a trip bill** and the same entitled model for both agents. Spark 1.3
-and Wonder 1.0 are selectable; availability still depends on your Meta access.
+and Wonder 1.0 are selectable; start with Spark 1.3 for both if your account permits
+it. Report model-access trouble before substituting; record any model change.
 Open the sessions. The task is an expense calculation: Alice paid €90 for a shared
 apartment; Ben paid €30 for dinner shared by Ben and Cara. The intended result is
 Ben paying Alice €15 and Cara paying Alice €45.
@@ -314,10 +341,25 @@ each pane. Approval permits that displayed action; it does not certify its resul
 Keep sends on Both for comparable input histories. Different questions/decisions
 can make the histories different; the evidence should record that honestly.
 
+A native question is answered in its own pane or through **Reply in message box**
+with that one agent selected. **Both** does not answer two native questions. A
+follow-up sent while an agent is working steers its work. **Escape** from the
+shared message box interrupts the selected recipient(s); verify **Both** first
+to target both. Escape inside a pane targets that pane. Interruption keeps the
+sessions open; record any one-sided actions with your result.
+
 Guidance can change on later model requests. Missing, rejected or withdrawn
 guidance uses ordinary fallback. A neutral policy or similar answers is not proof
 of a broken connection; inspect the reading and request-delivery evidence. Neither
 delivery nor a visual difference alone establishes better work or human benefit.
+
+After the follow-up, wait until both agents are **Ready** with no pending question,
+approval or turn. Reselect **Both**, then click **Check code**. If checks fail, use
+**Send CI feedback**, allow the repair and check again. Repeat the final check
+after any later turn, including an explanation-only reply: earlier checks become
+stale. A model's claim that its tests pass is not the harness result.
+Before **every Check code or Send CI feedback**, wait until both agents are Ready
+and reselect Both; clicking a pane or handling its approval can change recipients.
 
 **Check code** runs public and frozen checks in a separate read-only
 sandbox with no host network and bounded time/output. **Send CI feedback** sends each
@@ -326,17 +368,80 @@ selected agent its own checked results for repair. On Linux it requires `/usr/bi
 no credentials or model calls. An unavailable sandbox never becomes an unsandboxed
 run or a passing check. Native Windows still requires WSL2.
 
-Use **Close sessions** when finished and Ctrl-C in the launch terminal to close the
-server and its temporary OP configuration. Save/export evidence before replacing
-a backend; native conversations do not restore after a server restart. See the
-[evidence instructions](SETUP.md#combined-evidence-package) for feedback, ratings and export.
-
 The optional **See Presence impact** action makes a separate Muse call with
 selected conversations/work files and Presence, interaction and self-reported
 experience evidence. These materials can contain private information or embedded
 secrets. Read the [Observer disclosure](OBSERVER-REPORT.md) and the action's warning
 before using it. It remains one click; no automatic assessment or new confirmation
 step is added. Observer usage is tracked separately from both coding agents.
+
+## 5. Save and return your result
+
+Complete this before closing the pair or switching tasks:
+
+1. Open **Testing and diagnostics → Effort and experience**. Record each side's
+   effort and interruptions if you can judge them; leave unknown ratings blank.
+   If using review timers, stop them. Wait for **Recorded for this pair.** after
+   the last rating.
+2. Click **Export evidence package**. Leave **Include quoted public excerpts**
+   unchecked initially. Export makes no model call. Wait for a confirmed **Saved**
+   result; an error or “a file may exist” is not confirmed success. If **Newer
+   evidence is available**, settle the checks/ratings and export the final snapshot.
+3. Locate the exact JSON path shown. The shared per-user folder is:
+
+   ```text
+   ~/.local/share/a2-presence-muse/evidence/evidence-packages/
+   ```
+
+   In Finder, press **⌘⇧G** and enter that folder. Inspect the JSON locally before
+   sharing; full transcripts/work-file contents are excluded, but assessment text
+   or optional excerpts can still contain task details. Keep the file unchanged.
+4. Return that JSON **privately to the person who asked you to test**, together
+   with a short note using the [feedback template](TESTER-FEEDBACK-TEMPLATE.md):
+
+   ```text
+   Checkout revision / macOS / Node / Muse / browser and version:
+   Direct keyboard or Screen Sharing:
+   Task and model:
+   Setup, login, capture, approvals, checks and export: worked or blocked?
+   Final check result for Without / With:
+   What felt easier, harder or the same? Any different inputs or decisions?
+   Evidence filename, or exact nonsecret error if no export was possible:
+   ```
+
+   For the team rehearsal, return this to Teresa through your agreed private
+   channel. Export saves locally; it does not upload or notify anyone. Keep raw
+   exports, credentials, real typing and Capsules out of Git and public issues.
+   Failed, blocked and neutral outcomes are useful; no Presence effect is required.
+
+If startup fails before you can export, return the failed step, exact nonsecret
+error, checkout revision and available version outputs. Do not reset credentials
+or repeatedly reinstall to obtain a passing result.
+
+## 6. Explore more, then close cleanly
+
+After saving the first result, try the remaining prepared tasks if time and your
+Muse allowance permit. Each task uses a **fresh pair**, with the same task/model
+and shared instructions for both agents. Save one result package per pair.
+
+| Task | What to check in conversation |
+| --- | --- |
+| Save conflicts | What happens to your latest unsaved draft after a conflicting save? |
+| Booking rules | How do duplicate reservations and cancellation affect capacity? |
+| Batch import | Which rows survive a mixed-validity customer import? |
+| Notification routing | How do quiet hours interact with the existing rules? |
+
+**Your own task** is optional and starts a clean workspace without frozen
+acceptance checks. The [task battery](MAC-TESTER-TASKS.md) adds task-order suggestions
+and result-folder examples; the steps on this page are sufficient for the judge
+journey.
+
+To switch tasks, save/export, use **Close sessions**, select the next task and
+**Open sessions**. Keep the server running. Once finished, export the last pair,
+use **Close sessions**, then press **Ctrl-C in its launch terminal**. This stops
+that workspace and future capture; saved evidence remains. Native conversations
+do not restore from an export after a backend restart. Report unconfirmed cleanup
+before starting another workspace; do not kill unrelated processes.
 
 ## Linux and Windows through WSL2
 

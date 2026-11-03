@@ -2,6 +2,9 @@
 
 A side-by-side coding workspace for exploring how temporary Open Presence guidance can shape collaboration with Muse Code. Two isolated Muse sessions work on the same task; eligible Presence guidance is supplied only to the **With Presence** session. You can talk to either or both, review native approvals, steer a running turn and compare the resulting work and reported resources.
 
+**[Follow the Judge journey](docs/JUDGE-QUICKSTART.md)** to clone the repository,
+get it running, test it and return results.
+
 Presence is the focus of the experiment. The workspace can adjust optional commentary and suggest an appropriate response presentation when guidance is available. Essential answers, errors and approvals remain visible. When guidance is unavailable or withdrawn, the Presence session uses ordinary fallback. The Pulse displays the collaboration policy; it does not show numerical personal-state measurements.
 
 ## Comparison configuration
@@ -33,8 +36,11 @@ remain external. See [provenance](docs/PROVENANCE.md) and
 
 ## Try the demo
 
-**Reviewers: [start with the Mac tester handoff](docs/MAC-TESTER-HANDOFF.md).**
-It covers setup, your own Muse login, the first test and returning results.
+**Start here: [Judge journey — clone, run, test and return results](docs/JUDGE-QUICKSTART.md).**
+Follow that page from the public clone through setup, your own Muse login,
+the coding test and its final export/return instructions. It is the same journey
+for judges and teammates; no separate handoff or externally supplied commit is
+required.
 
 Use **Chrome or Firefox** for this rehearsal. Teresa reports working textbox
 capture in both browsers on the Mini. Safari capture failed in her Screen Sharing

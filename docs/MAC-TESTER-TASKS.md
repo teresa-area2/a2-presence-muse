@@ -1,9 +1,9 @@
 # Mac task battery and returning results
 
 For the two internal Mac testers. First complete the
-[setup and trip-bill walkthrough](MAC-TESTER-HANDOFF.md) at the exact qualified
-GitHub commit supplied by Teresa. Record that full commit for every result; older
-private rehearsal tags do not identify this release.
+[judge journey](JUDGE-QUICKSTART.md), including setup, the first Trip bill pair and
+its final return instructions. Record your actual full checkout revision for every
+result; no separately supplied commit is required.
 Aim to try **all five prepared tasks**, one fresh comparison at a time. Your own
 task is optional afterward. Pause between tasks if needed; more tasks mean more
 real usage on your own Muse account. Report failed, blocked or untried tasks too.
@@ -100,7 +100,7 @@ The package records a run ID, session generation and checkpoint revision. Task/m
 metadata, available per-arm usage, action counters, ratings, policy/request history
 and check summaries support later analysis. Counts/histories can be partial or
 unknown; the export labels those limits. Its task source commit is not necessarily
-the harness release commit, so include the full `git rev-parse HEAD` value supplied by Teresa in your note separately.
+the harness release commit, so include the full `git rev-parse HEAD` value from your local checkout in your note separately.
 
 **Full answers and code are not in this export.** The first export should precede any optional Observer assessment, so it has no
 generated assessment or selected answer quotes; ticking the excerpts option does

@@ -7,7 +7,7 @@ any reviewed public evidence.
 
 - Tester: A / B
 - Task and attempt number:
-- Approved release commit from Teresa / actual full `git rev-parse HEAD` value:
+- Actual full checkout revision (`git rev-parse HEAD`):
 - Browser and version (or not recorded):
 - Interaction mode: directly at the Mac / Screen Sharing / other remote setup:
 - Started from: macOS Terminal / Codex (note any per-command approval) / other:
