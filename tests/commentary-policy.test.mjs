@@ -110,7 +110,7 @@ test('held notice names current vs older receipt and reassures mandatory visibil
   assert.match(cur, /Holding 2 optional updates/);
   assert.match(cur, /Current eligible policy/);
   assert.match(cur, /Receipt 5s ago/);
-  assert.match(cur, /Mandatory messages, approvals and answers stay visible/);
+  assert.match(cur, /Native questions, approvals and final answers stay visible/);
   const older = heldNoticeText(1, 'Last eligible guidance', 'Receipt 2m 0s ago');
   assert.match(older, /Holding 1 optional update[^s]/);
   assert.match(older, /Last eligible policy/);

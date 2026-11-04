@@ -28,16 +28,18 @@ const rows=()=>[
  {author:'Muse',phase:'finalAnswer',text:'FINAL_ANSWER'}
 ];
 const approval=()=>({status:'review',review_token:'a'.repeat(64),approvalId:'a',requirementId:{approvalId:'a',sourceIndex:0},command:'node --test',choices:[{choiceId:'once',label:'Allow once',decision:'approved',scope:'once'},{choiceId:'reject',label:'Reject',decision:'denied',scope:'once'}]});
-function fixture(arm='with'){
+function fixture(arm='with',{awaitingApproval=false}={}){
  const container=new Node('div',doc),messages=rows();
- let state={status:'ready',session_generation:1,presence:source(),arms:{[arm]:{status:'approval',messages,approvals:[approval()]}}},options={connected:true,pendingDecisions:new Map(),now};
+ let state={status:'ready',session_generation:1,presence:source(),arms:{[arm]:{status:awaitingApproval?'approval':'running',active_turn_id:'turn',messages,approvals:awaitingApproval?[approval()]:[]}}},options={connected:true,pendingDecisions:new Map(),now};
  const questionDecisions=[],replies=[],decisions=[],pane=mountSessionPane({container,arm,onQuestion:(...args)=>questionDecisions.push(args),onReplyQuestion:(...args)=>replies.push(args),onDecide:(...args)=>decisions.push(args),onChange:()=>pane.render(state,options)});
  pane.render({...state,arms:{[arm]:{status:'ready',messages:[],approvals:[]}}},options);
  return {container,pane,decisions,questionDecisions,replies,get state(){return state;},render(change={},opts={}){state={...state,...change};options={...options,...opts};pane.render(state,options);},text:()=>container.textContent,buttons:()=>walk(container,n=>n.tag==='button')};
 }
 test('only optional Muse updates hold; finals, unknown rows, essential decisions and approvals remain',()=>{
  const f=fixture();f.render();assert.match(f.text(),/1 optional update held/);assert.ok(!f.text().includes('OPTIONAL_ONE'));
- for(const text of ['TASK','ESSENTIAL_DECISION','UNKNOWN_MANDATORY','FINAL_ANSWER','node --test','Allow once','Reject'])assert.ok(f.text().includes(text),text);
+ for(const text of ['TASK','ESSENTIAL_DECISION','UNKNOWN_MANDATORY','FINAL_ANSWER'])assert.ok(f.text().includes(text),text);
+ f.render({arms:{with:{...f.state.arms.with,status:'approval',approvals:[approval()]}}});
+ assert.match(f.text(),/OPTIONAL_ONE/);for(const text of ['node --test','Allow once','Reject'])assert.ok(f.text().includes(text),text);
  f.buttons().find(b=>b.textContent==='Allow once').click();assert.equal(f.decisions.length,1);assert.equal(f.decisions[0][0],'with');
 });
 test('baseline renders ordinary updates without ever reading Presence',()=>{
@@ -67,7 +69,7 @@ test('new session generation resets only transient presentation state',()=>{
  assert.ok(!f.text().includes('OPTIONAL_ONE'));assert.match(f.text(),/1 optional update held/);
 });
 test('receipt-age ticks do not recreate approval buttons or disturb their focus',()=>{
- const f=fixture();f.render();const before=f.buttons().find(b=>b.textContent==='Allow once');f.render({}, {now:now+1000});
+ const f=fixture('with',{awaitingApproval:true});f.render();const before=f.buttons().find(b=>b.textContent==='Allow once');f.render({}, {now:now+1000});
  assert.equal(f.buttons().find(b=>b.textContent==='Allow once'),before);
 });
 
@@ -87,7 +89,7 @@ test('resolved native stage awaiting confirmation has a non-actionable pending c
  for(const arm of ['without','with']){const f=fixture(arm);f.render({arms:{[arm]:{status:'approval',active_turn_id:'turn',messages:[],approval_decision_pending:true,approvals:[{status:'decision_pending',decision_pending:true,approvalId:'a',requirementId:{approvalId:'a',sourceIndex:0}}]}}});assert.match(f.text(),/Confirming decision/);assert.match(f.text(),/waiting for Muse/);assert.ok(!f.text().includes('not yet supported'));assert.equal(f.buttons().length,0);}
 });
 test('pending transition invalidates a stale Allow once button without hiding another unsupported request',()=>{
- const f=fixture();f.render();const old=f.buttons().find(b=>b.textContent==='Allow once');f.render({arms:{with:{...f.state.arms.with,approval_decision_pending:true,approvals:[{status:'decision_pending',decision_pending:true,approvalId:'a',requirementId:{approvalId:'a',sourceIndex:0}},{status:'unsupported',reason:'unsupported_subject'}]}}});old.click();assert.equal(f.decisions.length,0);assert.match(f.text(),/Confirming decision/);assert.match(f.text(),/not yet supported/);assert.equal(f.buttons().filter(b=>b.textContent==='Interrupt this agent').length,1);
+ const f=fixture('with',{awaitingApproval:true});f.render();const old=f.buttons().find(b=>b.textContent==='Allow once');f.render({arms:{with:{...f.state.arms.with,approval_decision_pending:true,approvals:[{status:'decision_pending',decision_pending:true,approvalId:'a',requirementId:{approvalId:'a',sourceIndex:0}},{status:'unsupported',reason:'unsupported_subject'}]}}});old.click();assert.equal(f.decisions.length,0);assert.match(f.text(),/Confirming decision/);assert.match(f.text(),/not yet supported/);assert.equal(f.buttons().filter(b=>b.textContent==='Interrupt this agent').length,1);
 });
 test('a pending card cannot reuse the preceding generic unsupported card',()=>{
  const f=fixture();f.render({arms:{with:{status:'approval',active_turn_id:'turn',messages:[],approvals:[{status:'unsupported',reason:'unknown'}]}}});assert.match(f.text(),/No decision can be sent/);f.render({arms:{with:{status:'approval',active_turn_id:'turn',messages:[],approvals:[{status:'decision_pending',decision_pending:true,approvalId:'a',requirementId:{approvalId:'a',sourceIndex:0}}]}}});assert.match(f.text(),/Confirming decision/);assert.ok(!f.text().includes('No decision can be sent'));
@@ -97,9 +99,10 @@ test('rendered decisions describe held updates and mandatory approvals without c
  const f=fixture();f.render();const p=f.pane.presentation();
  assert.equal(p.source,'browser_current_display_policy');assert.equal(p.coverage,'observed');
  assert.ok(p.events.some(e=>e.kind==='message'&&e.ordinal===2&&e.event==='held'&&e.reason==='defer'));
- assert.ok(p.events.some(e=>e.kind==='approval'&&e.event==='shown'&&e.reason==='mandatory'));
+ f.render({arms:{with:{...f.state.arms.with,status:'approval',approvals:[approval()]}}});
+ assert.ok(f.pane.presentation().events.some(e=>e.kind==='approval'&&e.event==='shown'&&e.reason==='mandatory'));
  assert.ok(p.events.some(e=>e.kind==='message'&&e.ordinal===5&&e.event==='shown'&&e.reason==='mandatory'));
- const n=p.events.length;f.render({}, {now:now+1000});assert.equal(f.pane.presentation().events.length,n);
+ const n=f.pane.presentation().events.length;f.render({}, {now:now+1000});assert.equal(f.pane.presentation().events.length,n);
  for(const secret of ['OPTIONAL_ONE','FINAL_ANSWER','node --test','approvalId'])assert.ok(!JSON.stringify(p).includes(secret));
 });
 test('display-time release reasons distinguish manual, send, fallback and disconnect',()=>{
@@ -169,7 +172,7 @@ test('genuine content and optional-type changes still reset either pane journal'
 const nativeQuestion=()=>({userInputId:'prompt-1',turnId:'turn-1',questions:[{id:'recovery',header:'Recovery',question:'Which recovery experience should we use?',selection:{mode:'single'},options:[{label:'Inline notice',description:'Keep editing.'},{label:'Review dialog',description:'Stop to resolve.'}]}]});
 test('native questions remain visible under defer and offer choices or the same message composer',()=>{
  const f=fixture();f.render({arms:{with:{...f.state.arms.with,status:'question',approvals:[],questions:[nativeQuestion()]}}});
- assert.match(f.text(),/Which recovery experience/);assert.ok(!f.text().includes('OPTIONAL_ONE'));assert.match(f.text(),/Muse · question/);
+ assert.match(f.text(),/Which recovery experience/);assert.match(f.text(),/OPTIONAL_ONE/);assert.match(f.text(),/Muse · question/);
  f.buttons().find(b=>b.textContent==='Inline notice').click();assert.deepEqual(f.questionDecisions[0],['with',nativeQuestion(),{action:'answer',answers:[{questionId:'recovery',selectedLabel:'Inline notice'}]}]);
  f.buttons().find(b=>b.textContent==='Reply in message box').click();assert.deepEqual(f.replies[0],['with',nativeQuestion()]);
  f.buttons().find(b=>b.textContent==='Skip question').click();assert.deepEqual(f.questionDecisions[1],['with',nativeQuestion(),{action:'cancel'}]);
@@ -185,6 +188,7 @@ test('mounting a recovered conversation shows existing updates while new updates
  const state={status:'ready',session_generation:8,presence:source(),arms:{with:{status:'ready',messages:rows(),approvals:[]}}};
  const options={connected:true,pendingDecisions:new Map(),now};pane.render(state,options);
  assert.match(container.textContent,/OPTIONAL_ONE/);assert.equal(pane.metrics().held_current,0);
+ state.arms.with.status='running';state.arms.with.active_turn_id='new-turn';
  state.arms.with.messages.push({author:'Muse',phase:'commentary',text:'NEW_OPTIONAL'});pane.render(state,options);
  assert.match(container.textContent,/OPTIONAL_ONE/);assert.ok(!container.textContent.includes('NEW_OPTIONAL'));assert.equal(pane.metrics().held_current,1);
 });
@@ -192,7 +196,7 @@ test('mounting a recovered conversation shows existing updates while new updates
 
 test('new transcript updates keep the active approval button mounted and usable',()=>{
  for(const arm of ['without','with']){
-  const f=fixture(arm);f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
+  const f=fixture(arm,{awaitingApproval:true});f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
   const messages=[...f.state.arms[arm].messages,{author:'Muse',phase:'commentary',text:'LATER_UPDATE'}];
   f.render({arms:{[arm]:{...f.state.arms[arm],messages}}});
   assert.equal(f.buttons().find(b=>b.textContent==='Allow once'),button,'background updates must not replace the pressed control');
@@ -200,35 +204,35 @@ test('new transcript updates keep the active approval button mounted and usable'
  }
 });
 test('another arm decision does not replace this pane approval controls',()=>{
- const f=fixture();f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('with',{awaitingApproval:true});f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
  f.render({}, {pendingDecisions:new Map([['without:other','pending']])});
  assert.equal(f.buttons().find(b=>b.textContent==='Allow once'),button);
 });
 test('retired approval controls check the latest requirement before dispatching',()=>{
- const f=fixture();f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('with',{awaitingApproval:true});f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
  f.render({arms:{with:{...f.state.arms.with,approvals:[{...approval(),requirementId:{approvalId:'a',sourceIndex:1}}]}}});
  button.click();assert.equal(f.decisions.length,0,'a detached older request must not be submitted');
 });
 
 test('approval controls retain identity while disabling on disconnect or pending decision',()=>{
- const f=fixture();f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('with',{awaitingApproval:true});f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
  for(const options of [{connected:false},{connected:true,pendingDecisions:new Map([['with:a','pending']])}]){
   f.render({},options);assert.equal(f.buttons().find(b=>b.textContent==='Allow once'),button);assert.equal(button.disabled,true);button.click();assert.equal(f.decisions.length,0);
  }
  f.render({}, {connected:true,pendingDecisions:new Map()});assert.equal(button.disabled,false);
 });
 test('an old generation approval cannot act on identical IDs reused by a new pair',()=>{
- const f=fixture();f.render();const old=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('with',{awaitingApproval:true});f.render();const old=f.buttons().find(b=>b.textContent==='Allow once');
  f.render({session_generation:2});old.click();assert.equal(f.decisions.length,0);
  const current=f.buttons().find(b=>b.textContent==='Allow once');assert.notEqual(current,old);current.click();assert.equal(f.decisions.length,1);
 });
 
 test('global closure disables unchanged approval buttons immediately',()=>{
- const f=fixture('without');f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('without',{awaitingApproval:true});f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
  f.render({status:'closed'});assert.equal(f.buttons().find(b=>b.textContent==='Allow once'),button);assert.equal(button.disabled,true);button.click();assert.equal(f.decisions.length,0);
 });
 test('adding or removing a different pending approval preserves this control',()=>{
- const f=fixture();f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('with',{awaitingApproval:true});f.render();const button=f.buttons().find(b=>b.textContent==='Allow once');
  const other={...approval(),approvalId:'b',requirementId:{approvalId:'b',sourceIndex:0},command:'node check.mjs'};
  f.render({arms:{with:{...f.state.arms.with,approvals:[approval(),other]}}});
  assert.equal(f.buttons().find(b=>b.textContent==='Allow once'),button);
@@ -236,7 +240,7 @@ test('adding or removing a different pending approval preserves this control',()
 });
 
 test('a removed approval control cannot revive when identical requirements return',()=>{
- const f=fixture();f.render();const old=f.buttons().find(b=>b.textContent==='Allow once');
+ const f=fixture('with',{awaitingApproval:true});f.render();const old=f.buttons().find(b=>b.textContent==='Allow once');
  f.render({arms:{with:{...f.state.arms.with,approvals:[]}}});
  f.render({arms:{with:{...f.state.arms.with,approvals:[approval()]}}});
  old.click();assert.equal(f.decisions.length,0);f.buttons().find(b=>b.textContent==='Allow once').click();assert.equal(f.decisions.length,1);

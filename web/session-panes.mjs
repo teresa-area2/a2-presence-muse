@@ -52,10 +52,14 @@ export function mountSessionPane({container,arm,onDecide,onQuestion=()=>{},onRep
   const workText=working?'Muse is working…'+(tool&&toolState?' · Last tool: '+tool+' ('+toolState+')':''):'';
   workStatus.hidden=!working;if(workStatus.textContent!==workText)workStatus.textContent=workText;
   const presence=projection?state?.presence:null;
-  const part=projection?projection.project(all,{arm,generation:state?.session_generation,presence,connected:connected&&state?.status==='ready',now}):{visible:all,held:[]};
+  // Native commentary has no reliable semantic required/optional flag. Hold
+  // only during this arm's bound active work; reveal at every handoff, including
+  // the running-without-a-turn continuation gap. Other arms do not govern it.
+  const allowDefer=working&&typeof session.active_turn_id==='string'&&session.active_turn_id.length>0&&!session.approval_decision_pending&&!pendingRecovery&&approvals.length===0&&questions.length===0;
+  const part=projection?projection.project(all,{arm,generation:state?.session_generation,presence,connected:connected&&state?.status==='ready',allowDefer,now}):{visible:all,held:[]};
   const messages=part.visible,held=part.held;
   const view=held.length?presenceView(presence,null,now):null,age=held.length?receiptAgeLabel(presence?.source,now):null;
-  const noticeText=held.length?held.length+' optional update'+(held.length===1?'':'s')+' held · '+view.reading+' · '+age+'. Decisions, errors, approvals and final answers stay visible.':'';
+  const noticeText=held.length?held.length+' optional update'+(held.length===1?'':'s')+' held while Muse works · '+view.reading+' · '+age+'. Native questions, approvals and final answers stay visible.':'';
   const key=JSON.stringify([state?.session_generation,messages,held,approvals,questions,session.status,session.active_turn_id,session.interrupt_pending,session.approval_decision_pending,pendingRecovery,connected,[...pendingDecisions.entries()],[...pendingQuestions.entries()]]);if(key===previous){for(const entry of approvalNodes.values())for(const control of entry.buttons)control.button.disabled=!control.allowed();if(heldText)heldText.textContent=noticeText;recordRendered(state,all,approvals,questions,presence,connected,now);return;}previous=key;
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<60,oldTop=feed.scrollTop;conversation.replaceChildren();heldHost.replaceChildren();
   heldText=null;

@@ -1,8 +1,9 @@
 // Muse corrective implementation; Codex integrated strict error guards and conservative history recovery.
 // Presentation-only policy for optional agent commentary (Presence arm only).
 // The baseline arm never consults Presence and always shows ordinary updates.
-// Only valid nonempty-text author 'Muse' / phase 'commentary' rows may be
-// optional. Unknown authors/phases, explicit essential:true, mandatory:true,
+// Only complete nonempty-text author 'Muse' / phase 'commentary' rows may be
+// held. Native phase is model-declared, not a semantic optionality guarantee.
+// Unknown authors/phases, explicit essential:true, mandatory:true,
 // decisionNeeded:true, decision_needed:true, kind:error, kind:decision and
 // errors/final answers/user rows are mandatory. Deferral reuses the existing
 // consumer eligibility contract via presenceView(value,null,now).controls,
@@ -16,6 +17,7 @@ export function isOptionalCommentary(row){
   if(row.author !== 'Muse') return false;
   if(row.phase !== 'commentary') return false;
   if(typeof row.text !== 'string' || row.text.trim().length === 0) return false;
+  if(row.truncated === true || row.cut_off === true) return false;
   if(row.essential === true || row.mandatory === true) return false;
   if(row.decisionNeeded === true || row.decision_needed === true) return false;
   if(['error','decision','approval'].includes(row.kind) || ['error','decision','approval'].includes(row.type) || row.error != null) return false;
@@ -54,7 +56,7 @@ export function heldNoticeText(heldCount, reading, ageLabel){
     : reading === 'Last eligible guidance'
       ? 'Last eligible policy: defer optional updates'
       : 'Deferring optional updates';
-  return `Holding ${n} optional update${n === 1 ? '' : 's'} · ${scope}${when}. Mandatory messages, approvals and answers stay visible.`;
+  return `Holding ${n} optional update${n === 1 ? '' : 's'} · ${scope}${when}. Native questions, approvals and final answers stay visible.`;
 }
 
 // Submission acknowledgment changes delivery state, not the message identity.
@@ -73,6 +75,8 @@ export function messageHistoryKey(row){
     row?.mandatory === true,
     row?.decisionNeeded === true,
     row?.decision_needed === true,
+    row?.truncated === true,
+    row?.cut_off === true,
   ]);
 }
 
@@ -193,7 +197,10 @@ export function createCommentaryProjection({monotonicNow=()=>performance.now(),r
     // seen or released. Only updates arriving after this mount may be held.
     if (!initialized && revealExistingOnMount) for (const [key,total] of totals) shown.set(key,total);
     let defer = false;
-    if(arm === 'with' && connected === true){
+    // The pane supplies false when its native turn ends or needs attention.
+    // Ordinary release permanently marks prior rows shown without counting a
+    // manual reveal or pretending the source policy changed.
+    if(arm === 'with' && connected === true && opts?.allowDefer !== false){
       let presence;
       try{
         presence = opts.presence;

@@ -20,7 +20,7 @@ Windows/WSL qualification limits, see [platform support](PLATFORM-SUPPORT.md).
   mkdir -p "$HOME/Developer"
   git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
   cd "$HOME/Developer/open-presence-muse-judge"
-  git checkout --detach submission-2026-11-04-v3
+  git checkout --detach submission-2026-11-04-v4
   sh scripts/judge-mac.sh requirements
 )
 ```

@@ -20,7 +20,11 @@ Use a trusted personal machine. The local interface does not authenticate other 
 
 Choose a [prepared coding task](coding-tasks/README.md), open both sessions and start with a plan. Each agent works in a separate workspace. Review approvals in each pane, ask follow-up questions, then use **Check code** for prepared tasks. An unavailable check is not a pass. Your own task has no predefined frozen checks.
 
-Both agents use isolated configurations with personal imports from other agent configurations disabled; task-local instructions, tools and normal approvals remain available. **Without Presence** is the configured baseline, not a copy of your complete everyday Muse setup. When guidance is unavailable, the Presence session uses ordinary fallback. Essential answers, errors and approvals remain visible.
+Both agents use isolated configurations with personal imports from other agent configurations disabled; task-local instructions, tools and normal approvals remain available. **Without Presence** is the configured baseline, not a copy of your complete everyday Muse setup. When guidance is unavailable, the Presence session uses ordinary fallback. Native questions, approvals and final answers remain visible. Under defer,
+progress commentary is held only during that agent's active working turn and is
+revealed when it finishes or needs attention. Native commentary has no reliable
+required/optional marker, so arbitrary required prose cannot be recognized with
+certainty while work continues.
 
 The resource view reports available usage, which can include reasoning and tool arguments. Differences in counts do not establish cost savings, causation or human benefit. Review the [Observer disclosure](docs/OBSERVER-REPORT.md) before using its optional assessment.
 
