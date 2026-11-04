@@ -19,7 +19,7 @@ Windows/WSL qualification limits, see [platform support](PLATFORM-SUPPORT.md).
   mkdir -p "$HOME/Developer"
   git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
   cd "$HOME/Developer/open-presence-muse-judge"
-  git checkout --detach submission-2026-11-04
+  git checkout --detach submission-2026-11-04-v2
   sh scripts/judge-mac.sh requirements
 )
 ```
@@ -72,6 +72,16 @@ a free port. Omit the consent flag to test ordinary fallback with live Presence 
 same entitled model for both agents. Click **Open sessions**, wait for both panes
 to show **Ready**, then select **Both**. Opening the page alone does not open the
 Muse sessions; no coding task starts until you send a message.
+
+**Which task should I choose?** A prepared task gives both agents the same
+starting task and common checks, making their work easier to compare. **Check
+code** runs its test suite on each selected agent's work; **Send CI feedback**
+is a separate action that sends each selected agent its own results to review.
+Plans and conversations can still diverge, so this is not a controlled comparison.
+
+**Your own task** starts with a clean workspace for your own goal. It has no
+predefined test suite, so **Check code** and **Send CI feedback** are unavailable.
+You can ask the agents to write and run tests and review their work yourself.
 
 ## Test it
 
