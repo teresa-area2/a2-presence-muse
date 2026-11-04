@@ -127,3 +127,77 @@ test('older server markup upgrades locally while current controls and saved rati
   if(legacy)for(const arm of ['without','with']){assert.ok(rows[arm].innerHTML.includes('How much effort did working with this side require?'));assert.ok(rows[arm].innerHTML.includes('Higher number = more effort'));assert.ok(rows[arm].innerHTML.includes('data-measure-arm="'+arm+'"'));}
  }
 });
+
+test('paired review cards expose independent effort and interruption groups in terminal order',()=>{
+ const html=sessionMeasurementHtml();
+ assert.ok(html.indexOf('data-review-arm="without"')<html.indexOf('data-review-arm="with"'));
+ assert.equal((html.match(/class="review-cards"/g)??[]).length,1);
+ assert.equal((html.match(/<fieldset class="interruption-rating">/g)??[]).length,2);
+ assert.equal((html.match(/<legend>Interruptions you noticed<\/legend>/g)??[]).length,2);
+ for(const arm of ['without','with']){
+  assert.ok(html.includes('id="rating-effort-summary-'+arm+'" role="status">Not reported'));
+  assert.ok(html.includes('id="rating-interruptions-summary-'+arm+'" role="status">Not reported'));
+  assert.ok(html.includes('data-measure-arm="'+arm+'" data-measure-action="none" aria-pressed="false">None (0)'));
+  assert.ok(html.includes('<div class="rating-footer"><button class="ghost" type="button" data-measure-arm="'+arm+'" data-measure-action="clear">Clear ratings'));
+ }
+});
+
+test('restored interruption reports distinguish unreported, zero and nonzero without writing ratings',()=>{
+ const fields=new Map(),buttons=['without','with'].flatMap(arm=>['none','interruption'].map(action=>({dataset:{measureArm:arm,measureAction:action},attributes:{},setAttribute(name,value){this.attributes[name]=value;}})));
+ const container={querySelector:id=>{if(!fields.has(id))fields.set(id,{textContent:''});return fields.get(id);},querySelectorAll:()=>buttons,addEventListener(){}};
+ let posts=0;const panel=mountSessionMeasurement(container,{post(){posts++;},onState(){}});
+ for(const counts of [[null,0],[0,3],[2,null],[100,0]]){
+  const m=new SessionMeasurement();for(const [index,arm]of ['without','with'].entries())m.feedback({arm,action:'feedback',effort:index?5:1,interruptions:counts[index]});
+  const state={session_generation:10,measurement:m.snapshot()},before=structuredClone(state);
+  panel.render(state,{connected:true});panel.render(state,{connected:false});
+  for(const [index,arm]of ['without','with'].entries()){
+   assert.equal(fields.get('#rating-interruptions-summary-'+arm).textContent,counts[index]===null?'Not reported':counts[index]+' noticed');
+   assert.equal(buttons.find(b=>b.dataset.measureArm===arm&&b.dataset.measureAction==='none').attributes['aria-pressed'],String(counts[index]===0));
+   assert.equal(fields.get('#rating-effort-summary-'+arm).textContent,index?'Very high effort (5/5)':'Very little effort (1/5)');
+  }
+  assert.deepEqual(state,before);
+ }
+ assert.equal(posts,0);
+});
+
+test('interruption controls preserve action payloads, explicit zero and arm-scoped clear',async()=>{
+ const fields=new Map(),buttons=['without','with'].flatMap(arm=>['none','interruption','clear'].map(action=>({dataset:{measureArm:arm,measureAction:action},setAttribute(){},closest(){return this;}})));
+ let listener,panel;const posts=[],m=new SessionMeasurement();m.feedback({arm:'without',action:'feedback',effort:4,interruptions:2});m.feedback({arm:'with',action:'feedback',effort:3});
+ const container={querySelector:id=>{if(!fields.has(id))fields.set(id,{textContent:''});return fields.get(id);},querySelectorAll:()=>buttons,contains:b=>buttons.includes(b),addEventListener:(name,fn)=>listener=fn};
+ const snapshot=()=>({session_generation:11,measurement:m.snapshot()});
+ panel=mountSessionMeasurement(container,{post:async(route,body)=>{posts.push({route,body});const {generation,...action}=body;m.feedback(action);return {state:snapshot()};},onState:state=>panel.render(state,{connected:true})});
+ panel.render(snapshot(),{connected:true});
+ for(const [arm,action]of [['with','none'],['with','interruption'],['without','clear']])await listener({target:buttons.find(b=>b.dataset.measureArm===arm&&b.dataset.measureAction===action)});
+ assert.deepEqual(posts,[{route:'human-review',body:{arm:'with',action:'feedback',interruptions:0,generation:11}},{route:'human-review',body:{arm:'with',action:'feedback',interruptions:1,generation:11}},{route:'human-review',body:{arm:'without',action:'feedback',effort:null,interruptions:null,generation:11}}]);
+ assert.equal(m.snapshot().review.arms.with.effort_rating,3);assert.equal(m.snapshot().review.arms.with.interruption_count,1);
+ assert.equal(m.snapshot().review.arms.without.effort_rating,null);assert.equal(m.snapshot().review.arms.without.interruption_count,null);
+ assert.equal(fields.get('#rating-interruptions-summary-without').textContent,'Not reported');assert.equal(fields.get('#rating-interruptions-summary-with').textContent,'1 noticed');
+});
+
+test('cached flat review rows move into one paired wrapper without losing either arm or saved data',()=>{
+ const fields=new Map(),children=[],rows={},attributes={},upgraded=new Set();let creates=0,posts=0;
+ const container={ownerDocument:{createElement(tag){assert.equal(tag,'div');creates++;return {className:'',children:[],append(...nodes){for(const node of nodes){children.splice(children.indexOf(node),1);this.children.push(node);}}};}},querySelector(selector){
+  if(selector==='.review-cards')return children.find(node=>node.className==='review-cards')??null;
+  for(const arm of ['without','with'])if(selector==='[data-measure-arm="'+arm+'"][data-measure-action="effort"]')return {closest:()=>rows[arm]};
+  if(!fields.has(selector))fields.set(selector,{textContent:''});return fields.get(selector);
+ },querySelectorAll:()=>[],addEventListener(){}};
+ for(const arm of ['without','with']){attributes[arm]={};rows[arm]={querySelector:()=>upgraded.has(arm)?{}:null,setAttribute(name,value){attributes[arm][name]=value;},set innerHTML(value){assert.ok(value.includes('class="interruption-rating"'));upgraded.add(arm);},before(node){children.splice(children.indexOf(this),0,node);}};children.push(rows[arm]);}
+ const m=new SessionMeasurement();m.feedback({arm:'without',action:'feedback',effort:1,interruptions:0});m.feedback({arm:'with',action:'feedback',effort:5,interruptions:3});
+ const state={session_generation:12,measurement:m.snapshot()},before=structuredClone(state);
+ for(let mount=0;mount<2;mount++){const panel=mountSessionMeasurement(container,{post(){posts++;},onState(){}});panel.render(state,{connected:true});}
+ assert.equal(creates,1);assert.equal(children.length,1);assert.equal(children[0].className,'review-cards');
+ assert.deepEqual(children[0].children,[rows.without,rows.with]);assert.equal(new Set(children[0].children).size,2);
+ for(const arm of ['without','with'])assert.equal(attributes[arm]['data-review-arm'],arm);
+ assert.equal(fields.get('#rating-interruptions-summary-without').textContent,'0 noticed');assert.equal(fields.get('#rating-interruptions-summary-with').textContent,'3 noticed');
+ assert.equal(posts,0);assert.deepEqual(state,before);
+});
+
+test('unchanged review summaries do not repeatedly mutate their live regions on timer renders',()=>{
+ const fields=new Map();let writes=0;
+ const container={querySelector(selector){if(!fields.has(selector)){if(selector.startsWith('#rating-')){let text='';fields.set(selector,{get textContent(){return text;},set textContent(value){writes++;text=value;}});}else fields.set(selector,{textContent:''});}return fields.get(selector);},querySelectorAll:()=>[],addEventListener(){}};
+ const m=new SessionMeasurement(),panel=mountSessionMeasurement(container,{post(){throw Error('unexpected write');},onState(){}}),state=()=>({session_generation:13,measurement:m.snapshot()});
+ panel.render(state(),{connected:true});assert.equal(writes,4);
+ for(let tick=0;tick<5;tick++)panel.render(state(),{connected:true});assert.equal(writes,4);
+ m.feedback({arm:'with',action:'feedback',interruptions:0});panel.render(state(),{connected:true});assert.equal(writes,5);
+ assert.equal(fields.get('#rating-interruptions-summary-with').textContent,'0 noticed');
+});

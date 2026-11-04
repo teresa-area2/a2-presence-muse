@@ -325,14 +325,23 @@ main:has(#start:enabled) #send-status { display: none; }
 
 /* Codex's measurement panel (#session-measurement): compact controls in the page's style. */
 #session-measurement .result-metrics { margin-top: 12px; }
-#session-measurement .rating { display: grid; gap: 12px; margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--bone); }
-#session-measurement .rating-heading { display: flex; align-items: center; gap: 12px; }
-#session-measurement .rating-heading > strong { font-size: 13px; font-weight: 600; }
-#session-measurement .rating-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
-#session-measurement .rating-actions > span { color: var(--muted); font-size: 12px; }
+#session-measurement .review-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+#session-measurement .rating { --review-accent: var(--ink); --review-tint: var(--paper); display: grid; align-content: start; gap: 20px; min-width: 0; margin: 0; padding: 16px; border: 1px solid var(--rule); border-top: 3px solid var(--review-accent); border-radius: 12px; background: var(--surface); }
+#session-measurement .rating[data-review-arm="with"] { --review-accent: var(--indigo); --review-tint: var(--indigo-pale); }
+#session-measurement .rating-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 32px; }
+#session-measurement .rating-heading > strong { color: var(--review-accent); font-size: 14px; font-weight: 700; }
+#session-measurement .rating-footer { padding-top: 8px; border-top: 1px solid var(--bone); }
 #session-measurement .rating button { min-height: 28px; padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 500; }
-#session-measurement .effort-rating { min-width: 0; margin: 0; padding: 0; border: 0; }
-#session-measurement .effort-rating legend { padding: 0; font-size: 12px; font-weight: 600; }
+#session-measurement :is(.effort-rating, .interruption-rating) { min-width: 0; margin: 0; padding: 0; border: 0; }
+#session-measurement :is(.effort-rating, .interruption-rating) legend { padding: 0; font-size: 12px; font-weight: 600; }
+#session-measurement .rating-value { margin-top: 10px; color: var(--ink); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#session-measurement .interruption-rating { padding: 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--review-tint); }
+#session-measurement .interruption-rating legend { padding: 0 4px; }
+#session-measurement .interruption-rating .rating-value { margin: 0 0 12px; }
+#session-measurement .interruption-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+#session-measurement .interruption-actions button { min-height: 42px; padding: 10px; font-size: 12px; background: var(--surface); }
+#session-measurement .interruption-actions [aria-pressed="true"] { border-color: var(--review-accent); box-shadow: inset 0 0 0 1px var(--review-accent); font-weight: 700; }
+#session-measurement .rating button:focus-visible { outline: 2px solid var(--review-accent); outline-offset: 3px; }
 #session-measurement .effort-scale-note { margin: 4px 0 8px; color: var(--muted); font-size: 11px; }
 #session-measurement .effort-scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 /* Identical intensity scale for both arms; text and selection marks carry meaning. */
@@ -341,7 +350,7 @@ main:has(#start:enabled) #send-status { display: none; }
 #session-measurement [data-measure-score="3"] { --effort-tone: #d0ccee; }
 #session-measurement [data-measure-score="4"] { --effort-tone: #b9b3e1; }
 #session-measurement [data-measure-score="5"] { --effort-tone: #9f97d2; }
-#session-measurement .rating button[data-measure-score] { position: relative; min-width: 0; min-height: 64px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--effort-tone); border-color: #8c85ac; color: #25213f; }
+#session-measurement .rating button[data-measure-score] { position: relative; min-width: 0; min-height: 80px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--effort-tone); border-color: #8c85ac; color: #25213f; }
 #session-measurement .effort-score-number { font: 600 14px/1.2 var(--mono); }
 #session-measurement .effort-score-label { font-size: 11px; line-height: 1.35; }
 #session-measurement .rating button[data-measure-score]:hover:not(:disabled) { background: var(--effort-tone); border-color: #25213f; color: #25213f; }
@@ -392,6 +401,7 @@ body[data-present="true"] .session-feed :is(pre, code) { font-size: 14px; }
   .fixture-chip { order: 4; max-width: 100%; }
 }
 @media (max-width: 820px) {
+  #session-measurement .review-cards { grid-template-columns: 1fr; }
   .pc-head { grid-template-columns: minmax(0, 1fr) 76px; }
   .pc-title { grid-column: 1 / -1; grid-row: 2; }
   .pc-head > .pv-replay { grid-column: 2; grid-row: 1; }
