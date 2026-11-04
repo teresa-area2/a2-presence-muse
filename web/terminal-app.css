@@ -325,13 +325,31 @@ main:has(#start:enabled) #send-status { display: none; }
 
 /* Codex's measurement panel (#session-measurement): compact controls in the page's style. */
 #session-measurement .result-metrics { margin-top: 12px; }
-#session-measurement .rating { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--bone); }
-#session-measurement .rating > strong { min-width: 136px; font-size: 13px; font-weight: 600; }
-#session-measurement .rating > span { margin-left: 8px; color: var(--muted); font-size: 12px; }
+#session-measurement .rating { display: grid; gap: 12px; margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--bone); }
+#session-measurement .rating-heading { display: flex; align-items: center; gap: 12px; }
+#session-measurement .rating-heading > strong { font-size: 13px; font-weight: 600; }
+#session-measurement .rating-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+#session-measurement .rating-actions > span { color: var(--muted); font-size: 12px; }
 #session-measurement .rating button { min-height: 28px; padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 500; }
-#session-measurement .rating button[data-measure-score] { width: 28px; padding: 0; font: 500 11px/1 var(--mono); }
-#session-measurement .rating button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
-#session-measurement .rating:last-of-type button[aria-pressed="true"] { background: var(--indigo); border-color: var(--indigo); }
+#session-measurement .effort-rating { min-width: 0; margin: 0; padding: 0; border: 0; }
+#session-measurement .effort-rating legend { padding: 0; font-size: 12px; font-weight: 600; }
+#session-measurement .effort-scale-note { margin: 4px 0 8px; color: var(--muted); font-size: 11px; }
+#session-measurement .effort-scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+/* Identical intensity scale for both arms; text and selection marks carry meaning. */
+#session-measurement [data-measure-score="1"] { --effort-tone: #f1f0fb; }
+#session-measurement [data-measure-score="2"] { --effort-tone: #e3e1f7; }
+#session-measurement [data-measure-score="3"] { --effort-tone: #d0ccee; }
+#session-measurement [data-measure-score="4"] { --effort-tone: #b9b3e1; }
+#session-measurement [data-measure-score="5"] { --effort-tone: #9f97d2; }
+#session-measurement .rating button[data-measure-score] { position: relative; min-width: 0; min-height: 64px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: var(--effort-tone); border-color: #8c85ac; color: #25213f; }
+#session-measurement .effort-score-number { font: 600 14px/1.2 var(--mono); }
+#session-measurement .effort-score-label { font-size: 11px; line-height: 1.35; }
+#session-measurement .rating button[data-measure-score]:hover:not(:disabled) { background: var(--effort-tone); border-color: #25213f; color: #25213f; }
+#session-measurement .rating button[data-measure-score][aria-pressed="true"] { border-color: #25213f; box-shadow: inset 0 0 0 1px #25213f; }
+#session-measurement .rating button[data-measure-score][aria-pressed="true"]::after { content: "✓"; position: absolute; top: 4px; right: 6px; font-size: 12px; font-weight: 700; }
+#session-measurement .rating button[data-measure-score][aria-pressed="true"] .effort-score-label { font-weight: 700; }
+#session-measurement .rating button[data-measure-score]:focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; }
+#session-measurement .rating button[data-measure-score]:disabled { opacity: .55; }
 #session-measurement .footnote { margin-top: 12px; }
 
 /* Desktop: the working area fills the window; secondary panels scroll below. */

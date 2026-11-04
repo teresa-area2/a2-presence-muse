@@ -35,16 +35,16 @@ test('UI measurement actions are explicit self-reports, null is distinct from ze
  const m=new SessionMeasurement();assert.deepEqual(reviewAction({action:'none',arm:'without',measurement:m.snapshot()}),{arm:'without',action:'feedback',interruptions:0});
  assert.deepEqual(reviewAction({action:'effort',arm:'with',score:3,measurement:m.snapshot()}),{arm:'with',action:'feedback',effort:3});
  m.feedback({arm:'with',action:'feedback',effort:3,interruptions:0});assert.equal(reviewAction({action:'effort',arm:'with',score:3,measurement:m.snapshot()}).effort,null);
- const v=measurementValues(m.snapshot());assert.equal(v.with.interruptions,'0');assert.equal(v.without.interruptions,'Not reported');assert.equal(v.with.review,'—');assert.equal(v.with.effort,'3/5');
+ const v=measurementValues(m.snapshot());assert.equal(v.with.interruptions,'0');assert.equal(v.without.interruptions,'Not reported');assert.equal(v.with.review,'—');assert.equal(v.with.effort,'Moderate effort (3/5)');
  assert.ok(!('usage' in m.snapshot()));assert.match(m.snapshot().resources,/without_adding_native_and_trace/);
- assert.match(sessionMeasurementHtml(),/1 low–5 high/);assert.match(sessionMeasurementHtml(),/not attention/);assert.ok(!sessionMeasurementHtml().includes('<form'));
+ assert.match(sessionMeasurementHtml(),/Higher number = more effort/);assert.match(sessionMeasurementHtml(),/not attention/);assert.ok(!sessionMeasurementHtml().includes('<form'));
 });
 test('actual measurement control handler gates pending/disconnected actions and uses the current generation',async()=>{
  const fields=new Map(),buttons=['without','with'].flatMap(arm=>['review','effort','none','interruption','clear'].map(action=>({dataset:{measureArm:arm,measureAction:action,...(action==='effort'?{measureScore:'3'}:{})},setAttribute(){},closest(){return this;}})));
  let listener,release,posted;const container={querySelector:id=>{if(!fields.has(id))fields.set(id,{textContent:''});return fields.get(id);},querySelectorAll:()=>buttons,contains:e=>buttons.includes(e),addEventListener:(name,fn)=>{listener=fn;}};
  const measurement=new SessionMeasurement(),first={session_generation:1,measurement:measurement.snapshot()},panel=mountSessionMeasurement(container,{post:(route,body)=>{posted={route,body};return new Promise(r=>{release=r;});},onState:state=>panel.render(state,{connected:true})});
  panel.render(first,{connected:false});assert.ok(buttons.every(b=>b.disabled));panel.render(first,{connected:true});const button=buttons.find(b=>b.dataset.measureArm==='with'&&b.dataset.measureAction==='effort');const pending=listener({target:button});assert.ok(buttons.every(b=>b.disabled));assert.deepEqual(posted,{route:'human-review',body:{arm:'with',action:'feedback',effort:3,generation:1}});
- measurement.feedback({arm:'with',action:'feedback',effort:3});release({state:{session_generation:1,measurement:measurement.snapshot()}});await pending;assert.ok(buttons.every(b=>!b.disabled));assert.equal(fields.get('#measure-effort-with').textContent,'3/5');assert.equal(fields.get('#measure-interruptions-with').textContent,'Not reported');
+ measurement.feedback({arm:'with',action:'feedback',effort:3});release({state:{session_generation:1,measurement:measurement.snapshot()}});await pending;assert.ok(buttons.every(b=>!b.disabled));assert.equal(fields.get('#measure-effort-with').textContent,'Moderate effort (3/5)');assert.equal(fields.get('#measure-interruptions-with').textContent,'Not reported');
 });
 
 test('paired elapsed display distinguishes unknown, completed, running and stopped partial turn time',()=>{
@@ -69,4 +69,42 @@ test('native steering and interrupt acknowledgements stay distinct from question
  assert.equal(s.turn_actions.participant.with.steering_accepted,1);assert.equal(s.turn_actions.coordinator.with.interrupt_accepted,1);assert.equal(s.turn_actions.participant.with.interrupt_accepted,0,'duplicate receipt is not another action');assert.equal(s.turn_actions.participant.with.interrupt_unconfirmed,1);
  assert.equal(s.actions.participant.arms.with.approval_decisions,0);assert.equal(s.review.arms.with.interruption_count,null);
  assert.ok(!JSON.stringify(s).includes('Consider edits'));assert.ok(!JSON.stringify(s).includes('w1'));
+});
+
+
+test('both effort scales state each numeric meaning and repeat the direction accessibly',()=>{
+ const html=sessionMeasurementHtml(),labels=['Very little effort','Little effort','Moderate effort','High effort','Very high effort'];
+ assert.equal((html.match(/How much effort did working with this side require\?/g)??[]).length,2);
+ assert.equal((html.match(/Higher number = more effort/g)??[]).length,2);
+ for(const arm of ['without','with'])for(const [i,label]of labels.entries()){
+  const side=arm==='with'?'With Presence':'Without Presence',score=i+1;
+  assert.ok(html.includes('data-measure-arm="'+arm+'" data-measure-action="effort" data-measure-score="'+score+'" aria-label="'+side+' effort '+score+' of 5 — '+label+'"'),arm+' '+label);
+ }
+ assert.equal((html.match(/class="effort-scale"/g)??[]).length,2);
+});
+
+test('semantic display preserves every effort value and unreported state without recoding',()=>{
+ const labels=['Very little effort','Little effort','Moderate effort','High effort','Very high effort'],m=new SessionMeasurement();
+ for(const score of [null,1,2,3,4,5]){
+  for(const arm of ['without','with'])m.feedback({arm,action:'feedback',effort:score});
+  const before=m.snapshot(),values=measurementValues(before);
+  for(const arm of ['without','with']){
+   assert.equal(values[arm].effort,score===null?'Not reported':labels[score-1]+' ('+score+'/5)');
+   assert.equal(before.review.arms[arm].effort_rating,score);
+   for(const next of [1,2,3,4,5])assert.deepEqual(reviewAction({action:'effort',arm,score:next,measurement:before}),{arm,action:'feedback',effort:next===score?null:next});
+  }
+  assert.deepEqual(m.snapshot(),before);
+ }
+});
+
+test('rendering restored ratings retains selection and never posts a new assessment',()=>{
+ const fields=new Map(),buttons=['without','with'].flatMap(arm=>[1,2,3,4,5].map(score=>({dataset:{measureArm:arm,measureAction:'effort',measureScore:String(score)},attributes:{},setAttribute(name,value){this.attributes[name]=value;}})));
+ const container={querySelector:id=>{if(!fields.has(id))fields.set(id,{textContent:''});return fields.get(id);},querySelectorAll:()=>buttons,addEventListener(){}};
+ let posts=0;const panel=mountSessionMeasurement(container,{post(){posts++;},onState(){}}),m=new SessionMeasurement();
+ m.feedback({arm:'without',action:'feedback',effort:2});m.feedback({arm:'with',action:'feedback',effort:4});
+ const state={session_generation:7,measurement:m.snapshot()},before=structuredClone(state);
+ for(const connected of [true,false,true])panel.render(state,{connected});
+ assert.equal(posts,0);assert.deepEqual(state,before);
+ assert.equal(fields.get('#measure-effort-without').textContent,'Little effort (2/5)');assert.equal(fields.get('#measure-effort-with').textContent,'High effort (4/5)');
+ for(const button of buttons)assert.equal(button.attributes['aria-pressed'],String(Number(button.dataset.measureScore)===(button.dataset.measureArm==='with'?4:2)));
 });
