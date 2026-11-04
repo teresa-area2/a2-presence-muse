@@ -108,3 +108,22 @@ test('rendering restored ratings retains selection and never posts a new assessm
  assert.equal(fields.get('#measure-effort-without').textContent,'Little effort (2/5)');assert.equal(fields.get('#measure-effort-with').textContent,'High effort (4/5)');
  for(const button of buttons)assert.equal(button.attributes['aria-pressed'],String(Number(button.dataset.measureScore)===(button.dataset.measureArm==='with'?4:2)));
 });
+
+test('older server markup upgrades locally while current controls and saved ratings stay intact',()=>{
+ for(const legacy of [true,false]){
+  const fields=new Map(),rows={},controls={},buttons=[];let posts=0,writes=0;
+  for(const arm of ['without','with']){
+   let markup='';rows[arm]={querySelector:()=>legacy?null:{},set innerHTML(value){writes++;markup=value;},get innerHTML(){return markup;}};
+   controls[arm]={closest:()=>rows[arm]};
+   for(const score of [1,2,3,4,5])buttons.push({dataset:{measureArm:arm,measureAction:'effort',measureScore:String(score)},setAttribute(){}});
+  }
+  const term={textContent:'Your effort · 1 low–5 high'};
+  const container={querySelector(selector){for(const arm of ['without','with'])if(selector==='[data-measure-arm="'+arm+'"][data-measure-action="effort"]')return controls[arm];if(!fields.has(selector))fields.set(selector,{textContent:'',...(selector==='#measure-effort-with'?{closest:()=>({querySelector:()=>term})}:{})});return fields.get(selector);},querySelectorAll:()=>buttons,addEventListener(){}};
+  const m=new SessionMeasurement();m.feedback({arm:'without',action:'feedback',effort:1});m.feedback({arm:'with',action:'feedback',effort:5});
+  const state={session_generation:9,measurement:m.snapshot()},before=structuredClone(state);
+  const panel=mountSessionMeasurement(container,{post(){posts++;},onState(){}});panel.render(state,{connected:true});panel.render(state,{connected:true});
+  assert.equal(writes,legacy?2:0,'only legacy rating groups are replaced, once at mount');assert.equal(posts,0);assert.deepEqual(state,before);
+  assert.equal(term.textContent,'Your effort');assert.equal(fields.get('#measure-effort-without').textContent,'Very little effort (1/5)');assert.equal(fields.get('#measure-effort-with').textContent,'Very high effort (5/5)');
+  if(legacy)for(const arm of ['without','with']){assert.ok(rows[arm].innerHTML.includes('How much effort did working with this side require?'));assert.ok(rows[arm].innerHTML.includes('Higher number = more effort'));assert.ok(rows[arm].innerHTML.includes('data-measure-arm="'+arm+'"'));}
+ }
+});
