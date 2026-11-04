@@ -1,6 +1,6 @@
 # Follow the judge journey
 
-Mauro and Peña should use the same public instructions as judges:
+Testers can use the same public instructions as judges:
 **[Judge journey: clone, run, test and return results](JUDGE-QUICKSTART.md)**.
 
 Start from the public [GitHub repository](https://github.com/teresa-area2/a2-presence-muse).

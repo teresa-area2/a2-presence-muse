@@ -10,7 +10,8 @@ Windows/WSL qualification limits, see [platform support](PLATFORM-SUPPORT.md).
 
 ## Quick setup
 
-**1. Fresh clone and requirements check** in macOS Terminal:
+**1. Clone and check requirements once** in the macOS **Terminal** app
+(Applications → Utilities → Terminal):
 
 ```sh
 (
@@ -19,7 +20,7 @@ Windows/WSL qualification limits, see [platform support](PLATFORM-SUPPORT.md).
   mkdir -p "$HOME/Developer"
   git clone https://github.com/teresa-area2/a2-presence-muse.git "$HOME/Developer/open-presence-muse-judge"
   cd "$HOME/Developer/open-presence-muse-judge"
-  git checkout --detach submission-2026-11-04-v2
+  git checkout --detach submission-2026-11-04-v3
   sh scripts/judge-mac.sh requirements
 )
 ```
@@ -29,7 +30,9 @@ tools and browser availability before installing app dependencies. It leaves
 your global Node, nvm and shell settings unchanged and makes no model/OP request.
 Continue only when requirements pass; account access is checked by the first
 real task. If it fails, follow its listed fix and rerun `(cd "$HOME/Developer/open-presence-muse-judge" && sh scripts/judge-mac.sh requirements)`.
-Use a new unused folder for a fresh rehearsal; keep the previous clone untouched.
+Clone and install once for this release. You can use the same checkout for every
+task and later visit; you do not need to delete or clone it again. For a separate
+fresh-install rehearsal, use a new unused folder and keep the previous clone.
 
 **2. Install and sign in** from the new checkout:
 
@@ -50,7 +53,7 @@ supplies neither. The [account reference](JUDGE-REFERENCE.md#1-connect-your-own-
 covers installation and login trouble.
 
 <a id="3-start-with-explicit-typing-consent"></a>
-**3. Start the workspace.** Read [Privacy & Data Use](PRIVACY-DATA-USE.md) first.
+**3. Start the workspace in macOS Terminal.** Read [Privacy & Data Use](PRIVACY-DATA-USE.md) first.
 The consent flag enables textbox timing/category metadata to OP, including before
 Send. Coding messages go separately to Muse. Testers share an OP calibration
 dataset; a fixed deletion date is not enforced. The privacy notice explains how
@@ -67,11 +70,15 @@ to stop capture and request deletion. If you agree:
 Keep Terminal open and open the **exact printed URL** in Chrome or Firefox.
 OP access is retrieved automatically; Cipher needs no npm token. Busy 8930 selects
 a free port. Omit the consent flag to test ordinary fallback with live Presence off.
+If another terminal app reports a detached-terminal error, run this start command
+in macOS Terminal; a tester resolved the issue that way without reinstalling.
 
-**4. Open the coding sessions in the browser.** Choose any prepared task and the
-same entitled model for both agents. Click **Open sessions**, wait for both panes
-to show **Ready**, then select **Both**. Opening the page alone does not open the
-Muse sessions; no coding task starts until you send a message.
+**4. Start a task in the browser.** In the task menu, choose a prepared task, such
+as **Save conflicts**. In **Model**, choose an entitled model for both agents,
+such as **Spark 1.3**. Click **Open sessions**, wait for both panes to show
+**Ready**, then select **Both**. Opening the page alone does not open the Muse
+sessions; no coding task starts until you send a message. Task and model selection
+are locked while sessions are open.
 
 **Which task should I choose?** A prepared task gives both agents the same
 starting task and common checks, making their work easier to compare. **Check
@@ -135,12 +142,23 @@ the export is not uploaded automatically. Open **Testing and diagnostics**:
    Note Screen Sharing if used. Export saves locally; it does not upload. Keep credentials,
    real typing and raw exports out of Git/public issues.
 
-Try the [other prepared tasks](MAC-TESTER-TASKS.md), then optionally **Your own task**,
-if time/allowance permit. Use a fresh pair for each task; if exporting, save a
-package for each pair before closing it. When finished, **Close sessions**, then
-**Ctrl-C in the launch Terminal**. If you're
-rehearsing for Teresa and are blocked before export, return the failed step and
-exact nonsecret error.
+### Try another task or finish
+
+1. When you are done with the current task, finish your checks and ratings and,
+   if you want an export, save it **before** closing. Testers returning results to
+   Teresa should save one package per task.
+2. Click **Close sessions** and wait for both to close. Keep Terminal and the local
+   server running. Choose the next task and model, click **Open sessions**, and
+   select **Both** when both panes are Ready. Each task gets a fresh pair of
+   sessions; you do not need to clone, install or restart the server.
+3. When you are completely finished, close the sessions and press **Ctrl-C** in
+   the launch Terminal. To return later, use the same checkout and repeat step 3;
+   open a fresh pair of sessions. Previously exported evidence stays on disk, but
+   closed conversations do not resume from an export.
+
+Try the [other prepared tasks](MAC-TESTER-TASKS.md), then optionally **Your own
+task**, if time and allowance permit. If you're rehearsing for Teresa and are
+blocked before export, return the failed step and exact nonsecret error.
 
 ## Help
 
